@@ -7,7 +7,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.regex.Pattern;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -67,12 +66,6 @@ public class LoginServlet extends HttpServlet {
 				ex.printStackTrace();
 			}
 		}
-	}
-	
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-		RequestDispatcher rd = req.getRequestDispatcher("/WEB-INF/login.jsp");
-		rd.forward(req, resp);
 	}
 	
 	boolean validateMail(String mail){

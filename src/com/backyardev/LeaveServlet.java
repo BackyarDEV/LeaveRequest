@@ -103,7 +103,7 @@ public class LeaveServlet extends HttpServlet{
 		
 		
 		
-		RequestDispatcher rd = req.getRequestDispatcher("/WEB-INF/result.jsp");
+		RequestDispatcher rd = req.getRequestDispatcher("/WEB-INF/LeaveForm.jsp");
 		rd.forward(req, resp);
 	}
 }

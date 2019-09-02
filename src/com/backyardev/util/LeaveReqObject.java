@@ -10,6 +10,7 @@ public class LeaveReqObject {
 	private String startDate;
 	private String endDate;
 	private String leaveType;
+	private String leaveDesc; 
 	private int id;
 	private int numberOfDays;
 	private int halfDayLeave; 
@@ -38,8 +39,6 @@ public class LeaveReqObject {
 	public void setFullDayLeave(int fullDayLeave) {
 		this.fullDayLeave = fullDayLeave;
 	}
-
-	private String leaveDesc; 
 	
 	public String getName() {
 		return name;
