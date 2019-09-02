@@ -38,7 +38,7 @@
 		<div class="container" style="min-width: 300px; max-width: 500px; width: 60%; margin-left: auto; margin-right: auto; margin-bottom: 4%; margin-top: 4%; background:#fff;">
 			<div class="row">
 				<div class="col-sm-12">
-					 <form class="form-horizontal form-pass" method="POST" action="">
+					 <form class="form-horizontal form-pass" method="POST" action="setting">
 					 	<h4>${name}</h4>
 			            <label class="control-label"><strong>Update Password:</strong></label>
 			            <div class="form-group">
@@ -49,9 +49,7 @@
 			                    <input class="form-control" placeholder="Confirm Password" autocomplete="off" required type="password" id="confpass" name="confpass"/>
 			                </div>
 			            </div>
-			            <div class="form-group">
-			                <button type="button" class="btn btn-primary" id="updatepass">Submit</button>
-			            </div>
+		                <button type="submit" class="btn btn-primary">Submit</button>
 			        </form>
 				</div>
 			</div>
@@ -63,17 +61,22 @@
 				var form = $(this);
 	      		var url = form.attr('action');
 	      		var method = form.attr('method');
-	      		console.log("check")
-	   			$.ajax({
+	      		$.ajax({
 	       		    type: method,
 	       		    url: url,
 	       		    data: form.serialize(),
 	       		    success: function(s) {
-	       		    	console.log(s);
 	       		        if(s == 'true'){
+	       		        	$('#setpass').val('');
+	       		        	$('#confpass').val('');
 	       		        	alert("Password Updated Successfully!");
-	       		        } else if (s == "pass_no_match"){}
+	       		        } else if (s == "pass_no_match"){
 	   						alert("Passwords do not match!");
+	       		        } else if (s == "weak_pass"){
+	       		        	alert("Strong Password required!");
+	       		        } else {
+	       		        	alert('Password update error!');
+	       		        }
 	       		    }
 	       		});
 			});
