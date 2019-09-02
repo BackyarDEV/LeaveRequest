@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.backyardev.util.DatabaseConnection;
+import com.backyardev.util.LeaveMail;
 import com.backyardev.util.LeaveReqObject;
 
 public class LeaveServlet extends HttpServlet{
@@ -84,7 +85,8 @@ public class LeaveServlet extends HttpServlet{
 					execute = pst.execute();
 					if (!execute) {
 						//TODO send leave request mail to concerned party
-						
+						LeaveMail mail = new LeaveMail();
+						mail.prepareMail(obj);
 					}
 				}
 				
@@ -103,7 +105,7 @@ public class LeaveServlet extends HttpServlet{
 		
 		
 		
-		RequestDispatcher rd = req.getRequestDispatcher("/WEB-INF/LeaveForm.jsp");
+		RequestDispatcher rd = req.getRequestDispatcher("/WEB-INF/Lea.jsp");
 		rd.forward(req, resp);
 	}
 }

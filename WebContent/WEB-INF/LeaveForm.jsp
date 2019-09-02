@@ -1,21 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-	    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-	    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-	    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-		<title>Leave Request</title>
-	</head>
-	<body>
-		
-		<div class="container leave-container" style="min-width: 300px; max-width: 800px; width: 60%; margin-left: auto; margin-right: auto; margin-bottom: 2%; margin-top: 2%; background:#fff;">
+<jsp:include page="/WEB-INF/layout.jsp"></jsp:include>
+		<div class="container leave-container">
 			<div class="row">
 				<div class="col-sm-12">
-					<form class="form" method="post" action="leave" style="border-radius: 0.5rem; box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 9px 26px 0 rgba(0, 0, 0, 0.19); border: solid 1px e0e0e0; padding: 4%;">
+					<form class="form leave-form" method="post" action="leave">
 						<h3>Leave Request</h3><br>
 						<div class="form-group">
 							<label for="name">Name of the Employee</label>
