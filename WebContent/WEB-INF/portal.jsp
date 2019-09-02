@@ -56,6 +56,8 @@
 				
 			</c:choose>
 		</div>
-		
+		<script>
+		console.log('${ecode}');
+		</script>
 	</body>
 </html>

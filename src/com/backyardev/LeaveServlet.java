@@ -30,7 +30,7 @@ public class LeaveServlet extends HttpServlet{
 		String sql;
 		
 		try {
-			
+			Class.forName("com.mysql.cj.jdbc.Driver");
 			DatabaseConnection db = DatabaseConnection.getInstance();
 			conn = db.getConnection();
 			PreparedStatement pst;
