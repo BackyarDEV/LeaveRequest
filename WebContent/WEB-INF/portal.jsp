@@ -10,6 +10,7 @@
    <table class="table">
       <thead>
          <tr>
+
             <th scope="col">Ecode</th>
             <th scope="col">Name</th>
             <th scope="col">Project</th>
@@ -25,6 +26,7 @@
    			 <% } else { %>
    			  <th scope="col">Action </th>
 		      <% } %>
+
          </tr>
       </thead>
       <tbody>
@@ -37,7 +39,7 @@
             %>
          <% for(int i = 0; i < resultSet.size();  i+=1) { %>
          <tr>
-           
+
             <td><%=resultSet.get(i).getEcode() %></td>
             <td><%=resultSet.get(i).getName() %></td>
             <td><%=resultSet.get(i).getProjectName() %></td>
@@ -48,7 +50,7 @@
             <td><%=resultSet.get(i).getNumberOfDays()  %></td>
             <td><%=resultSet.get(i).getLeaveType()  %></td>
             <td><%=resultSet.get(i).getLeaveDesc()%></td>
-          
+  
 			<% if ((resultSet.get(i).getStatus()).equals("Pending")) { %>
              <td class="bg-warning text-dark"><%=resultSet.get(i).getStatus()%></td>
 		    <% } %>

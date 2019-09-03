@@ -28,11 +28,12 @@ public class TableClass {
 				ps.setString(1, tl_name);
 			} else {
 				sql = "SELECT * FROM LEAVE_REQUEST, LEAVE_STATUS WHERE LEAVE_REQUEST.id = LEAVE_STATUS.id AND ecode = ? order by leave_request_time desc";
+
 				ps = conn.prepareStatement(sql);
 				ps.setString(1, ecode);
 			}
 			resultSet = ps.executeQuery();
-			
+
 			while (resultSet.next()) {
 				LeaveReqObject obj = new LeaveReqObject();
 				if(resultSet.getInt("status")== 0) {

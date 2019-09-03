@@ -1,8 +1,3 @@
-<html>
-<head>
-
-</head>
-<body>
 <jsp:include page="/WEB-INF/layout.jsp"></jsp:include>
 		<form class="form leave-form" method="post" action="leave">
 				<h3>Leave Request</h3><br>
