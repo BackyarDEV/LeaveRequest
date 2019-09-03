@@ -14,6 +14,13 @@
 	    		color: red;
 	    	}
     	</style>
+    	<script type="text/javascript">
+    		var ecode = '${ecode}';
+    		if (ecode != ''){
+    			window.location.replace('portal');
+    		}
+    		
+    	</script>
 		<title>Login</title>
 	</head>
 	<body>
@@ -59,7 +66,7 @@
        		    url: url,
        		    data: form.serialize(),
        		    success: function(s) {
-       		        "true" == s ? window.location.replace('portal') : "invalid_mail" == s ? ($("#login-email-error").css("display", "block"), $("#mail-login").focus()) : "wrong_pass" == s && ($("#login-pass-error").css("display", "block"), $("#mail-pass").focus())
+       		        "true" == s ? window.location.replace('portal') : "invalid_mail" == s ? ($("#login-email-error").css("display", "block"), $("#mail-login").focus()) : "500" == s ? alert("Server Error! Please try later.") : "wrong_pass" == s && ($("#login-pass-error").css("display", "block"), $("#mail-pass").focus())
        		    }
        		});
       	});

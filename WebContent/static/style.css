@@ -1,0 +1,66 @@
+.navbar{
+	 background-color: #434343;
+}
+.sidenav {
+	 height: 100%;
+	 width: 240px;
+	 position: fixed;
+	 left: 0;
+	 background-color: #434343;
+	 overflow-x: hidden;
+	 padding-top: 40px;
+
+	 opacity: .9;
+}
+	
+.sidenav a {
+	 padding: 6px 8px 6px 16px;
+	 text-decoration: none;
+	 font-size: 1.1rem;
+	 color: #a1a1a1;
+	 display: block;
+}
+	
+.sidenav a:hover {
+	 color: #f1f1f1;
+	 text-decoration: none;
+}
+
+.leave-container{
+	min-width: 300px;
+	max-width: 800px;
+	width: 100%;
+	padding: 4%; 
+	margin-left: 240px;
+	margin-right: auto;
+	margin-bottom: 2%;
+	margin-top: 4%;
+	background:#fff;
+}
+
+.leave-form{
+	border-radius: 0.5rem;
+	width: 60%;
+	margin-left: auto;
+	margin-right: auto;
+	box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 9px 26px 0 rgba(0, 0, 0, 0.19);
+	border: solid 1px e0e0e0;
+	padding: 4%;
+}
+
+.btn-check{
+	background:white;
+	color: #1c9be8;
+	border: none;
+}
+   	
+.btn-reject{
+	background:white;
+	color: #7323dc;
+	border: none;
+}
+
+table {
+    font-size: 14px;
+    border-collapse: collapse;
+}

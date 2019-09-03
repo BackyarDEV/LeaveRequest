@@ -13,32 +13,12 @@
         <title>Welcome</title>
     </head>
     <body>
-
-		<nav class="navbar navbar-expand-sm navbar-dark bg-dark">
-		    <a class="navbar-brand" href="portal">Leave Management</a>
-		    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-		        <span class="navbar-toggler-icon"></span>
-		    </button>
-			
-		    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-		        <ul class="navbar-nav ml-auto">
-		            <li class="nav-item active">
-		                <a class="nav-link" href="portal">Home <span class="sr-only">(current)</span></a>
-		            </li>	            
-		            <li class="nav-item active">
-		                <a class="nav-link" href="setting">Settings </a>
-		            </li>	            
-		               <li class="nav-item logout-item">
-		                <a class="nav-link" href="logout">Logout</a>
-		            </li>
-		            
-		        </ul>
-		    </div>
-		</nav>
+	  	<%@ include file="layout.jsp" %>   <!-- Navbar Component -->
+	  	
 		<div class="container" style="min-width: 300px; max-width: 500px; width: 60%; margin-left: auto; margin-right: auto; margin-bottom: 4%; margin-top: 4%; background:#fff;">
 			<div class="row">
 				<div class="col-sm-12">
-					 <form class="form-horizontal form-pass" method="POST" action="">
+					 <form class="form-horizontal form-pass" method="POST" action="setting">
 					 	<h4>${name}</h4>
 			            <label class="control-label"><strong>Update Password:</strong></label>
 			            <div class="form-group">
@@ -49,9 +29,7 @@
 			                    <input class="form-control" placeholder="Confirm Password" autocomplete="off" required type="password" id="confpass" name="confpass"/>
 			                </div>
 			            </div>
-			            <div class="form-group">
-			                <button type="button" class="btn btn-primary" id="updatepass">Submit</button>
-			            </div>
+		                <button type="submit" class="btn btn-primary">Submit</button>
 			        </form>
 				</div>
 			</div>
@@ -63,17 +41,22 @@
 				var form = $(this);
 	      		var url = form.attr('action');
 	      		var method = form.attr('method');
-	      		console.log("check")
-	   			$.ajax({
+	      		$.ajax({
 	       		    type: method,
 	       		    url: url,
 	       		    data: form.serialize(),
 	       		    success: function(s) {
-	       		    	console.log(s);
 	       		        if(s == 'true'){
+	       		        	$('#setpass').val('');
+	       		        	$('#confpass').val('');
 	       		        	alert("Password Updated Successfully!");
-	       		        } else if (s == "pass_no_match"){}
+	       		        } else if (s == "pass_no_match"){
 	   						alert("Passwords do not match!");
+	       		        } else if (s == "weak_pass"){
+	       		        	alert("Strong Password required!");
+	       		        } else {
+	       		        	alert('Password update error!');
+	       		        }
 	       		    }
 	       		});
 			});

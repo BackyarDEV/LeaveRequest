@@ -1,8 +1,10 @@
 package com.backyardev;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.util.regex.Pattern;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -32,7 +34,7 @@ public class SettingServlet extends HttpServlet{
 	
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		System.out.println("really?");
+		PrintWriter out = resp.getWriter();
 		String pass = req.getParameter("setpass");
 		String conf = req.getParameter("confpass");
 		String hash;
@@ -44,26 +46,38 @@ public class SettingServlet extends HttpServlet{
 		try {
 			DatabaseConnection dc = DatabaseConnection.getInstance();
 			conn = dc.getConnection();
-			if (pass.equals(conf)) {
+			if (!validatePass(pass)) {
+				out.print("weak_pass");
+			}else if (pass.equals(conf)) {
 				hash = Password.getSaltedHash(pass);
 				PreparedStatement ps = conn.prepareStatement(sql);
 				ps.setString(1, hash);
 				ps.setString(2, ecode);
-				System.out.println(ps);
 				boolean execute = ps.execute();
 				if (!execute) {
-					resp.getWriter().write("true");
+					out.write("true");
 				} else {
-					System.out.println("tumse naa ho payega!");
+					out.print("no_exe");
 				}
 			} else {
-				resp.getWriter().write("pass_no_match");
+				out.write("pass_no_match");
 			}
 			
 			
 		} catch(Exception ex) {
 			ex.printStackTrace();
 		}
+	}
+	
+	private boolean validatePass(String pass) {
+		
+		String passRegex = "((?=.*[a-z])(?=.*\\d)(?=.*[A-Z])(?=.*[@#$%!]).{8,})";
+		Pattern pat = Pattern.compile(passRegex);
+		if(pass == null) {
+			return false;
+		}
+		return pat.matcher(pass).matches();
+		
 	}
 	
 }
