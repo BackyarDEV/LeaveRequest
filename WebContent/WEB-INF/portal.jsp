@@ -56,7 +56,7 @@
    </table>
 </div>
 <script>
-	$(function{
+	$(function(){
 		$('#all-req').css('color', '#f1f1f1');
 	});
 </script>

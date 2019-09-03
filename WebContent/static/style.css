@@ -1,6 +1,6 @@
 .sidenav {
 	 height: 100%;
-	 width: 240px;
+	 width: 220px;
 	 position: fixed;
 	 left: 0;
 	 background-color: #343a40;
@@ -12,7 +12,7 @@
 .sidenav a {
 	 padding: 6px 8px 6px 16px;
 	 text-decoration: none;
-	 font-size: 20px;
+	 font-size: 18px;
 	 color: #a1a1a1;
 	 display: block;
 }
@@ -31,6 +31,10 @@
 	margin-bottom: 2%;
 	margin-top: 4%;
 	background:#fff;
+}
+
+.table{
+	font-size: 14px;
 }
 
 .leave-form{

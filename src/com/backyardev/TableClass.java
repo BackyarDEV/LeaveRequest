@@ -19,16 +19,15 @@ public class TableClass {
 		try{ 
 			DatabaseConnection dc = DatabaseConnection.getInstance();
 			conn = dc.getConnection();
-			System.out.println(desg);
 			if (desg.equals("Admin") || desg.equals("Super_Admin")) {
-				sql = "SELECT * FROM LEAVE_REQUEST";
+				sql = "SELECT * FROM LEAVE_REQUEST order by leave_request_time desc";
 				ps = conn.prepareStatement(sql);
 			} else if (desg.equals("TeamLead")) {
-				sql = "SELECT * FROM LEAVE_REQUEST WHERE team_lead = ?";
+				sql = "SELECT * FROM LEAVE_REQUEST WHERE team_lead = ? order by leave_request_time desc";
 				ps = conn.prepareStatement(sql);
 				ps.setString(1, tl_name);
 			} else {
-				sql = "SELECT * FROM LEAVE_REQUEST  WHERE  ecode = ?";
+				sql = "SELECT * FROM LEAVE_REQUEST  WHERE  ecode = ? order by leave_request_time desc";
 				ps = conn.prepareStatement(sql);
 				ps.setString(1, ecode);
 			}

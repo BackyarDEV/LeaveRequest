@@ -41,4 +41,4 @@
 		  <a href="portal" id="all-req">My Leave Requests</a>
 		  <a href="leave" id="new-req">New Leave Request</a>
 		</div>	
-		<div style="margin-left: 240px; margin-top: 50px; padding: 40px;">
+		<div style="margin-left: 220px; margin-top: 50px; padding: 40px;">
