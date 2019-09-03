@@ -13,28 +13,8 @@
         <title>Welcome</title>
     </head>
     <body>
-
-		<nav class="navbar navbar-expand-sm navbar-dark bg-dark">
-		    <a class="navbar-brand" href="portal">Leave Management</a>
-		    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-		        <span class="navbar-toggler-icon"></span>
-		    </button>
-			
-		    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-		        <ul class="navbar-nav ml-auto">
-		            <li class="nav-item active">
-		                <a class="nav-link" href="portal">Home <span class="sr-only">(current)</span></a>
-		            </li>	            
-		            <li class="nav-item active">
-		                <a class="nav-link" href="setting">Settings </a>
-		            </li>	            
-		               <li class="nav-item logout-item">
-		                <a class="nav-link" href="logout">Logout</a>
-		            </li>
-		            
-		        </ul>
-		    </div>
-		</nav>
+	  	<%@ include file="layout.jsp" %>   <!-- Navbar Component -->
+	  	
 		<div class="container" style="min-width: 300px; max-width: 500px; width: 60%; margin-left: auto; margin-right: auto; margin-bottom: 4%; margin-top: 4%; background:#fff;">
 			<div class="row">
 				<div class="col-sm-12">

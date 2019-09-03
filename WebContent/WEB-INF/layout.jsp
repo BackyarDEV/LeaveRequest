@@ -17,6 +17,7 @@
         <title>Welcome</title>
     </head>
     <body>
+
 		<nav class="navbar fixed-top navbar-expand-sm navbar-dark bg-dark" style="box-shadow: 0 10px 10px -10px #333;;">
 		    <a class="navbar-brand" href="portal">Frys Web Leave Management</a>
 		    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -26,6 +27,7 @@
 		    <div class="collapse navbar-collapse" id="navbarSupportedContent">
 		        <ul class="navbar-nav ml-auto">
 		            <li class="nav-item active">
+
 		                <a class="nav-link" href="portal">Home <span class="sr-only">(current)</span></a>
 		            </li>	            
 		            <li class="nav-item active">

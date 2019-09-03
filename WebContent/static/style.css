@@ -1,24 +1,33 @@
+
+.navbar{
+	 background-color: #434343;
+}
 .sidenav {
 	 height: 100%;
-	 width: 220px;
+	 width: 240px;
 	 position: fixed;
 	 left: 0;
-	 background-color: #343a40;
+	 background-color: #434343;
 	 overflow-x: hidden;
-	 padding-top: 80px;
-	 box-shadow:  10px 0 10px -10px #333;
+	 padding-top: 40px;
+
+	 opacity: .9;
+
 }
 	
 .sidenav a {
 	 padding: 6px 8px 6px 16px;
 	 text-decoration: none;
-	 font-size: 18px;
+
+	 font-size: 1.1rem;
 	 color: #a1a1a1;
 	 display: block;
 }
 	
 .sidenav a:hover {
 	 color: #f1f1f1;
+	 text-decoration: none;
+
 }
 
 .leave-container{
@@ -31,10 +40,6 @@
 	margin-bottom: 2%;
 	margin-top: 4%;
 	background:#fff;
-}
-
-.table{
-	font-size: 14px;
 }
 
 .leave-form{
@@ -57,4 +62,10 @@
 	background:white;
 	color: #7323dc;
 	border: none;
+
+}
+
+table {
+    font-size: 14px;
+    border-collapse: collapse;
 }

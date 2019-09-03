@@ -20,14 +20,15 @@ public class TableClass {
 			DatabaseConnection dc = DatabaseConnection.getInstance();
 			conn = dc.getConnection();
 			if (desg.equals("Admin") || desg.equals("Super_Admin")) {
-				sql = "SELECT * FROM LEAVE_REQUEST order by leave_request_time desc";
+				sql = "SELECT * FROM LEAVE_REQUEST, LEAVE_STATUS WHERE LEAVE_REQUEST.id = LEAVE_STATUS.id order by leave_request_time desc";
 				ps = conn.prepareStatement(sql);
 			} else if (desg.equals("TeamLead")) {
-				sql = "SELECT * FROM LEAVE_REQUEST WHERE team_lead = ? order by leave_request_time desc";
+				sql = "SELECT * FROM LEAVE_REQUEST, LEAVE_STATUS WHERE LEAVE_REQUEST.id = LEAVE_STATUS.id AND team_lead = ? order by leave_request_time desc";
 				ps = conn.prepareStatement(sql);
 				ps.setString(1, tl_name);
 			} else {
-				sql = "SELECT * FROM LEAVE_REQUEST  WHERE  ecode = ? order by leave_request_time desc";
+				sql = "SELECT * FROM LEAVE_REQUEST, LEAVE_STATUS WHERE LEAVE_REQUEST.id = LEAVE_STATUS.id AND ecode = ? order by leave_request_time desc";
+
 				ps = conn.prepareStatement(sql);
 				ps.setString(1, ecode);
 			}
@@ -35,6 +36,13 @@ public class TableClass {
 
 			while (resultSet.next()) {
 				LeaveReqObject obj = new LeaveReqObject();
+				if(resultSet.getInt("status")== 0) {
+					obj.setStatus("Pending");
+				} else if(resultSet.getInt("status")== 1) {
+					obj.setStatus("Approved");
+				} else {
+					obj.setStatus("Rejected");
+				}
 				obj.setId(resultSet.getInt("id"));
 				obj.setEcode(resultSet.getString("ecode"));
 				obj.setName(resultSet.getString("name"));

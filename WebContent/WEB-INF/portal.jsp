@@ -10,7 +10,7 @@
    <table class="table">
       <thead>
          <tr>
-            <th scope="col">#</th>
+
             <th scope="col">Ecode</th>
             <th scope="col">Name</th>
             <th scope="col">Project</th>
@@ -21,8 +21,12 @@
             <th scope="col">Total Days </th>
             <th scope="col">Type </th>
             <th scope="col">Desc </th>
-            <th scope="col">Action </th>
-            <th scope="col"></th>
+           	<%  if(session.getAttribute("desg").equals("Developer")){  %>
+            <th scope="col">Status </th>
+   			 <% } else { %>
+   			  <th scope="col">Action </th>
+		      <% } %>
+
          </tr>
       </thead>
       <tbody>
@@ -35,7 +39,7 @@
             %>
          <% for(int i = 0; i < resultSet.size();  i+=1) { %>
          <tr>
-            <th scope="row"><%= resultSet.get(i).getId()%></th>
+
             <td><%=resultSet.get(i).getEcode() %></td>
             <td><%=resultSet.get(i).getName() %></td>
             <td><%=resultSet.get(i).getProjectName() %></td>
@@ -46,10 +50,17 @@
             <td><%=resultSet.get(i).getNumberOfDays()  %></td>
             <td><%=resultSet.get(i).getLeaveType()  %></td>
             <td><%=resultSet.get(i).getLeaveDesc()%></td>
-            <td>
-               <button type="button" class="btn-check"><i class="fas fa-check"></i></button>
-               <button type="button" class="btn-reject"><i class="fas fa-trash-alt"></i></button>
-            </td>
+  
+			<% if ((resultSet.get(i).getStatus()).equals("Pending")) { %>
+             <td class="bg-warning text-dark"><%=resultSet.get(i).getStatus()%></td>
+		    <% } %>
+		    <% if((resultSet.get(i).getStatus()).equals("Approved")) { %>
+             <td class="bg-primary text-white"><%=resultSet.get(i).getStatus()%></td>
+		    <% } %>
+		    <% if ((resultSet.get(i).getStatus()).equals("Rejected")) { %>
+             <td class="bg-danger text-white"><%=resultSet.get(i).getStatus()%></td>
+		    <% } %>
+		    
          </tr>
          <% } %>
       </tbody>

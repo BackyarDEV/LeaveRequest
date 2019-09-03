@@ -1,123 +1,132 @@
 package com.backyardev.util;
 
 public class LeaveReqObject {
-	
-	private String name;
-	private String ecode;
-	private String projectName;
-	private String teamLead;
-	private String projectManager;
-	private String startDate;
-	private String endDate;
-	private String leaveType;
-	private String leaveDesc; 
-	private int id;
-	private int numberOfDays;
-	private int halfDayLeave; 
-	private int fullDayLeave;
 
-	public int getId() {
-		return id;
-	}
+private String name;
+private String ecode;
+private String projectName;
+private String teamLead;
+private String projectManager;
+private String startDate;
+private String endDate;
+private String leaveType;
+private String leaveDesc; 
+private String status;
+private int id;
+private int numberOfDays;
+private int halfDayLeave; 
+private int fullDayLeave;
 
-	public void setId(int id) {
-		this.id = id;
-	}
-	
-	public int getHalfDayLeave() {
-		return halfDayLeave;
-	}
+public int getId() {
+return id;
+}
 
-	public void setHalfDayLeave(int halfDayLeave) {
-		this.halfDayLeave = halfDayLeave;
-	}
+public void setId(int id) {
+this.id = id;
+}
 
-	public int getFullDayLeave() {
-		return fullDayLeave;
-	}
+public String getStatus() {
+return status;
+}
 
-	public void setFullDayLeave(int fullDayLeave) {
-		this.fullDayLeave = fullDayLeave;
-	}
-	
-	public String getName() {
-		return name;
-	}
+public void setStatus(String status) {
+this.status = status;
+}
 
-	public void setName(String name) {
-		this.name = name;
-	}
+public int getHalfDayLeave() {
+return halfDayLeave;
+}
 
-	public String getEcode() {
-		return ecode;
-	}
+public void setHalfDayLeave(int halfDayLeave) {
+this.halfDayLeave = halfDayLeave;
+}
 
-	public void setEcode(String ecode) {
-		this.ecode = ecode;
-	}
+public int getFullDayLeave() {
+return fullDayLeave;
+}
 
-	public String getProjectName() {
-		return projectName;
-	}
+public void setFullDayLeave(int fullDayLeave) {
+this.fullDayLeave = fullDayLeave;
+}
 
-	public void setProjectName(String projectName) {
-		this.projectName = projectName;
-	}
+public String getName() {
+return name;
+}
 
-	public String getTeamLead() {
-		return teamLead;
-	}
+public void setName(String name) {
+this.name = name;
+}
 
-	public void setTeamLead(String teamLead) {
-		this.teamLead = teamLead;
-	}
+public String getEcode() {
+return ecode;
+}
 
-	public String getProjectManager() {
-		return projectManager;
-	}
+public void setEcode(String ecode) {
+this.ecode = ecode;
+}
 
-	public void setProjectManager(String projectManager) {
-		this.projectManager = projectManager;
-	}
+public String getProjectName() {
+return projectName;
+}
 
-	public String getStartDate() {
-		return startDate;
-	}
+public void setProjectName(String projectName) {
+this.projectName = projectName;
+}
 
-	public void setStartDate(String startDate) {
-		this.startDate = startDate;
-	}
+public String getTeamLead() {
+return teamLead;
+}
 
-	public String getEndDate() {
-		return endDate;
-	}
+public void setTeamLead(String teamLead) {
+this.teamLead = teamLead;
+}
 
-	public void setEndDate(String endDate) {
-		this.endDate = endDate;
-	}
+public String getProjectManager() {
+return projectManager;
+}
 
-	public int getNumberOfDays() {
-		return numberOfDays;
-	}
+public void setProjectManager(String projectManager) {
+this.projectManager = projectManager;
+}
 
-	public void setNumberOfDays(int numberOfDays) {
-		this.numberOfDays = numberOfDays;
-	}
+public String getStartDate() {
+return startDate;
+}
 
-	public String getLeaveType() {
-		return leaveType;
-	}
+public void setStartDate(String startDate) {
+this.startDate = startDate;
+}
 
-	public void setLeaveType(String leaveType) {
-		this.leaveType = leaveType;
-	}
-	
-	public String getLeaveDesc() {
-		return leaveDesc;
-	}
+public String getEndDate() {
+return endDate;
+}
 
-	public void setLeaveDesc(String leaveDesc) {
-		this.leaveDesc = leaveDesc;
-	}
-	
+public void setEndDate(String endDate) {
+this.endDate = endDate;
+}
+
+public int getNumberOfDays() {
+return numberOfDays;
+}
+
+public void setNumberOfDays(int numberOfDays) {
+this.numberOfDays = numberOfDays;
+}
+
+public String getLeaveType() {
+return leaveType;
+}
+
+public void setLeaveType(String leaveType) {
+this.leaveType = leaveType;
+}
+
+public String getLeaveDesc() {
+return leaveDesc;
+}
+
+public void setLeaveDesc(String leaveDesc) {
+this.leaveDesc = leaveDesc;
+}
+
 }
