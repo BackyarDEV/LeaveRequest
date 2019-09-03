@@ -1,8 +1,5 @@
 <jsp:include page="/WEB-INF/layout.jsp"></jsp:include>
-		<div class="container leave-container">
-			<div class="row">
-				<div class="col-sm-12">
-					<form class="form leave-form" method="post" action="leave">
+			<form class="form leave-form" method="post" action="leave">
 						<h3>Leave Request</h3><br>
 						<div class="form-group">
 							<label for="name">Name of the Employee</label>
@@ -78,16 +75,17 @@
 						</div>
 						<br>
 						<div class="form-group">
-							<label for="leave-desc">Leave Description</label>
+							<label for="leave-desc">Leave Description/Reason</label>
 							<input class="form-control" required id="leave-desc" type="text" placeholder="Brief Description" name="leave-desc"/>
 						</div>
 						<button type="submit" class="btn btn-primary">Submit</button>
 					</form>
-				</div>
-			</div>
 		</div>
 		
 		<script>
+			$(function{
+				$('#new-req').css('color', '#f1f1f1');
+			});
 			$(".form").submit(function(s){
 				s.preventDefault();
 				

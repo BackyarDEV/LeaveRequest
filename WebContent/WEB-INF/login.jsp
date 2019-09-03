@@ -14,6 +14,13 @@
 	    		color: red;
 	    	}
     	</style>
+    	<script type="text/javascript">
+    		var ecode = '${ecode}';
+    		if (ecode != ''){
+    			window.location.replace('portal');
+    		}
+    		
+    	</script>
 		<title>Login</title>
 	</head>
 	<body>

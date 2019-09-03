@@ -25,7 +25,7 @@ public class SendEmail {
 
       // Recipient's email ID needs to be mentioned.
 	   
-      String to = "dikshawadhwa0220@gmail.com";
+      String to = "mayank.sinha02@gmail.com";
 
       // Sender's email ID needs to be mentioned
       String from = "dikshawadhwa0220@gmail.com";
@@ -61,23 +61,19 @@ public class SendEmail {
               InternetAddress.parse(to+",dikshawadhwa185@gmail.com"));
 
 	   // Set Subject: header field
-	   if(details.startDate == details.endDate)
-	   {
-		   message.setSubject("Leave Approval- "+ details.eCode +" - "+details.name + " - "+ details.startDate  + " - " + details.leaveType);
-	   }
-	   else
-	   {
-	       message.setSubject("Leave Approval- "+ details.eCode +" - "+details.name + " - "+ details.startDate + " - "+ details.endDate + " - " + details.leaveType);
-	   }
+	   
+       message.setSubject("Leave Approval- "+ details.eCode +" - "+details.name + " - "+ details.startDate + " - "+ details.endDate + " - " + details.leaveType);
+	   
 	   // Send the actual HTML message, as big as you like
 	   message.setContent( "<div>"
 			   
-			  +" <table border=1 style=\"width:60%;text-align:left;\">"
+			  +" <table border=1 style=\"width:80%;text-align:left;\">"
 				+"  <tr><td style = \"text-align: center; color:black;\"><b>LEAVE APPLICATION FORM</b></td><td>   </td></tr>"
 				 +" <tr><th style = \"color: black;\">E-Code</th><td style = \"color: black;\">"+details.eCode+"</td></tr>"
 				+"  <tr><th style = \"color: black;\">Name</th><td style = \"color: black;\">"+details.name+"</td></tr>"
 				+"  <tr><th style = \"color: black;\">Project</th><td style = \"color: black;\">"+details.project+"</td></tr>"
 				 +" <tr><th style = \"color: black;\">Team/Project Lead Name</th><td style =\"color: black;\">"+details.teamLead+"</td></tr>"
+				 +" <tr><th style = \"color: black;\">Team/Project Manager Name</th><td style =\"color: black;\">"+details.proManager+"</td></tr>"
 				 +" <tr style =\"background-color:black;\"><td style = \"color: black;\">Blank Line</td><td>   </td></tr>"
 				 +" <tr><th style = \"color: black;\">Leave Start Date</th><td style = \"color: black;\">"+details.startDate+"</td></tr>"
 				 +" <tr><th style = \"color: black;\">Leave End Date</th><td style = \"color: black;\">"+details.endDate+"</td></tr>"

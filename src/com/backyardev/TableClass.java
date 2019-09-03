@@ -1,38 +1,38 @@
 package com.backyardev;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
 import com.backyardev.util.DatabaseConnection;
 import com.backyardev.util.LeaveReqObject;
 
-import java.sql.*;
 
 public class TableClass {
-	public  ArrayList<LeaveReqObject>  getTable() {
-		// Database details
-		String JDBC_DRIVER  =  "com.mysql.cj.jdbc.Driver";
-	 	String JDBC_DB_URL = "jdbc:mysql://localhost:3306/J1_EMP ";
-	 	
-	    // JDBC Database Credentials
-	   String JDBC_USER = "root";
-	   String JDBC_PASS = "root";
-	   Connection  conn;
-	   ResultSet resultSet = null ;
-	   ArrayList<LeaveReqObject>  lr  = new ArrayList();
-	   
-	   
+	public  ArrayList<LeaveReqObject>  getTable(String ecode, String desg, String tl_name) {
+		Connection  conn;
+		ResultSet resultSet = null ;
+		String sql;
+		PreparedStatement ps = null;
+		ArrayList<LeaveReqObject>  lr  = new ArrayList<LeaveReqObject>(); 
 		try{ 
 			DatabaseConnection dc = DatabaseConnection.getInstance();
 			conn = dc.getConnection();
-			Statement statement= conn.createStatement();
-			String sql = "SELECT * FROM LEAVE_REQUEST  WHERE  ecode = 'E01116'";
-			
-			resultSet = statement.executeQuery(sql);
-			
-			
+			System.out.println(desg);
+			if (desg.equals("Admin") || desg.equals("Super_Admin")) {
+				sql = "SELECT * FROM LEAVE_REQUEST";
+				ps = conn.prepareStatement(sql);
+			} else if (desg.equals("TeamLead")) {
+				sql = "SELECT * FROM LEAVE_REQUEST WHERE team_lead = ?";
+				ps = conn.prepareStatement(sql);
+				ps.setString(1, tl_name);
+			} else {
+				sql = "SELECT * FROM LEAVE_REQUEST  WHERE  ecode = ?";
+				ps = conn.prepareStatement(sql);
+				ps.setString(1, ecode);
+			}
+			resultSet = ps.executeQuery();
 
 			while (resultSet.next()) {
 				LeaveReqObject obj = new LeaveReqObject();
@@ -53,8 +53,6 @@ public class TableClass {
 			} catch (Exception e) {
 			e.printStackTrace();
 			} 
-		System.out.println(( lr.get(0)).getEcode());
-		System.out.println((lr.get(0)).getName());
 		return lr;
 	}
 }

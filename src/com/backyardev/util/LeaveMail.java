@@ -7,7 +7,7 @@ import java.io.IOException;
 public class LeaveMail {
 	
 	int user_id,days;
-	String f_name,eCode,project,teamLead;
+	String f_name,eCode,project,teamLead, proManager;
 	String startDate,endDate;
 	String name,description,leaveType = "";
 	String address;
@@ -25,6 +25,8 @@ public class LeaveMail {
 			details.startDate = obj.getStartDate();
 			details.endDate = obj.getEndDate();
 			details.days = obj.getNumberOfDays();
+			details.proManager = obj.getProjectManager();
+			
 			
 			if(obj.getHalfDayLeave() == 1) {
 				details.hdl = 'X';
