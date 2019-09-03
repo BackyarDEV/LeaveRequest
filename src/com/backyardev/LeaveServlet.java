@@ -10,6 +10,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.backyardev.util.DatabaseConnection;
 import com.backyardev.util.LeaveMail;
@@ -103,9 +104,16 @@ public class LeaveServlet extends HttpServlet{
 	
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		
-		
-		RequestDispatcher rd = req.getRequestDispatcher("/WEB-INF/Lea.jsp");
-		rd.forward(req, resp);
+		HttpSession session = req.getSession(false);
+		try{
+			if(session.getAttribute("ecode") != null) {
+				RequestDispatcher rd = req.getRequestDispatcher("/WEB-INF/LeaveForm.jsp");
+				rd.forward(req, resp);
+			} else {
+				resp.sendRedirect("/LeaveRequest");
+			}
+		} catch(NullPointerException ex) {
+			resp.sendRedirect("/LeaveRequest");
+		}
 	}
 }

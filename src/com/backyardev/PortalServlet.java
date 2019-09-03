@@ -23,10 +23,10 @@ public class PortalServlet extends HttpServlet{
 				RequestDispatcher rd = req.getRequestDispatcher("/WEB-INF/portal.jsp");
 				rd.forward(req, resp);
 			} else {
-				resp.sendRedirect("login");
+				resp.sendRedirect("/LeaveRequest");
 			}
 		} catch(NullPointerException ex) {
-			resp.sendRedirect("login");
+			resp.sendRedirect("/LeaveRequest");
 		}
 		
 	}

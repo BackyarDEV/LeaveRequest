@@ -63,6 +63,7 @@ public class LoginServlet extends HttpServlet {
 					}
 				}
 			} catch(Exception ex) {
+				out.print("500");
 				ex.printStackTrace();
 			}
 		}
