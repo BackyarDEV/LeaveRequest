@@ -1,8 +1,3 @@
-<html>
-<head>
-
-</head>
-<body>
 <jsp:include page="/WEB-INF/layout.jsp"></jsp:include>
 		<form class="form leave-form" method="post" action="leave">
 				<h3>Leave Request</h3><br>
@@ -42,13 +37,13 @@
 					<div class="col-sm-6">
 						<div class="form-group">
 							<label for="leave-start">Leave Start Date</label>
-							<input class="form-control" id="leave-start" required type="date" name="leave-start"/>
+							<input class="form-control date1" id="leave-start"   required type="date" name="leave-start"  placeholder="DD/MM/YYYY"  />
 						</div>
 					</div>
 					<div class="col-sm-6">
 						<div class="form-group">
 							<label for="leave-end">Leave End Date</label>
-							<input class="form-control" id="leave-end" required type="date" name="leave-end"/>
+							<input class="form-control date1" id="leave-end"    required type="date" name="leave-end"  placeholder="DD/MM/YYYY" />
 						</div>
 					</div>
 				</div>
@@ -108,8 +103,7 @@
 			    </div>
 			</div>
 		</div>
-		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-		<script src="//cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.3.26/jquery.form-validator.min.js"></script>
+
 		<script>
 			$(function(){
 				$('#new-req').css('color', '#f1f1f1');
@@ -140,6 +134,39 @@
 					});
 				});
 			});
+		</script>
+		<script>
+				var startDate
+				function setStartDate(){
+					var startDate  = $("#leave-start").val() ;
+					console.log(startDate);
+					
+				}
+
+				$(".date1").flatpickr({
+				    enableTime: false,
+				    dateFormat: "y-m-d",
+				    "disable": [
+				        function(date) {
+				           return (date.getDay() === 0 || date.getDay() === 6);  // disable weekends
+				        }
+				    ],
+				    "locale": {
+				        "firstDayOfWeek": 1 // set start day of week to Monday
+				    },
+				 
+
+				});
+				$('#leave-end').flatpickr({
+					dateFormat: "y-m-d",
+				    "disable": [
+				        function(date) {
+				           return (date.getDay() === 0 || date.getDay() === 6);  // disable weekends
+				        }
+				    ]
+				   
+				});
+				
 		</script>
 	</body>
 </html>

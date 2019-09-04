@@ -1,12 +1,9 @@
-package com.backyardev;
+package com.backyardev.util;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
-
-import com.backyardev.util.DatabaseConnection;
-import com.backyardev.util.LeaveReqObject;
 
 
 public class TableClass {
