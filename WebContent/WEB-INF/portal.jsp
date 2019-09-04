@@ -1,4 +1,4 @@
-<%@page import="com.backyardev.TableClass"%>
+<%@page import="com.backyardev.util.TableClass"%>
 <%@page import="java.sql.DriverManager"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.Statement"%>
@@ -10,7 +10,6 @@
    <table class="table">
       <thead>
          <tr>
-
             <th scope="col">Ecode</th>
             <th scope="col">Name</th>
             <th scope="col">Project</th>
@@ -26,7 +25,6 @@
    			 <% } else { %>
    			  <th scope="col">Action </th>
 		      <% } %>
-
          </tr>
       </thead>
       <tbody>
@@ -39,7 +37,7 @@
             %>
          <% for(int i = 0; i < resultSet.size();  i+=1) { %>
          <tr>
-
+           
             <td><%=resultSet.get(i).getEcode() %></td>
             <td><%=resultSet.get(i).getName() %></td>
             <td><%=resultSet.get(i).getProjectName() %></td>
@@ -50,26 +48,92 @@
             <td><%=resultSet.get(i).getNumberOfDays()  %></td>
             <td><%=resultSet.get(i).getLeaveType()  %></td>
             <td><%=resultSet.get(i).getLeaveDesc()%></td>
-  
-			<% if ((resultSet.get(i).getStatus()).equals("Pending")) { %>
-             <td class="bg-warning text-dark"><%=resultSet.get(i).getStatus()%></td>
-		    <% } %>
-		    <% if((resultSet.get(i).getStatus()).equals("Approved")) { %>
-             <td class="bg-primary text-white"><%=resultSet.get(i).getStatus()%></td>
-		    <% } %>
-		    <% if ((resultSet.get(i).getStatus()).equals("Rejected")) { %>
-             <td class="bg-danger text-white"><%=resultSet.get(i).getStatus()%></td>
+           	
+           	<!-- changes action/status column  view based on designation --> 
+             <%  if(session.getAttribute("desg").equals("Developer")) {  %>      	<!-- designation is developer -->
+           
+				<% if ((resultSet.get(i).getStatus()).equals("Pending")) { %>        		
+	             <td class="bg-warning text-dark"><%=resultSet.get(i).getStatus()%></td>
+			    <% } %>
+			    <% if((resultSet.get(i).getStatus()).equals("Approved")) { %>
+	             <td class="bg-primary text-white"><%=resultSet.get(i).getStatus()%></td>
+			    <% } %>
+			    <% if ((resultSet.get(i).getStatus()).equals("Rejected")) { %>
+	             <td class="bg-danger text-white"><%=resultSet.get(i).getStatus()%></td>
+	             
 		    <% } %>
 		    
+		     <% } else { %>		<!-- designation is !developer-->			
+	     			    <!--  changes action/status column  view based on status-->																																																	
+	     				<% if ((resultSet.get(i).getStatus()).equals("Approved")) { %>				<!-- status == approved -->	                 
+     				 				<td class="bg-primary">
+							    	 		<button type="button " class=" bg-primary rm-border text-white"  >Approved</button>
+							    	 </td>
+						<% } else if ((resultSet.get(i).getStatus()).equals("Rejected")) { %>	<!-- status == rejected -->	
+									<td class="bg-danger">
+							    	 		<button type="button " class=" bg-danger rm-border text-white"  >Declined</button>
+							    	 </td>
+	     				  <% } else { %>																													<!-- status == pending -->																			  
+							    	 <td class="">
+							    	 		<button type="button" class=" btn-check"  id="<%=resultSet.get(i).getId()%>"><i class="fas fa-check"></i></button>
+								     		 <button type="button" class=" btn-reject"  id="<%=resultSet.get(i).getId()%>"><i class="fas fa-times"></i></button>
+							    	 </td>
+	    	 				<% } %>
+	    	 				
+		  	 <% } %>
          </tr>
          <% } %>
       </tbody>
    </table>
-</div>
+<script src="./static/portalJsp.js"></script>
 <script>
-	$(function(){
-		$('#all-req').css('color', '#f1f1f1');
+$('.btn-reject').click(function(s){
+	
+	var url = "ActionLeaveServlet";
+	var method = "post";
+	var id = $(this).attr("id")
+	console.log(id);
+	
+	$.ajax({
+		type: method,
+		url: url,
+		data: {
+			'id': id,
+			'action' : 'reject'
+		} ,
+		success: function(data){
+			if (data == "true"){
+				window.location.replace('portal');
+			} else {
+				alert('Error!');
+			}
+		}
 	});
+});
+
+$('.btn-check').click(function(s){
+	
+	var url = "ActionLeaveServlet";
+	var method = "post";
+	var id = $(this).attr("id")
+	console.log(id);
+	
+	$.ajax({
+		type: method,
+		url: url,
+		data: {
+			'id': id,
+			'action' : 'approve'
+		} ,
+		success: function(data){
+			if (data == "true"){
+				window.location.replace('portal');
+			} else {
+				alert('Error!');
+			}
+		}
+	});
+});
 </script>
 </body>
 </html>
