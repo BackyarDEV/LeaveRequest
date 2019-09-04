@@ -28,6 +28,9 @@ CREATE TABLE `EMPLOYEES` (
   `name` varchar(100) NOT NULL,
   `pass_hash` varchar(100) NOT NULL,
   `designation` varchar(100) NOT NULL,
+  `team_lead` varchar(100) DEFAULT NULL,
+  `project_manager` varchar(100) DEFAULT NULL,
+  `project` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`ecode`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -38,7 +41,7 @@ CREATE TABLE `EMPLOYEES` (
 
 LOCK TABLES `EMPLOYEES` WRITE;
 /*!40000 ALTER TABLE `EMPLOYEES` DISABLE KEYS */;
-INSERT INTO `EMPLOYEES` VALUES ('E00179','preeti.khanna@trantorinc.com','Preeti Khanna','Qi7A6dFrU9sqgd/eIlJwboJN5iKFZIwuW727TQ++7DY=\r\n$oO2hjR2H2m7HmnXH+pC2VlKukrgyRCQ9An65O2JREAI=\r\n','TeamLead'),('E00213','sachin.dogra@trantorinc.com','Sachin Dogra','Qi7A6dFrU9sqgd/eIlJwboJN5iKFZIwuW727TQ++7DY=\r\n$oO2hjR2H2m7HmnXH+pC2VlKukrgyRCQ9An65O2JREAI=\r\n','TeamLead'),('E00583','jaspreet.singh@trantorinc.com','Jaspreet Singh','Qi7A6dFrU9sqgd/eIlJwboJN5iKFZIwuW727TQ++7DY=\r\n$oO2hjR2H2m7HmnXH+pC2VlKukrgyRCQ9An65O2JREAI=\r\n','TeamLead'),('E01114','aakash.gautam@trantorinc.com','Aakash Gautam','Qi7A6dFrU9sqgd/eIlJwboJN5iKFZIwuW727TQ++7DY=\r\n$oO2hjR2H2m7HmnXH+pC2VlKukrgyRCQ9An65O2JREAI=\r\n','Developer'),('E01115','diksha.wadhwa@trantorinc.com','Diksha Wadhwa','Qi7A6dFrU9sqgd/eIlJwboJN5iKFZIwuW727TQ++7DY=\r\n$oO2hjR2H2m7HmnXH+pC2VlKukrgyRCQ9An65O2JREAI=\r\n','Developer'),('E01116','mayank.sinha@trantorinc.com','Mayank Sinha','12r2s25827O+WjpghzuF8+yr8+Tc3VwjDDRRuBofNdY=\r\n$sAJ4A8rNE/db3IXklFodHuwnk8kiAHgbk7xO7rr6nU0=\r\n','Developer'),('E01188','kartik.raina@trantorinc.com','Kartik Raina','Qi7A6dFrU9sqgd/eIlJwboJN5iKFZIwuW727TQ++7DY=\r\n$oO2hjR2H2m7HmnXH+pC2VlKukrgyRCQ9An65O2JREAI=\r\n','TeamLead'),('EXXXX0','admin.leaveApp@trantorinc.com','Admin','Qi7A6dFrU9sqgd/eIlJwboJN5iKFZIwuW727TQ++7DY=\r\n$oO2hjR2H2m7HmnXH+pC2VlKukrgyRCQ9An65O2JREAI=\r\n','Admin'),('EXXXXX','superAdmin.leaveApp@trantorinc.com','Super Admin','Qi7A6dFrU9sqgd/eIlJwboJN5iKFZIwuW727TQ++7DY=\r\n$oO2hjR2H2m7HmnXH+pC2VlKukrgyRCQ9An65O2JREAI=\r\n','Super_Admin');
+INSERT INTO `EMPLOYEES` VALUES ('E00179','preeti.khanna@trantorinc.com','Preeti Khanna','Qi7A6dFrU9sqgd/eIlJwboJN5iKFZIwuW727TQ++7DY=\r\n$oO2hjR2H2m7HmnXH+pC2VlKukrgyRCQ9An65O2JREAI=\r\n','TeamLead',NULL,'Mandeepinder Singh','Fry\'s'),('E00213','sachin.dogra@trantorinc.com','Sachin Dogra','Qi7A6dFrU9sqgd/eIlJwboJN5iKFZIwuW727TQ++7DY=\r\n$oO2hjR2H2m7HmnXH+pC2VlKukrgyRCQ9An65O2JREAI=\r\n','TeamLead',NULL,'Mandeepinder Singh','Fry\'s'),('E00583','jaspreet.singh@trantorinc.com','Jaspreet Singh','Qi7A6dFrU9sqgd/eIlJwboJN5iKFZIwuW727TQ++7DY=\r\n$oO2hjR2H2m7HmnXH+pC2VlKukrgyRCQ9An65O2JREAI=\r\n','TeamLead',NULL,'Mandeepinder Singh','Fry\'s'),('E01114','aakash.gautam@trantorinc.com','Aakash Gautam','Qi7A6dFrU9sqgd/eIlJwboJN5iKFZIwuW727TQ++7DY=\r\n$oO2hjR2H2m7HmnXH+pC2VlKukrgyRCQ9An65O2JREAI=\r\n','Developer','Sachin Dogra','Mandeepinder Singh','Fry\'s'),('E01115','diksha.wadhwa@trantorinc.com','Diksha Wadhwa','Qi7A6dFrU9sqgd/eIlJwboJN5iKFZIwuW727TQ++7DY=\r\n$oO2hjR2H2m7HmnXH+pC2VlKukrgyRCQ9An65O2JREAI=\r\n','Developer','Kartik Raina','Mandeepinder Singh','Fry\'s'),('E01116','mayank.sinha@trantorinc.com','Mayank Sinha','12r2s25827O+WjpghzuF8+yr8+Tc3VwjDDRRuBofNdY=\r\n$sAJ4A8rNE/db3IXklFodHuwnk8kiAHgbk7xO7rr6nU0=\r\n','Developer','Sachin Dogra','Mandeepinder Singh','Fry\'s'),('E01188','kartik.raina@trantorinc.com','Kartik Raina','Qi7A6dFrU9sqgd/eIlJwboJN5iKFZIwuW727TQ++7DY=\r\n$oO2hjR2H2m7HmnXH+pC2VlKukrgyRCQ9An65O2JREAI=\r\n','TeamLead',NULL,'Mandeepinder Singh','Fry\'s'),('EXXXX0','admin.leaveApp@trantorinc.com','Admin','Qi7A6dFrU9sqgd/eIlJwboJN5iKFZIwuW727TQ++7DY=\r\n$oO2hjR2H2m7HmnXH+pC2VlKukrgyRCQ9An65O2JREAI=\r\n','Admin',NULL,NULL,NULL),('EXXXXX','superAdmin.leaveApp@trantorinc.com','Super Admin','Qi7A6dFrU9sqgd/eIlJwboJN5iKFZIwuW727TQ++7DY=\r\n$oO2hjR2H2m7HmnXH+pC2VlKukrgyRCQ9An65O2JREAI=\r\n','Super_Admin',NULL,NULL,NULL);
 /*!40000 ALTER TABLE `EMPLOYEES` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -65,7 +68,7 @@ CREATE TABLE `LEAVE_REQUEST` (
   `leave_desc` varchar(400) NOT NULL,
   `leave_request_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -74,6 +77,7 @@ CREATE TABLE `LEAVE_REQUEST` (
 
 LOCK TABLES `LEAVE_REQUEST` WRITE;
 /*!40000 ALTER TABLE `LEAVE_REQUEST` DISABLE KEYS */;
+INSERT INTO `LEAVE_REQUEST` VALUES (6,'E01114','Aakash Gautam','Frys','Sachin','Mandeep','2019-09-09','2019-09-09',1,1,0,'Earned Leave','Urgent Work','2019-09-03 08:35:00'),(7,'E01116','Krilin','Frys','Sachin','Mandeep','2019-09-09','2019-09-09',1,1,0,'Earned Leave','Urgent Work','2019-09-03 08:41:23'),(8,'E01114','Aakash Gautam','Frys','Sachin','Mandeep','2019-09-09','2019-09-09',1,1,0,'Casual Leave','Urgent Work','2019-09-03 10:59:00'),(9,'E01114','Aakash Gautam','Frys','Sachin','Mandeep','2019-09-04','2019-09-06',2,1,0,'Casual Leave','Urgent Work','2019-09-04 06:47:53'),(10,'E01114','Aakash Gautam','Frys','Sachin','Mandeep','2019-09-07','2019-09-08',1,1,0,'Earned Leave','Urgent Work','2019-09-04 07:31:15'),(11,'E01114','Aakash Gautam','Frys','Sachin','Mandeep','2019-09-04','2019-09-06',1,1,0,'Earned Leave','Urgent Work','2019-09-04 11:11:22'),(12,'E01116','Mayank Mrinal','Fry\'s','Sachin Dogra','Mandeepinder Singh','2019-09-05','2019-09-05',1,1,0,'Casual Leave','Have some urgent work','2019-09-04 12:37:03'),(13,'E01116','Mayank Mrinal','Fry\'s','Sachin Dogra','Mandeepinder Singh','2019-09-05','2019-09-06',2,1,0,'Casual Leave','Have some urgent work','2019-09-04 12:43:11');
 /*!40000 ALTER TABLE `LEAVE_REQUEST` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -97,6 +101,7 @@ CREATE TABLE `LEAVE_STATUS` (
 
 LOCK TABLES `LEAVE_STATUS` WRITE;
 /*!40000 ALTER TABLE `LEAVE_STATUS` DISABLE KEYS */;
+INSERT INTO `LEAVE_STATUS` VALUES (3,0),(4,0),(5,0),(6,1),(7,-1),(8,-1),(9,-1),(10,1),(11,1),(12,1),(13,1);
 /*!40000 ALTER TABLE `LEAVE_STATUS` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -109,4 +114,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-09-02 12:46:23
+-- Dump completed on 2019-09-04 18:17:03

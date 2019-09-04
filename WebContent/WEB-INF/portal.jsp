@@ -53,26 +53,22 @@
              <%  if(session.getAttribute("desg").equals("Developer")) {  %>      	<!-- designation is developer -->
            
 				<% if ((resultSet.get(i).getStatus()).equals("Pending")) { %>        		
-	             <td class="bg-warning text-dark"><%=resultSet.get(i).getStatus()%></td>
+	             <td class="text-info"><b><%=resultSet.get(i).getStatus()%></b></td>
 			    <% } %>
 			    <% if((resultSet.get(i).getStatus()).equals("Approved")) { %>
-	             <td class="bg-primary text-white"><%=resultSet.get(i).getStatus()%></td>
+	             <td class="text-primary"><b><%=resultSet.get(i).getStatus()%></b></td>
 			    <% } %>
 			    <% if ((resultSet.get(i).getStatus()).equals("Rejected")) { %>
-	             <td class="bg-danger text-white"><%=resultSet.get(i).getStatus()%></td>
+	             <td class="text-danger"><b><%=resultSet.get(i).getStatus()%></b></td>
 	             
 		    <% } %>
 		    
 		     <% } else { %>		<!-- designation is !developer-->			
 	     			    <!--  changes action/status column  view based on status-->																																																	
 	     				<% if ((resultSet.get(i).getStatus()).equals("Approved")) { %>				<!-- status == approved -->	                 
-     				 				<td class="bg-primary">
-							    	 		<button type="button " class=" bg-primary rm-border text-white"  >Approved</button>
-							    	 </td>
+     				 				<td class="rm-border text-primary"><b>Approved</b></td>
 						<% } else if ((resultSet.get(i).getStatus()).equals("Rejected")) { %>	<!-- status == rejected -->	
-									<td class="bg-danger">
-							    	 		<button type="button " class=" bg-danger rm-border text-white"  >Declined</button>
-							    	 </td>
+									<td class="rm-border text-danger"><b>Declined</b></td>
 	     				  <% } else { %>																													<!-- status == pending -->																			  
 							    	 <td class="">
 							    	 		<button type="button" class=" btn-check"  id="<%=resultSet.get(i).getId()%>"><i class="fas fa-check"></i></button>
