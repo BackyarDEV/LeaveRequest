@@ -69,3 +69,6 @@ table {
     font-size: 14px;
     border-collapse: collapse;
 }
+.rm-border{
+	border:none;
+}
