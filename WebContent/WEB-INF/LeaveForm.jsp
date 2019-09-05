@@ -1,21 +1,22 @@
 <jsp:include page="/WEB-INF/layout.jsp"></jsp:include>
+		
 		<form class="form leave-form" method="post" action="leave">
 				<h3>Leave Request</h3><br>
 				<div class="form-group">
 					<label for="name">Name of the Employee</label>
-					<input class="form-control" id="name" required type="text" name="name" placeholder="Name"/>
+					<input class="form-control" id="name" required type="text" readonly value="${name}" name="name" placeholder="Name"/>
 				</div>
 				<div class="form-row">
 					<div class="col-sm-6">
 						<div class="form-group">
 							<label for="ecode">Ecode</label>
-							<input class="form-control" id="ecode" required type="text" name="ecode" placeholder="Ecode"/>
+							<input class="form-control" id="ecode" required type="text" readonly name="ecode" value="${ecode}" placeholder="Ecode"/>
 						</div>
 					</div>
 					<div class="col-sm-6">
 						<div class="form-group">
 							<label for="project">Project</label>
-							<input class="form-control" id="project" required type="text" name="project" placeholder="Project"/>
+							<input class="form-control" id="project" value="${project}" required type="text" name="project" placeholder="Project"/>
 						</div>
 					</div>
 				</div>
@@ -23,13 +24,13 @@
 					<div class="col-sm-6">
 						<div class="form-group">
 							<label for="tLead">Team Lead</label>
-							<input class="form-control" id="tLead" required type="text" name="tLead" placeholder="Team Lead"/>
+							<input class="form-control" id="tLead" required value="${lead}" type="text" name="tLead" placeholder="Team Lead"/>
 						</div>
 					</div>
 					<div class="col-sm-6">
 						<div class="form-group">
 							<label for="manager">Project Manager</label>
-							<input class="form-control" id="manager" required type="text" name="manager" placeholder="Project Manager"/>
+							<input class="form-control" id="manager" value="${manager}" required type="text" name="manager" placeholder="Project Manager"/>
 						</div>
 					</div>
 				</div>
@@ -102,7 +103,6 @@
 			        </div>
 			    </div>
 			</div>
-		</div>
 
 		<script>
 			$(function(){
@@ -129,6 +129,8 @@
 								window.location.replace('portal');
 							} else if (data == "null") {
 								alert('All fields are compulsory!');
+							} else if (data == 'mail_not_sent') {
+								alert('There was a problem sending a Leave Request Mail!');
 							}
 						}
 					});

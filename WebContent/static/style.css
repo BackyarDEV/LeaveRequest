@@ -1,33 +1,29 @@
-
 .navbar{
-	 background-color: #434343;
+	background-color: #434343;
 }
 .sidenav {
-	 height: 100%;
-	 width: 240px;
-	 position: fixed;
-	 left: 0;
-	 background-color: #434343;
-	 overflow-x: hidden;
-	 padding-top: 40px;
-
-	 opacity: .9;
-
-}
+	height: 100%;
+	width: 240px;
+	position: fixed;
+	left: 0;
+	background-color: #434343;
+	overflow-x: hidden;
+	padding-top: 40px;
 	
+	opacity: .9;
+}
+
 .sidenav a {
-	 padding: 6px 8px 6px 16px;
-	 text-decoration: none;
-
-	 font-size: 1.1rem;
-	 color: #a1a1a1;
-	 display: block;
+	padding: 6px 8px 6px 16px;
+	text-decoration: none;
+	font-size: 1.1rem;
+	color: #a1a1a1;
+	display: block;
 }
-	
-.sidenav a:hover {
-	 color: #f1f1f1;
-	 text-decoration: none;
 
+.sidenav a:hover {
+	color: #f1f1f1;
+	text-decoration: none;
 }
 
 .leave-container{
@@ -57,18 +53,46 @@
 	color: #1c9be8;
 	border: none;
 }
-   	
+
 .btn-reject{
 	background:white;
 	color: #7323dc;
 	border: none;
-
 }
 
 table {
-    font-size: 14px;
-    border-collapse: collapse;
+	font-size: 14px;
+	border-collapse: collapse;
 }
 .rm-border{
 	border:none;
 }
+
+input:focus {
+	outline:none;
+}
+
+.dataTables_wrapper .dataTables_filter input {
+	margin-left: 0.5em;
+	padding-left: 10px;
+	border-radius: 25px;
+	border: 1.4px solid #4c4646;
+}
+
+button, select {
+	text-transform: none;
+	background: white;
+}
+.dataTables_wrapper .dataTables_paginate .paginate_button.current, .dataTables_wrapper .dataTables_paginate .paginate_button.current:hover {
+	color: #ffffff !important;
+	border: none;
+	background: #1c9be8;
+	border-radius: 50px;
+}
+.dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+	color: #ffffff !important;
+	border: none;
+	background: #888f97;
+	border-radius: 50px;
+}
+
