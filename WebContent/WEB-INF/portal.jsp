@@ -6,8 +6,13 @@
 <%@page import=" java.util.ArrayList"%>
 <%@page import=" com.backyardev.util.LeaveReqObject"%>
 <jsp:include page="/WEB-INF/layout.jsp"></jsp:include>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-   <table class="table">
+<html>
+    <head>
+    	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
+		 <link rel="stylesheet" href="static/style.css">
+	</head>
+	<body>
+   	<table class="table hover nowrap "  id="data-table">
       <thead>
          <tr>
             <th scope="col">Ecode</th>
@@ -45,7 +50,7 @@
             <td><%=resultSet.get(i).getProjectManager()  %></td>
             <td><%=resultSet.get(i).getStartDate() %></td>
             <td><%=resultSet.get(i).getEndDate()  %></td>
-            <td><%=resultSet.get(i).getNumberOfDays()  %></td>
+            <td class="text-center"><%=resultSet.get(i).getNumberOfDays()  %></td>
             <td><%=resultSet.get(i).getLeaveType()  %></td>
             <td><%=resultSet.get(i).getLeaveDesc()%></td>
            	
@@ -53,29 +58,25 @@
              <%  if(session.getAttribute("desg").equals("Developer")) {  %>      	<!-- designation is developer -->
            
 				<% if ((resultSet.get(i).getStatus()).equals("Pending")) { %>        		
-	             <td class="bg-warning text-dark"><%=resultSet.get(i).getStatus()%></td>
+	             <td class="text-warning font-weight-bold"><%=resultSet.get(i).getStatus()%></td>
 			    <% } %>
 			    <% if((resultSet.get(i).getStatus()).equals("Approved")) { %>
-	             <td class="bg-primary text-white"><%=resultSet.get(i).getStatus()%></td>
+	             <td class="text-primary font-weight-bold"><%=resultSet.get(i).getStatus()%></td>
 			    <% } %>
 			    <% if ((resultSet.get(i).getStatus()).equals("Rejected")) { %>
-	             <td class="bg-danger text-white"><%=resultSet.get(i).getStatus()%></td>
+	             <td class="text-danger font-weight-bold"><%=resultSet.get(i).getStatus()%></td>
 	             
 		    <% } %>
 		    
 		     <% } else { %>		<!-- designation is !developer-->			
 	     			    <!--  changes action/status column  view based on status-->																																																	
 	     				<% if ((resultSet.get(i).getStatus()).equals("Approved")) { %>				<!-- status == approved -->	                 
-     				 				<td class="bg-primary">
-							    	 		<button type="button " class=" bg-primary rm-border text-white"  >Approved</button>
-							    	 </td>
+     				 				<td class="text-primary font-weight-bold" > Approved </td>
 						<% } else if ((resultSet.get(i).getStatus()).equals("Rejected")) { %>	<!-- status == rejected -->	
-									<td class="bg-danger">
-							    	 		<button type="button " class=" bg-danger rm-border text-white"  >Declined</button>
-							    	 </td>
+									<td class="text-danger font-weight-bold" > Rejected </td>
 	     				  <% } else { %>																													<!-- status == pending -->																			  
 							    	 <td class="">
-							    	 		<button type="button" class=" btn-check"  id="<%=resultSet.get(i).getId()%>"><i class="fas fa-check"></i></button>
+							    	 		<button type="button" class=" btn-check"  id="<%=resultSet.get(i).getId()%>"><i class="fas fa-check "></i></button>
 								     		 <button type="button" class=" btn-reject"  id="<%=resultSet.get(i).getId()%>"><i class="fas fa-times"></i></button>
 							    	 </td>
 	    	 				<% } %>
@@ -85,55 +86,7 @@
          <% } %>
       </tbody>
    </table>
-<script src="./static/portalJsp.js"></script>
-<script>
-$('.btn-reject').click(function(s){
-	
-	var url = "ActionLeaveServlet";
-	var method = "post";
-	var id = $(this).attr("id")
-	console.log(id);
-	
-	$.ajax({
-		type: method,
-		url: url,
-		data: {
-			'id': id,
-			'action' : 'reject'
-		} ,
-		success: function(data){
-			if (data == "true"){
-				window.location.replace('portal');
-			} else {
-				alert('Error!');
-			}
-		}
-	});
-});
 
-$('.btn-check').click(function(s){
-	
-	var url = "ActionLeaveServlet";
-	var method = "post";
-	var id = $(this).attr("id")
-	console.log(id);
-	
-	$.ajax({
-		type: method,
-		url: url,
-		data: {
-			'id': id,
-			'action' : 'approve'
-		} ,
-		success: function(data){
-			if (data == "true"){
-				window.location.replace('portal');
-			} else {
-				alert('Error!');
-			}
-		}
-	});
-});
-</script>
+<script src="./static/portalJs.js"></script>
 </body>
 </html>

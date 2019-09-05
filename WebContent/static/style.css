@@ -67,3 +67,33 @@ table {
 .rm-border{
 	border:none;
 }
+
+input:focus {
+    outline:none;
+}
+
+	.dataTables_wrapper .dataTables_filter input {
+    margin-left: 0.5em;
+    padding-left: 10px;
+    border-radius: 25px;
+    border: 1.4px solid #4c4646;
+	}
+	
+	button, select {
+	    text-transform: none;
+	    background: white;
+	}
+	.dataTables_wrapper .dataTables_paginate .paginate_button.current, .dataTables_wrapper .dataTables_paginate .paginate_button.current:hover {
+    color: #ffffff !important;
+    border: none;
+    background: #1c9be8;
+    border-radius: 50px;
+    }
+    .dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+     color: #ffffff !important;
+    border: none;
+    background: #888f97;
+    border-radius: 50px;
+	}
+
+

@@ -9,7 +9,7 @@
 					<div class="col-sm-6">
 						<div class="form-group">
 							<label for="ecode">Ecode</label>
-							<input class="form-control" id="ecode" required type="text" name="ecode" placeholder="Ecode"/>
+							<input class="form-control" id="ecode" required type="text" name="ecode"  value="E01114" placeholder="Ecode" readonly/>
 						</div>
 					</div>
 					<div class="col-sm-6">
