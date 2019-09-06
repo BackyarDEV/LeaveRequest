@@ -9,7 +9,6 @@
 	background-color: #434343;
 	overflow-x: hidden;
 	padding-top: 40px;
-	
 	opacity: .9;
 }
 
@@ -40,7 +39,7 @@
 
 .leave-form{
 	border-radius: 0.5rem;
-	width: 60%;
+	width: 65%;
 	margin-left: auto;
 	margin-right: auto;
 	box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 9px 26px 0 rgba(0, 0, 0, 0.19);
@@ -73,6 +72,10 @@ input:focus {
 }
 
 .dataTables_wrapper .dataTables_filter input {
+	margin-right: .5em;
+	padding-left: 10px;
+	border-radius: 25px;
+	border: 1.4px solid #4c4646;
 	margin-left: 0.5em;
 	padding-left: 10px;
 	border-radius: 25px;
@@ -94,5 +97,63 @@ button, select {
 	border: none;
 	background: #888f97;
 	border-radius: 50px;
+}
+
+.dataTables_wrapper {
+    position: relative;
+    clear: both;
+    zoom: 1;
+    overflow: hidden;
+}
+.navbar{
+  background-color: #434343;
+}
+
+.navbar-toggler{
+  border: none;	
+}
+
+.sidenav {
+  height: 100%;
+  width: 240px;
+  position: fixed;
+  z-index: 1;
+  top: 0; 
+  left: 0;
+  background-color: #434343;
+  overflow-x: hidden;
+  padding-top: 60px;
+  opacity: 0.9;
+}
+
+.sidenav-link{
+  padding-top:30px;
+  display: block;
+}
+
+.sidenav a {
+  padding: 6px 8px 6px 16px;
+  text-decoration: none;
+  font-size: 1.1rem;
+  color: #a1a1a1;
+  display: block;
+}
+
+.sidenav a:hover {
+  color: #f1f1f1;
+  text-decoration: none;
+}
+
+.sidenav .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 220px;
+}
+
+.sidenav-toggle{
+  color: white;
+  padding-right: 1em;
 }
 

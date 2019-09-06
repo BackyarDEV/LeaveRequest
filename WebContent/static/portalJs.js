@@ -50,5 +50,8 @@ $(document).ready(function() {
 	$('#all-req').css('color', '#f1f1f1');
     $('#data-table').DataTable({
         sorting: false
+    },
+    {
+        "pagingType": "scrolling"
     });
 });

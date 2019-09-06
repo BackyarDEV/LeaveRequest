@@ -38,13 +38,13 @@
 					<div class="col-sm-6">
 						<div class="form-group">
 							<label for="leave-start">Leave Start Date</label>
-							<input class="form-control date1" id="leave-start"   required type="date" name="leave-start"  placeholder="DD/MM/YYYY"  />
+							<input class="form-control"  class="date-format"  id="leave-start"   required type="text"  name="leave-start"  onclick="cal()"  value="yy-mm-dd" autocomplete="off" />
 						</div>
 					</div>
 					<div class="col-sm-6">
 						<div class="form-group">
 							<label for="leave-end">Leave End Date</label>
-							<input class="form-control date1" id="leave-end"    required type="date" name="leave-end"  placeholder="DD/MM/YYYY" />
+							<input class="form-control "  class="date-format"  id="leave-end"    required type="text"  name="leave-end" onchange="cal()"  value="yy-mm-dd" autocomplete="off"/>
 						</div>
 					</div>
 				</div>
@@ -103,72 +103,7 @@
 			        </div>
 			    </div>
 			</div>
+	<script src="./static/formJs.js"></script>
 
-		<script>
-			$(function(){
-				$('#new-req').css('color', '#f1f1f1');
-				$('#submitFormModal').modal({ show: false});
-			});
-			$('.form').submit(function(s){
-				s.preventDefault();
-				$('#submitFormModal').modal('show');
-				console.log('here');
-				$('#submitFormBtn').click(function(){
-					console.log('clickity click!');
-					$('#progress').css('display', 'block');
-					var form = $('.form');
-					var url = form.attr("action");
-					var method = form.attr("method");
-					
-					$.ajax({
-						type: method,
-						url: url,
-						data: form.serialize(),
-						success: function(data){
-							if (data == "true"){
-								window.location.replace('portal');
-							} else if (data == "null") {
-								alert('All fields are compulsory!');
-							} else if (data == 'mail_not_sent') {
-								alert('There was a problem sending a Leave Request Mail!');
-							}
-						}
-					});
-				});
-			});
-		</script>
-		<script>
-				var startDate
-				function setStartDate(){
-					var startDate  = $("#leave-start").val() ;
-					console.log(startDate);
-					
-				}
-
-				$(".date1").flatpickr({
-				    enableTime: false,
-				    dateFormat: "y-m-d",
-				    "disable": [
-				        function(date) {
-				           return (date.getDay() === 0 || date.getDay() === 6);  // disable weekends
-				        }
-				    ],
-				    "locale": {
-				        "firstDayOfWeek": 1 // set start day of week to Monday
-				    },
-				 
-
-				});
-				$('#leave-end').flatpickr({
-					dateFormat: "y-m-d",
-				    "disable": [
-				        function(date) {
-				           return (date.getDay() === 0 || date.getDay() === 6);  // disable weekends
-				        }
-				    ]
-				   
-				});
-				
-		</script>
 	</body>
 </html>

@@ -2,6 +2,7 @@
 <%@page import=" java.util.ArrayList"%>
 <%@page import=" com.backyardev.util.LeaveReqObject"%>
 <jsp:include page="/WEB-INF/layout.jsp"></jsp:include>
+
 <table class="table hover nowrap" id="data-table">
    <thead>
       <tr>
@@ -14,6 +15,7 @@
          <th scope="col">End Date</th>
          <th scope="col">Total Days </th>
          <th scope="col">Type </th>
+         <th scope="col" class="slide">Desc </th>
          <th scope="col">Desc </th>
          <% if(session.getAttribute("desg").equals("Developer")){ %>
          <th scope="col">Status </th>
