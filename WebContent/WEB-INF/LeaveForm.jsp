@@ -103,7 +103,7 @@
 			        </div>
 			    </div>
 			</div>
-
 	<script src="./static/formJs.js"></script>
+
 	</body>
 </html>
