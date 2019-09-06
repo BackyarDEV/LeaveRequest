@@ -1,21 +1,22 @@
 <jsp:include page="/WEB-INF/layout.jsp"></jsp:include>
+		
 		<form class="form leave-form" method="post" action="leave">
 				<h3>Leave Request</h3><br>
 				<div class="form-group">
 					<label for="name">Name of the Employee</label>
-					<input class="form-control" id="name" required type="text" name="name" placeholder="Name"/>
+					<input class="form-control" id="name" required type="text" readonly value="${name}" name="name" placeholder="Name"/>
 				</div>
 				<div class="form-row">
 					<div class="col-sm-6">
 						<div class="form-group">
 							<label for="ecode">Ecode</label>
-							<input class="form-control" id="ecode" required type="text" name="ecode"  value="E01114" placeholder="Ecode" readonly/>
+							<input class="form-control" id="ecode" required type="text" readonly name="ecode" value="${ecode}" placeholder="Ecode"/>
 						</div>
 					</div>
 					<div class="col-sm-6">
 						<div class="form-group">
 							<label for="project">Project</label>
-							<input class="form-control" id="project" required type="text" name="project" placeholder="Project"/>
+							<input class="form-control" id="project" value="${project}" required type="text" name="project" placeholder="Project"/>
 						</div>
 					</div>
 				</div>
@@ -23,13 +24,13 @@
 					<div class="col-sm-6">
 						<div class="form-group">
 							<label for="tLead">Team Lead</label>
-							<input class="form-control" id="tLead" required type="text" name="tLead" placeholder="Team Lead"/>
+							<input class="form-control" id="tLead" required value="${lead}" type="text" name="tLead" placeholder="Team Lead"/>
 						</div>
 					</div>
 					<div class="col-sm-6">
 						<div class="form-group">
 							<label for="manager">Project Manager</label>
-							<input class="form-control" id="manager" required type="text" name="manager" placeholder="Project Manager"/>
+							<input class="form-control" id="manager" value="${manager}" required type="text" name="manager" placeholder="Project Manager"/>
 						</div>
 					</div>
 				</div>
@@ -37,13 +38,13 @@
 					<div class="col-sm-6">
 						<div class="form-group">
 							<label for="leave-start">Leave Start Date</label>
-							<input class="form-control date1" id="leave-start"   required type="date" name="leave-start"  placeholder="DD/MM/YYYY"  />
+							<input class="form-control"  class="date-format"  id="leave-start"   required type="text"  name="leave-start"  onclick="cal()"  value="yy-mm-dd" autocomplete="off" />
 						</div>
 					</div>
 					<div class="col-sm-6">
 						<div class="form-group">
 							<label for="leave-end">Leave End Date</label>
-							<input class="form-control date1" id="leave-end"    required type="date" name="leave-end"  placeholder="DD/MM/YYYY" />
+							<input class="form-control "  class="date-format"  id="leave-end"    required type="text"  name="leave-end" onchange="cal()"  value="yy-mm-dd" autocomplete="off"/>
 						</div>
 					</div>
 				</div>
@@ -102,71 +103,7 @@
 			        </div>
 			    </div>
 			</div>
-		</div>
 
-		<script>
-			$(function(){
-				$('#new-req').css('color', '#f1f1f1');
-				$('#submitFormModal').modal({ show: false});
-			});
-			$('.form').submit(function(s){
-				s.preventDefault();
-				$('#submitFormModal').modal('show');
-				console.log('here');
-				$('#submitFormBtn').click(function(){
-					console.log('clickity click!');
-					$('#progress').css('display', 'block');
-					var form = $('.form');
-					var url = form.attr("action");
-					var method = form.attr("method");
-					
-					$.ajax({
-						type: method,
-						url: url,
-						data: form.serialize(),
-						success: function(data){
-							if (data == "true"){
-								window.location.replace('portal');
-							} else if (data == "null") {
-								alert('All fields are compulsory!');
-							}
-						}
-					});
-				});
-			});
-		</script>
-		<script>
-				var startDate
-				function setStartDate(){
-					var startDate  = $("#leave-start").val() ;
-					console.log(startDate);
-					
-				}
-
-				$(".date1").flatpickr({
-				    enableTime: false,
-				    dateFormat: "y-m-d",
-				    "disable": [
-				        function(date) {
-				           return (date.getDay() === 0 || date.getDay() === 6);  // disable weekends
-				        }
-				    ],
-				    "locale": {
-				        "firstDayOfWeek": 1 // set start day of week to Monday
-				    },
-				 
-
-				});
-				$('#leave-end').flatpickr({
-					dateFormat: "y-m-d",
-				    "disable": [
-				        function(date) {
-				           return (date.getDay() === 0 || date.getDay() === 6);  // disable weekends
-				        }
-				    ]
-				   
-				});
-				
-		</script>
+	<script src="./static/formJs.js"></script>
 	</body>
 </html>

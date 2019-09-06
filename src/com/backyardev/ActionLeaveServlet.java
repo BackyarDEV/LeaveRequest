@@ -3,7 +3,6 @@ package com.backyardev;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.SQLException;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -46,8 +45,6 @@ public class ActionLeaveServlet extends HttpServlet {
 			sql = "UPDATE LEAVE_STATUS SET STATUS = "+ status + " WHERE id =  " + id ;
 			pst = conn.prepareStatement(sql);
 			pst.execute();
-			
-			
 			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
