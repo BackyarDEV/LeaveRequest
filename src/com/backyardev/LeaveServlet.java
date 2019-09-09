@@ -26,9 +26,9 @@ public class LeaveServlet extends HttpServlet{
 		String dayLeave = req.getParameter("day-leave");
 		String leaveDesc = req.getParameter("leave-desc");
 		int numberOfDays = Integer.parseInt(req.getParameter("number-days"));
-		PrintWriter out = res.getWriter();
-		
-		if(name == null || ecode == null || projectName == null || req.getParameter("number-days") == null || leaveDesc == null ||  leaveType.equals("null") ||  teamLead == null || projectManager == null || endDate == null || startDate == null || dayLeave == null) {
+		PrintWriter out = res.getWriter();		
+
+		if(name == null || ecode == null || projectName == null || req.getParameter("number-days") == null || leaveDesc == null || leaveType.equals("null") || teamLead == null || projectManager == null || endDate == null || startDate == null || dayLeave == null) {
 			out.write("null");
 		} else {
 			LeaveReqObject obj = new LeaveReqObject();

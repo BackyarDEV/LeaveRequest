@@ -2,8 +2,8 @@
 <%@page import=" java.util.ArrayList"%>
 <%@page import=" com.backyardev.util.LeaveReqObject"%>
 <jsp:include page="/WEB-INF/layout.jsp"></jsp:include>
-<table class="table hover nowrap  mt-5"  id="data-table">
 
+<table class="table hover nowrap  mt-5"  id="data-table">
    <thead>
       <tr>
          <th scope="col" >Ecode <i class="fas fa-sort ml-1" onclick="sort()"></i></th>
@@ -16,6 +16,7 @@
          <th scope="col">Total Days <i class="fas fa-sort ml-1" onclick="sort()"></th>
          <th scope="col">Type <i class="fas fa-sort ml-5" onclick="sort()"></th>
          <th scope="col">Desc <i class="fas fa-sort ml-1" onclick="sort()"></th>
+
          <% if(session.getAttribute("desg").equals("Developer")){ %>
          <th scope="col">Status <i class="fas fa-sort ml-1" onclick="sort()"> </th>
          <% } else { %>

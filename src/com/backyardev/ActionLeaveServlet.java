@@ -38,21 +38,16 @@ public class ActionLeaveServlet extends HttpServlet {
 			status = -1;
 		}
 		
-		DatabaseConnection db;
 		try {
-			db = DatabaseConnection.getInstance();
+			DatabaseConnection db = DatabaseConnection.getInstance();
 			conn = db.getConnection();	
 			sql = "UPDATE LEAVE_STATUS SET STATUS = "+ status + " WHERE id =  " + id ;
 			pst = conn.prepareStatement(sql);
 			pst.execute();
 			
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		System.out.println(id);
-		System.out.println(action);
 		response.getWriter().write("true");
 	}
 
