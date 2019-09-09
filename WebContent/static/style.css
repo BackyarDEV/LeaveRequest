@@ -1,28 +1,54 @@
 .navbar{
-	background-color: #434343;
+  background-color: #212121;
+  height: 50px;
 }
+
+.navbar-toggler{
+  border: none;	
+}
+
 .sidenav {
-	height: 100%;
-	width: 240px;
-	position: fixed;
-	left: 0;
-	background-color: #434343;
-	overflow-x: hidden;
-	padding-top: 40px;
-	opacity: .9;
+  height: 100%;
+  width: 240px;
+  position: fixed;
+  z-index: 1;
+  top: 0; 
+  background-color: #484848;
+  left: 0;
+  overflow-x: hidden;
+  margin-top: 50px;
+  opacity: 0.9;
+}
+
+.sidenav-link{
+  padding-top:30px;
+  display: block;
 }
 
 .sidenav a {
-	padding: 6px 8px 6px 16px;
-	text-decoration: none;
-	font-size: 1.1rem;
-	color: #a1a1a1;
-	display: block;
+  padding: 6px 8px 6px 16px;
+  text-decoration: none;
+  font-size: 1.1rem;
+  color: #a1a1a1;
+  display: block;
 }
 
 .sidenav a:hover {
-	color: #f1f1f1;
-	text-decoration: none;
+  color: #f1f1f1;
+  text-decoration: none;
+}
+
+.sidenav .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 220px;
+}
+
+.sidenav-toggle{
+  color: white;
+  padding-right: 1em;
 }
 
 .leave-container{
@@ -103,57 +129,5 @@ button, select {
     position: relative;
     clear: both;
     zoom: 1;
-    overflow: hidden;
+    overflow: auto;
 }
-.navbar{
-  background-color: #434343;
-}
-
-.navbar-toggler{
-  border: none;	
-}
-
-.sidenav {
-  height: 100%;
-  width: 240px;
-  position: fixed;
-  z-index: 1;
-  top: 0; 
-  left: 0;
-  background-color: #434343;
-  overflow-x: hidden;
-  padding-top: 60px;
-  opacity: 0.9;
-}
-
-.sidenav-link{
-  padding-top:30px;
-  display: block;
-}
-
-.sidenav a {
-  padding: 6px 8px 6px 16px;
-  text-decoration: none;
-  font-size: 1.1rem;
-  color: #a1a1a1;
-  display: block;
-}
-
-.sidenav a:hover {
-  color: #f1f1f1;
-  text-decoration: none;
-}
-
-.sidenav .closebtn {
-  position: absolute;
-  top: 0;
-  right: 25px;
-  font-size: 36px;
-  margin-left: 220px;
-}
-
-.sidenav-toggle{
-  color: white;
-  padding-right: 1em;
-}
-
