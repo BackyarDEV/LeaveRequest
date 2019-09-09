@@ -22,10 +22,10 @@
 					if (data == "true"){
 						window.location.replace('portal');
 					} else if (data == "null") {
-						$('#submitFormModal').modal({ show: false});
+						$('#submitFormModal').modal("hide");
 						alert('All fields are compulsory!');
 					} else if (data == 'mail_not_sent') {
-						$('#submitFormModal').modal({ show: false});
+						$('#submitFormModal').modal( "hide");
 						alert('There was a problem sending a Leave Request Mail!');
 					}
 				}

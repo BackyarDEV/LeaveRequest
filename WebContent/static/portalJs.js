@@ -49,9 +49,29 @@ $('.btn-check').click(function(s) {
 $(document).ready(function() {
 	$('#all-req').css('color', '#f1f1f1');
     $('#data-table').DataTable({
-        sorting: false
+    	"ordering": false
     },
     {
         "pagingType": "scrolling"
     });
 });
+
+function sort(){
+	 $('#data-table').DataTable({
+	 		destroy: true,
+	    	"ordering": true
+	    },
+	    {
+	        "pagingType": "scrolling"
+	    });
+	 $(".fa-sort").hide()
+}
+
+
+
+
+
+
+
+
+
