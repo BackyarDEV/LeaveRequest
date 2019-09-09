@@ -1,30 +1,3 @@
-.navbar{
-	background-color: #434343;
-}
-.sidenav {
-	height: 100%;
-	width: 230px;
-	position: fixed;
-	left: 0;
-	background-color: #434343;
-	overflow-x: hidden;
-	padding-top: 40px;
-	opacity: .9;
-}
-
-.sidenav a {
-	padding: 6px 8px 6px 16px;
-	text-decoration: none;
-	font-size: 1.1rem;
-	color: #a1a1a1;
-	display: block;
-}
-
-.sidenav a:hover {
-	color: #f1f1f1;
-	text-decoration: none;
-}
-
 .leave-container{
 	min-width: 300px;
 	max-width: 800px;
@@ -60,8 +33,9 @@
 }
 
 table {
-	font-size: 14px;
+	font-size: 13.8px;
 	border-collapse: collapse;
+	margin-bottom: 10px;
 }
 .rm-border{
 	border:none;
@@ -97,13 +71,7 @@ button, select {
 	border-radius: 50px;
 }
 
-.dataTables_wrapper {
-    position: relative;
-    clear: both;
-    zoom: 1;
-    overflow: hidden;
 
-}
 .navbar{
 background-color: #434343;
 }
@@ -155,4 +123,39 @@ margin-left: 220px;
 color: white;
 padding-right: 1em;
 }
+.dataTables_wrapper {
+    position: relative;
+    clear: both;
+    zoom: 1;
+    overflow: auto;
+}
+div.scrollable {
+    width: 100px;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: auto;
+}
 
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 4px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;; 
+}
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888; 
+}
+.form-error {
+    display: block;
+    font-size: 13px;
+    color: #c72f44;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    line-height: 140%;
+}

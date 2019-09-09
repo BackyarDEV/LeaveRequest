@@ -22,8 +22,10 @@
 					if (data == "true"){
 						window.location.replace('portal');
 					} else if (data == "null") {
+						$('#submitFormModal').modal({ show: false});
 						alert('All fields are compulsory!');
 					} else if (data == 'mail_not_sent') {
+						$('#submitFormModal').modal({ show: false});
 						alert('There was a problem sending a Leave Request Mail!');
 					}
 				}
@@ -88,7 +90,8 @@
 		      return date;
 		    }
 		  } );
-
+	//Start validation
+	  $.validate();
 			
 			
 			

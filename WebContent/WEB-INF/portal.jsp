@@ -2,7 +2,7 @@
 <%@page import=" java.util.ArrayList"%>
 <%@page import=" com.backyardev.util.LeaveReqObject"%>
 <jsp:include page="/WEB-INF/layout.jsp"></jsp:include>
-<table class="table hover nowrap  mt-5" id="data-table">
+<table class="table hover nowrap  mt-5"  id="data-table">
    <thead>
       <tr>
          <th scope="col">Ecode</th>
@@ -14,7 +14,7 @@
          <th scope="col">End Date</th>
          <th scope="col">Total Days </th>
          <th scope="col">Type </th>
-         <th scope="col" class="slide">Desc </th>
+         <th scope="col">Desc </th>
          <% if(session.getAttribute("desg").equals("Developer")){ %>
          <th scope="col">Status </th>
          <% } else { %>
@@ -40,7 +40,7 @@
          <td><%=resultSet.get(i).getEndDate() %></td>
          <td class="text-center"><%=resultSet.get(i).getNumberOfDays() %></td>
          <td><%=resultSet.get(i).getLeaveType() %></td>
-         <td><%=resultSet.get(i).getLeaveDesc()%></td>
+         <td><div class="scrollable"><%=resultSet.get(i).getLeaveDesc()%></div></td>
          <!-- changes action/status column view based on designation --> 
          <% if(session.getAttribute("desg").equals("Developer")) { %> <!-- designation is developer -->
          <% if ((resultSet.get(i).getStatus()).equals("Pending")) { %> 
@@ -70,5 +70,6 @@
    </tbody>
 </table>
 <script src="static/portalJs.js"></script>
+
 </body>
 </html>
