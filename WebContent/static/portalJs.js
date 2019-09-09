@@ -50,9 +50,29 @@ $(document).ready(function() {
 	$('#all-req').css('color', '#f1f1f1');
 	$('#all-req').css('font-size', '1.2rem');
     $('#data-table').DataTable({
-        sorting: false
+    	"ordering": false
     },
     {
         "pagingType": "scrolling"
     });
 });
+
+function sort(){
+	 $('#data-table').DataTable({
+	 		destroy: true,
+	    	"ordering": true
+	    },
+	    {
+	        "pagingType": "scrolling"
+	    });
+	 $(".fa-sort").hide()
+}
+
+
+
+
+
+
+
+
+

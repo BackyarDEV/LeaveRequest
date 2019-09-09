@@ -29,8 +29,7 @@ $('.form').submit(function(s){
 			}
 		});
 	});
-});
-
+  
 //alert method
 function showAlert(msg, type){
 	$('#progress').css('display', 'none');

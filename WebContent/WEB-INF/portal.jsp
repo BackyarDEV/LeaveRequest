@@ -3,23 +3,24 @@
 <%@page import=" com.backyardev.util.LeaveReqObject"%>
 <jsp:include page="/WEB-INF/layout.jsp"></jsp:include>
 
-<table class="table hover nowrap" id="data-table">
+<table class="table hover nowrap  mt-5"  id="data-table">
    <thead>
       <tr>
-         <th scope="col">Ecode</th>
-         <th scope="col">Name</th>
-         <th scope="col">Project</th>
-         <th scope="col">TL</th>
-         <th scope="col">Manager</th>
-         <th scope="col">Start Date</th>
-         <th scope="col">End Date</th>
-         <th scope="col">Total Days </th>
-         <th scope="col">Type </th>
-         <th scope="col">Desc </th>
+         <th scope="col" >Ecode <i class="fas fa-sort ml-1" onclick="sort()"></i></th>
+         <th scope="col">Name <i class="fas fa-sort ml-1" onclick="sort()"></th>
+         <th scope="col">Project <i class="fas fa-sort ml-1" onclick="sort()"></th>
+         <th scope="col">TL <i class="fas fa-sort ml-1" onclick="sort()"></th>
+         <th scope="col">Manager <i class="fas fa-sort ml-1" onclick="sort()"></th>
+         <th scope="col">Start Date <i class="fas fa-sort ml-1" onclick="sort()"></th>
+         <th scope="col">End Date <i class="fas fa-sort ml-1" onclick="sort()"></th>
+         <th scope="col">Total Days <i class="fas fa-sort ml-1" onclick="sort()"></th>
+         <th scope="col">Type <i class="fas fa-sort ml-5" onclick="sort()"></th>
+         <th scope="col">Desc <i class="fas fa-sort ml-1" onclick="sort()"></th>
+
          <% if(session.getAttribute("desg").equals("Developer")){ %>
-         <th scope="col">Status </th>
+         <th scope="col">Status <i class="fas fa-sort ml-1" onclick="sort()"> </th>
          <% } else { %>
-         <th scope="col">Action </th>
+         <th scope="col">Action <i class="fas fa-sort ml-1" onclick="sort()"> </th>
          <% } %>
       </tr>
    </thead>
@@ -41,7 +42,7 @@
          <td><%=resultSet.get(i).getEndDate() %></td>
          <td class="text-center"><%=resultSet.get(i).getNumberOfDays() %></td>
          <td><%=resultSet.get(i).getLeaveType() %></td>
-         <td><%=resultSet.get(i).getLeaveDesc()%></td>
+         <td><div class="scrollable"><%=resultSet.get(i).getLeaveDesc()%></div></td>
          <!-- changes action/status column view based on designation --> 
          <% if(session.getAttribute("desg").equals("Developer")) { %> <!-- designation is developer -->
          <% if ((resultSet.get(i).getStatus()).equals("Pending")) { %> 
@@ -71,5 +72,6 @@
    </tbody>
 </table>
 <script src="static/portalJs.js"></script>
+
 </body>
 </html>
