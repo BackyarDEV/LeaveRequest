@@ -1,10 +1,28 @@
 //Function to submit form
 $(function(){
-		$('#new-req').css('color', '#f1f1f1');
-		$('#new-req').css('font-size', '1.2rem');
-		$('#submitFormModal').modal('hide');
-		
+	$('#new-req').css('color', '#f1f1f1');
+	$('#new-req').css('font-size', '1.2rem');
+	$('#submitFormModal').modal('hide');    
+	var dateFormat =  "yy-mm-dd",
+    from = $( "#leave-start" )
+    .datepicker({
+		defaultDate: "+1w",
+		changeMonth: true,
+		numberOfMonths: 1
+    })
+    .on( "change", function() {
+    	to.datepicker( "option", "minDate", getDate( this ) );
+    }),
+    to = $( "#leave-end" ).datepicker({
+    	defaultDate: "+1w",
+	    changeMonth: true,
+	    numberOfMonths: 1
+    })
+    .on( "change", function() {
+    	from.datepicker( "option", "maxDate", getDate( this ) );
+	    });
 });
+
 $('.form').submit(function(s){
 	s.preventDefault();
 	$('#submitFormModal').modal('show');
@@ -29,6 +47,7 @@ $('.form').submit(function(s){
 			}
 		});
 	});
+});
   
 //alert method
 function showAlert(msg, type){
@@ -66,34 +85,17 @@ $( "#leave-end" ).datepicker({
 	  dateFormat: "yy-mm-dd"
 }); 
 
-$( function() {
-	    var dateFormat =  "yy-mm-dd",
-	    from = $( "#leave-start" )
-	    .datepicker({
-			defaultDate: "+1w",
-			changeMonth: true,
-			numberOfMonths: 1
-	    })
-	    .on( "change", function() {
-	    	to.datepicker( "option", "minDate", getDate( this ) );
-	    }),
-	    to = $( "#leave-end" ).datepicker({
-	    	defaultDate: "+1w",
-		    changeMonth: true,
-		    numberOfMonths: 1
-	    })
-	    .on( "change", function() {
-	    	from.datepicker( "option", "maxDate", getDate( this ) );
-	    });
- 
-	    function getDate( element ) {
-	    	var date;
-		try {	
-			date = $.datepicker.parseDate( dateFormat, element.value );
-		} catch( error ) {
-			date = null;
-		}
- 
-		return date;
-    }
-});
+
+function getDate(element) {
+	var date = null;
+	try {	
+		date = $.datepicker.parseDate(dateFormat, element.value);
+	} catch(error) {
+		date = null;
+	}
+	return date;
+}
+
+
+
+

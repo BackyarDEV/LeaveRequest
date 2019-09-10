@@ -55,22 +55,36 @@ public class LeaveRequestService {
 	}
 	
 	public static String leaveService(LeaveReqObject obj) {
-		String returnBool = null;
+		String returnString = null;
 		try {
 			if(DatabaseQueries.insertLeaveRequest(obj)) {
 				if (LeaveMail.prepareMail(obj)){
-					returnBool = "true";
+					returnString = "true";
 				} else {
-					returnBool = "mail_not_sent";
+					returnString = "mail_not_sent";
 				}
 			} else {
-				returnBool = "insertion_error";
+				returnString = "insertion_error";
 			}
 		} catch(Exception ex) {
 			ex.printStackTrace();
 		}
 		
-		return returnBool;
+		return returnString;
+	}
+	
+	public static String compOffService(CompoffReqObject obj) {
+		String returnString = null;
+		try {
+			if(DatabaseQueries.insertCompoffRequest(obj)) {
+				returnString = "true";	
+			} else {
+				returnString = "insertion_error";
+			}
+		} catch(Exception ex) {
+			ex.printStackTrace();
+		}
+		return returnString;
 	}
 
 	private static boolean validateMail(String mail){

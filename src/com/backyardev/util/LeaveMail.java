@@ -134,7 +134,7 @@ public class LeaveMail {
 			
 			// Set To: header field of the header.
 			message.setRecipients(Message.RecipientType.CC,
-			         InternetAddress.parse(to+",dikshawadhwa185@gmail.com"));
+			         InternetAddress.parse(to));
 			
 			// Set Subject: header field
 			  

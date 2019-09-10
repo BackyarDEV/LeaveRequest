@@ -15,6 +15,8 @@ import com.backyardev.util.LeaveRequestService;
 public class LeaveServlet extends HttpServlet{
 	
 	protected void doPost(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException{
+		
+		String returnString = "null";
 		String name = req.getParameter("name");
 		String ecode = req.getParameter("ecode");
 		String projectName = req.getParameter("project");
@@ -28,8 +30,8 @@ public class LeaveServlet extends HttpServlet{
 		int numberOfDays = Integer.parseInt(req.getParameter("number-days"));
 		PrintWriter out = res.getWriter();		
 
-		if(name == null || ecode == null || projectName == null || req.getParameter("number-days") == null || leaveDesc == null || leaveType.equals("null") || teamLead == null || projectManager == null || endDate == null || startDate == null || dayLeave == null) {
-			out.write("null");
+		if(name == null || ecode == null || projectName == null || req.getParameter("number-days") == null || leaveDesc == null || leaveType.equals("null") || teamLead == null || projectManager == null || endDate.equals("yy-mm-dd") || startDate.equals("yy-mm-dd") || dayLeave == null) {
+			out.write(returnString);
 		} else {
 			LeaveReqObject obj = new LeaveReqObject();
 			obj.setEcode(ecode);
@@ -47,7 +49,8 @@ public class LeaveServlet extends HttpServlet{
 			} else {
 				obj.setHalfDayLeave(1);
 			}
-			out.write(LeaveRequestService.leaveService(obj));
+			returnString = LeaveRequestService.leaveService(obj);
+			out.write(returnString);
 		}
 	}
 	

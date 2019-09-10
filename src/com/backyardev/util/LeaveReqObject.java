@@ -14,8 +14,8 @@ private String leaveDesc;
 private String status;
 private int id;
 private int numberOfDays;
-private int halfDayLeave; 
-private int fullDayLeave;
+private int halfDayLeave=0; 
+private int fullDayLeave=0;
 
 public int getId() {
 return id;

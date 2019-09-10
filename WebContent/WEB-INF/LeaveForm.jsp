@@ -82,7 +82,7 @@
 				<br>
 				<div class="form-group">
 					<label for="leave-desc">Leave Description/Reason</label>
-					<input class="form-control" required id="leave-desc" type="text" placeholder="Brief Description" name="leave-desc"  data-validation="length"  data-validation-length="5-140" data-validation-error-msg="Leave description must be between 5-140 characters"/>
+					<textarea class="form-control" required id="leave-desc" rows="3" placeholder="Brief Description" name="leave-desc"  data-validation="length"  data-validation-length="5-140" data-validation-error-msg="Leave description must be between 5-140 characters"></textarea>
 				</div>
 				<button type="submit" class="btn btn-primary">Submit</button>
 			</form>

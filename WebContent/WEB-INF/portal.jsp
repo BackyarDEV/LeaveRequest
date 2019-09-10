@@ -7,20 +7,17 @@
    <thead>
       <tr>
          <th scope="col" >Ecode <i class="fas fa-sort ml-1" onclick="sort()"></i></th>
-         <th scope="col">Name <i class="fas fa-sort ml-1" onclick="sort()"></th>
-         <th scope="col">Project <i class="fas fa-sort ml-1" onclick="sort()"></th>
-         <th scope="col">TL <i class="fas fa-sort ml-1" onclick="sort()"></th>
-         <th scope="col">Manager <i class="fas fa-sort ml-1" onclick="sort()"></th>
-         <th scope="col">Start Date <i class="fas fa-sort ml-1" onclick="sort()"></th>
-         <th scope="col">End Date <i class="fas fa-sort ml-1" onclick="sort()"></th>
-         <th scope="col">Total Days <i class="fas fa-sort ml-1" onclick="sort()"></th>
-         <th scope="col">Type <i class="fas fa-sort ml-5" onclick="sort()"></th>
-         <th scope="col">Desc <i class="fas fa-sort ml-1" onclick="sort()"></th>
+         <th scope="col">Name <i class="fas fa-sort ml-1" onclick="sort()"></i></th>
+         <th scope="col">TL <i class="fas fa-sort ml-1" onclick="sort()"></i></th>
+         <th scope="col">Start Date <i class="fas fa-sort ml-1" onclick="sort()"></i></th>
+         <th scope="col">End Date <i class="fas fa-sort ml-1" onclick="sort()"></i></th>
+         <th scope="col">Total Days <i class="fas fa-sort ml-1" onclick="sort()"></i></th>
+         <th scope="col">Type <i class="fas fa-sort ml-5" onclick="sort()"></i></th>
 
          <% if(session.getAttribute("desg").equals("Developer")){ %>
-         <th scope="col">Status <i class="fas fa-sort ml-1" onclick="sort()"> </th>
+         <th scope="col">Status <i class="fas fa-sort ml-1" onclick="sort()"> </i></th>
          <% } else { %>
-         <th scope="col">Action <i class="fas fa-sort ml-1" onclick="sort()"> </th>
+         <th scope="col">Action <i class="fas fa-sort ml-1" onclick="sort()"> </i></th>
          <% } %>
       </tr>
    </thead>
@@ -35,14 +32,11 @@
       <tr>
          <td><%=resultSet.get(i).getEcode() %></td>
          <td><%=resultSet.get(i).getName() %></td>
-         <td><%=resultSet.get(i).getProjectName() %></td>
          <td><%=resultSet.get(i) .getTeamLead()%></td>
-         <td><%=resultSet.get(i).getProjectManager() %></td>
          <td><%=resultSet.get(i).getStartDate() %></td>
          <td><%=resultSet.get(i).getEndDate() %></td>
          <td class="text-center"><%=resultSet.get(i).getNumberOfDays() %></td>
          <td><%=resultSet.get(i).getLeaveType() %></td>
-         <td><div class="scrollable"><%=resultSet.get(i).getLeaveDesc()%></div></td>
          <!-- changes action/status column view based on designation --> 
          <% if(session.getAttribute("desg").equals("Developer")) { %> <!-- designation is developer -->
          <% if ((resultSet.get(i).getStatus()).equals("Pending")) { %> 

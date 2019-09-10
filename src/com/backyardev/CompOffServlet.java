@@ -10,11 +10,50 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.backyardev.util.CompoffReqObject;
+import com.backyardev.util.LeaveRequestService;
+
 public class CompOffServlet extends HttpServlet{
 	
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		
 		PrintWriter out = resp.getWriter();
-		out.write("true");
+		
+		String returnString = "null";
+		String name = req.getParameter("name");
+		String ecode = req.getParameter("ecode");
+		String project = req.getParameter("project");
+		String manager = req.getParameter("manager");
+		String teamLead = req.getParameter("tLead");
+		String comp_date = (req.getParameter("comp-date")).replace('/', '-');
+		String desc = req.getParameter("comp-desc");
+		String ticket = req.getParameter("ticket");
+		String avail = req.getParameter("avail");
+		int night = 0;
+		
+		if(comp_date.equals("yy-mm-dd") || desc == null || ticket == null || avail == null || project == null || teamLead == null || manager == null) {
+			out.write(returnString);
+		} else {
+			if(avail.equals("avail")) {
+				night = 1;
+			}
+			
+			CompoffReqObject obj = new CompoffReqObject();
+			
+			obj.setEcode(ecode);
+			obj.setName(name);
+			obj.setProject(project);
+			obj.setTeamLead(teamLead);
+			obj.setManager(manager);
+			obj.setCompDate(comp_date);
+			obj.setDesc(desc);
+			obj.setTicket(ticket);
+			obj.setNightShift(night);
+			
+			returnString = LeaveRequestService.compOffService(obj);
+			
+			out.write(returnString);
+		}
 	}
 	
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

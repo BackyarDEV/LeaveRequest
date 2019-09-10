@@ -29,6 +29,20 @@
 					</div>
 					<div class="col-sm-6">
 						<div class="form-group">
+							<label for="manager">Project Manager</label>
+							<input class="form-control" id="manager" required value="${manager}" type="text" name="manager" placeholder="Team Lead"/>
+						</div>
+					</div>
+				</div>
+				<div class="form-row">
+					<div class="col-sm-6">
+						<div class="form-group">
+							<label for="ticket">Ticket/SCR</label>
+							<input class="form-control" id="ticket" required type="text" name="ticket"/>
+						</div>
+					</div>
+					<div class="col-sm-6">
+						<div class="form-group">
 							<label for="comp-date">Date</label>
 							<input class="form-control date-format" id="comp-date" required type="text" name="comp-date" value="yy-mm-dd" autocomplete="off"/>
 						</div>
@@ -36,7 +50,7 @@
 				</div>
 				<div class="form-group">
 					<label for="comp-desc">Description</label>
-					<input class="form-control" required name="comp-desc" type="text"/>
+					<textarea class="form-control" required name="comp-desc" rows="3"></textarea>
 				</div>
 				<div class="from-check" style="display: inherit; margin: 20px;">
 					<input type="checkbox" class="form-check-input" id="avail" name="avail" value="avail"/>
@@ -48,7 +62,7 @@
 			    <div class="modal-dialog modal-dialog-centered" role="document">
 			        <div class="modal-content">
 			            <div class="modal-header">
-			                <h4 class="modal-title" id="ModalTitle">Request Comp-Of?</h4>
+			                <h4 class="modal-title" id="ModalTitle">Request Comp-Off?</h4>
 			                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 			                    <span aria-hidden="true">&times;</span>
 		                    </button>
@@ -73,7 +87,9 @@
 				$('#comp-req').css('color', '#f1f1f1');
 				$('#comp-req').css('font-size', '1.2rem');
 				$('#submitFormModal').modal({ show: false});
-				$( "#comp-date" ).datepicker();
+				$( "#comp-date" ).datepicker({
+					  dateFormat: "yy-mm-dd"
+				});
 			});
 			$('.form').submit(function(s){
 				s.preventDefault();
@@ -91,6 +107,8 @@
 						success: function(data){
 							if (data == "true"){
 								showAlert('Post Success!', 'alert-success');
+							} else if(data == "null"){
+								showAlert('All Fields are compulsory!', 'alert-warning');
 							}
 						}
 					});
