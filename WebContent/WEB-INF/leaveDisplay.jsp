@@ -1,22 +1,30 @@
+<%@page import="com.backyardev.util.DatabaseQueries"%>
+<%@page import=" java.util.ArrayList"%>
+<%@page import=" com.backyardev.util.LeaveReqObject"%>
 <jsp:include page="/WEB-INF/layout.jsp"></jsp:include>
-		
+      	<% 
+	    	String url = (String)request.getAttribute("javax.servlet.forward.request_uri");
+      		String updatedUrl = url.replace("/LeaveRequest/leave/","");
+	 	 	ArrayList<LeaveReqObject> resultSet = DatabaseQueries.getLeave(updatedUrl);
+         %>
+         <% for(int i = 0; i < resultSet.size(); i+=1) { %>
 		<form class="form leave-form" method="post" action="leave">
 				<h3>Leave Request</h3><br>
 				<div class="form-group">
 					<label for="name">Name of the Employee</label>
-					<input class="form-control" id="name" required type="text" readonly value="${name}" name="name" placeholder="Name" />
+					<input class="form-control" id="name" required type="text" readonly value="<%=resultSet.get(i).getName()%>"  name="name" placeholder="Name" />
 				</div>
 				<div class="form-row">
 					<div class="col-sm-6">
 						<div class="form-group">
 							<label for="ecode">Ecode</label>
-							<input class="form-control" id="ecode" required type="text" readonly name="ecode" value="${ecode}" placeholder="Ecode"/>
+							<input class="form-control" id="ecode" required type="text"  readonly name="ecode" value="<%=resultSet.get(i).getEcode()%>" placeholder="Ecode"/>
 						</div>
 					</div>
 					<div class="col-sm-6">
 						<div class="form-group">
 							<label for="project">Project</label>
-							<input class="form-control" id="project" value="${project}" required type="text" name="project" placeholder="Project"  data-validation="required" data-validation-error-msg="Enter your project name"/>
+							<input class="form-control"  readonly id="project" value="<%=resultSet.get(i).getProjectName()%>" required type="text" name="project" placeholder="Project" />
 						</div>
 					</div>
 				</div>
@@ -24,13 +32,13 @@
 					<div class="col-sm-6">
 						<div class="form-group">
 							<label for="tLead">Team Lead</label>
-							<input class="form-control" id="tLead" required value="${lead}" type="text" name="tLead" placeholder="Team Lead" data-validation="length"  data-validation-length="min3" data-validation-error-msg="Name is is shorter than 3 characters"/>
+							<input class="form-control"  readonly id="tLead" required value="${lead}" type="text" name="tLead" placeholder="Team Lead" />
 						</div>
 					</div>
 					<div class="col-sm-6">
 						<div class="form-group">
 							<label for="manager">Project Manager</label>
-							<input class="form-control" id="manager" value="${manager}" required type="text" name="manager" placeholder="Project Manager" data-validation="length"  data-validation-length="min3" data-validation-error-msg="Name is is shorter than 3 characters"/>
+							<input class="form-control"  readonly id="manager" value="${manager}" required type="text" name="manager" placeholder="Project Manager" />
 						</div>
 					</div>
 				</div>
@@ -38,13 +46,13 @@
 					<div class="col-sm-6">
 						<div class="form-group">
 							<label for="leave-start">Leave Start Date</label>
-							<input class="form-control"  class="date-format"  id="leave-start"   required type="text"  name="leave-start"  onclick="cal()"  value="yy-mm-dd" autocomplete="off"  data-validation="date" data-validation-error-msg="Please select a start date"/>
+							<input class="form-control"  readonly  class="date-format"  id="leave-start"   required type="text"  name="leave-start"  onclick="cal()"  value="<%=resultSet.get(i).getStartDate()%>" autocomplete="off" />
 						</div>
 					</div>
 					<div class="col-sm-6">
 						<div class="form-group">
 							<label for="leave-end">Leave End Date</label>
-							<input class="form-control "  class="date-format"  id="leave-end"    required type="text"  name="leave-end" onchange="cal()"  value="yy-mm-dd" autocomplete="off"  data-validation="date" data-validation-error-msg="Please select an end date"/>
+							<input class="form-control " readonly  class="date-format"  id="leave-end"    required type="text"  name="leave-end" onchange="cal()"  value="<%=resultSet.get(i).getEndDate()%>" autocomplete="off" />
 						</div>
 					</div>
 				</div>
@@ -52,21 +60,13 @@
 					<div class="col-sm-6">
 						<div class="form-group">
 							<label for="number-days">No. of working days</label>
-							<input class="form-control" required id="number-days" type="number" name="number-days"/>
+							<input class="form-control"  readonly required id="number-days" type="number" value="<%=resultSet.get(i).getNumberOfDays()%>" name="number-days"/>
 						</div>
 					</div>
 					<div class="col-sm-6">
 						<div class="form-group">
 							<label for="leave-type">Leave Type</label>
-							<select class="form-control" id="leave-type" name="leave-type" data-validation="required" data-validation-error-msg="Please select leave type">
-								<option selected value="null" disabled>-Select an option-</option>
-								<option value="Sick Leave">Sick Leave</option>
-								<option value="Casual Leave">Casual Leave</option>
-								<option value="Earned Leave">Earned Leave</option>
-								<option value="Maternity Leave">Maternity Leave</option>
-								<option value="On Office Duty">On Office Duty</option>
-								<option value="Biometric Miss Out">Biometric Miss Out</option>
-							</select>
+							<input class="form-control"  readonly required id="number-days" type="text" value="<%=resultSet.get(i).getLeaveType()%>" name="Leave Type"/>
 						</div>
 					</div>
 				</div>
@@ -77,10 +77,14 @@
 				<br>
 				<div class="form-group">
 					<label for="leave-desc">Leave Description/Reason</label>
-					<input class="form-control" required id="leave-desc" type="text" placeholder="Brief Description" name="leave-desc"  data-validation="length"  data-validation-length="5-140" data-validation-error-msg="Leave description must be between 5-140 characters"/>
+					<input class="form-control"  readonly required id="leave-desc" type="text"  value="<%=resultSet.get(i).getLeaveDesc() %>" placeholder="Brief Description" name="leave-desc" />
 				</div>
-				<button type="submit" class="btn btn-primary">Submit</button>
+				<!--  <button type="submit" class="btn btn-primary">Approve</button>
+				<button type="submit" class="btn btn-danger">Reject</button>-->
 			</form>
+			
+		    <% } %>	
+		    
 			<div class="modal fade" id="submitFormModal" tabindex="-1" role="dialog" aria-labelledby="submitFormModalTitle" aria-hidden="true">
 			    <div class="modal-dialog modal-dialog-centered" role="document">
 			        <div class="modal-content">
@@ -103,8 +107,7 @@
 			        </div>
 			    </div>
 			</div>
-	
-	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.3.26/jquery.form-validator.min.js"></script>
+
 	<script src="/LeaveRequest/static/formJs.js"></script>
 
 	</body>

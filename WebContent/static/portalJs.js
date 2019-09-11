@@ -48,6 +48,7 @@ $('.btn-check').click(function(s) {
 
 $(document).ready(function() {
 	$('#all-req').css('color', '#f1f1f1');
+	$('#all-req').css('font-size', '1.2rem');
     $('#data-table').DataTable({
     	"ordering": false
     },
@@ -67,6 +68,11 @@ function sort(){
 	 $(".fa-sort").hide()
 }
 
+$('.targetRow').click(function() {
+		var url = "leave/"+$(this).attr("id").trim()
+		console.log(url);
+		window.location.replace(url);
+});
 
 
 

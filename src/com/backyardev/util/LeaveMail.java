@@ -104,7 +104,7 @@ public class LeaveMail {
 		String to = "mayank.sinha02@gmail.com";
 		
 		// Sender's email ID needs to be mentioned
-		String from = "dikshawadhwa0220@gmail.com";
+		String from = "mayank.sinha02@gmail.com";
 		final String username = EMAIL_U;//change accordingly
 		final String password = EMAIL_P;//change accordingly
 		
@@ -134,7 +134,7 @@ public class LeaveMail {
 			
 			// Set To: header field of the header.
 			message.setRecipients(Message.RecipientType.CC,
-			         InternetAddress.parse(to+",dikshawadhwa185@gmail.com"));
+			         InternetAddress.parse(to));
 			
 			// Set Subject: header field
 			  
