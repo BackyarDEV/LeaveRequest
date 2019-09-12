@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class DatabaseQueries {
 	
@@ -44,17 +45,19 @@ public class DatabaseQueries {
 		boolean returnBool = false;
 		try {
 			if (obj.getHalfDayLeave() == 1) {
-				sql = "insert into LEAVE_REQUEST(ecode, leave_start_date, leave_end_date, leave_type, leave_desc, number_of_days, half_day_leave) values(?,?,?,?,?, " + numberOfDays + " ," + 1 + ");";
+				sql = "insert into LEAVE_REQUEST(ecode,name,project_name,leave_start_date, leave_end_date, leave_type, leave_desc, number_of_days, half_day_leave) values(?,?,?,?,?,?,?,  " + numberOfDays + " ," + 1 + ");";
 				pst = conn.prepareStatement(sql);
 			} else {
-				sql = "insert into LEAVE_REQUEST(ecode, leave_start_date, leave_end_date, leave_type, leave_desc, number_of_days, full_day_leave) values(?,?,?,?,?, " + numberOfDays + " ," + 1 + ");";
+				sql = "insert into LEAVE_REQUEST(ecode,name,project_name, leave_start_date, leave_end_date, leave_type, leave_desc, number_of_days, full_day_leave) values(?,?,?,?,?,?,?, " + numberOfDays + " ," + 1 + ");";
 				pst = conn.prepareStatement(sql);
 			}
 			pst.setString(1, obj.getEcode());
-			pst.setString(2, obj.getStartDate());
-			pst.setString(3, obj.getEndDate());
-			pst.setString(4, obj.getLeaveType());
-			pst.setString(5, obj.getLeaveDesc());
+			pst.setString(2, obj.getName());
+			pst.setString(3, obj.getProjectName());
+			pst.setString(4, obj.getStartDate());
+			pst.setString(5, obj.getEndDate());
+			pst.setString(6, obj.getLeaveType());
+			pst.setString(7, obj.getLeaveDesc());
 			
 			boolean execute = pst.execute();
 			if(!execute) {
@@ -250,7 +253,34 @@ public class DatabaseQueries {
 		}
 		return returnBool;
 	}
-	
+	public static ArrayList<LeaveReqObject> getLeave(String id) {
+		ArrayList<LeaveReqObject> arrayList = new ArrayList<LeaveReqObject>();
+		conn = createConnection();
+		try {
+			sql = "select * from LEAVE_REQUEST where id = ?";
+			pst = conn.prepareStatement(sql);
+			pst.setString(1, id);
+			rs = pst.executeQuery();
+			while (rs.next()) {
+				LeaveReqObject obj = new LeaveReqObject();
+				obj.setId(rs.getInt("id"));
+				obj.setEcode(rs.getString("ecode"));
+//				obj.setName(rs.getString("name"));
+//				obj.setProjectName(rs.getString("project_name"));
+				obj.setStartDate(rs.getString("leave_start_date"));
+				obj.setEndDate(rs.getString("leave_end_date"));
+				obj.setNumberOfDays(rs.getInt("number_of_days"));
+				obj.setLeaveType(rs.getString("leave_type"));
+				obj.setLeaveDesc(rs.getString("leave_desc"));
+				arrayList.add(obj);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return arrayList;
+		
+	}
 	public static void closeConnection() {
 		
 		try {
@@ -264,7 +294,5 @@ public class DatabaseQueries {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-	
-		
 	}
 }

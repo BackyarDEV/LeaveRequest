@@ -183,8 +183,6 @@ public class LeaveRequestService {
 		} else {
 			return false;
 		}
-		
 	}
-
 	
 }

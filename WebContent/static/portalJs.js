@@ -56,3 +56,10 @@ function sort(){
 	    });
 	 $(".fa-sort").hide()
 }
+
+$('.targetRow').click(function() {
+		var url = "leave/"+$(this).attr("id").trim()
+		console.log(url);
+		window.location.replace(url);
+});
+

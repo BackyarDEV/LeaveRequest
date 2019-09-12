@@ -18,10 +18,12 @@
     <servlet-name>Comp</servlet-name>
     <servlet-class>com.backyardev.CompServlet</servlet-class>
   </servlet>
+  
   <servlet-mapping>
     <servlet-name>Comp</servlet-name>
     <url-pattern>/comp</url-pattern>
   </servlet-mapping>
+  
   <servlet>
     <servlet-name>CompOff</servlet-name>
     <servlet-class>com.backyardev.CompOffServlet</servlet-class>
@@ -30,6 +32,16 @@
     <servlet-name>CompOff</servlet-name>
     <url-pattern>/compoff</url-pattern>
   </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>LeaveDisplayServlet</servlet-name>
+    <servlet-class>com.backyardev.LeaveDisplayServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>LeaveDisplayServlet</servlet-name>
+    <url-pattern>/leave/*</url-pattern>
+  </servlet-mapping>
+  
   <servlet>
     <servlet-name>Logout</servlet-name>
     <servlet-class>com.backyardev.LogoutServlet</servlet-class>
@@ -73,4 +85,5 @@
   <welcome-file-list>
     <welcome-file>/WEB-INF/login.jsp</welcome-file>
   </welcome-file-list>
+
 </web-app>

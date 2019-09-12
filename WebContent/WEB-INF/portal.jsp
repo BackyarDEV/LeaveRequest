@@ -29,7 +29,7 @@
                ArrayList<LeaveReqObject> resultSet = LeaveRequestService.populateLeaveTable(desg,name,ecode);
       %>
       <% for(int i = 0; i < resultSet.size(); i+=1) { %>
-      <tr>
+      <tr id=" <%=resultSet.get(i).getId()%>"  class="targetRow">
          <td><%=resultSet.get(i).getEcode() %></td>
          <td><%=resultSet.get(i).getName() %></td>
          <td><%=resultSet.get(i) .getTeamLead()%></td>
@@ -70,7 +70,17 @@
 	$(document).ready(function() {
 		$('#all-req').css('color', '#f1f1f1');
 		$('#all-req').css('font-size', '1.2rem');
+		$('#data-table').DataTable({
+			"ordering": false
+		},
+		{
+			"pagingType": "scrolling"
+		});
 	});
 </script>
 </body>
 </html>
+
+
+
+
