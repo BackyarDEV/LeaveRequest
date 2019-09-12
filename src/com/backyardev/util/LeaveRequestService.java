@@ -1,6 +1,7 @@
 package com.backyardev.util;
 
 import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.regex.Pattern;
 
 import javax.servlet.http.HttpServletRequest;
@@ -108,5 +109,10 @@ public class LeaveRequestService {
 		
 	}
 
+	public static LeaveReqObject  getLeaveById(int id) {
+		LeaveReqObject obj = new LeaveReqObject();
+		
+		return null;	
+	}
 	
 }

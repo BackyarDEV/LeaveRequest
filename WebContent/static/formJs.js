@@ -96,6 +96,5 @@ function getDate(element) {
 	return date;
 }
 
-
-
+$.validate();
 

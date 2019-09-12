@@ -29,7 +29,7 @@
          ArrayList<LeaveReqObject> resultSet = DatabaseQueries.getTable(desg,name,ecode);
          %>
       <% for(int i = 0; i < resultSet.size(); i+=1) { %>
-      <tr>
+      <tr id=" <%=resultSet.get(i).getId()%>"  class="targetRow">
          <td><%=resultSet.get(i).getEcode() %></td>
          <td><%=resultSet.get(i).getName() %></td>
          <td><%=resultSet.get(i) .getTeamLead()%></td>
@@ -65,7 +65,11 @@
       <% } %>
    </tbody>
 </table>
-<script src="static/portalJs.js"></script>
+<script src="/LeaveRequest/static/portalJs.js"></script>
 
 </body>
 </html>
+
+
+
+
