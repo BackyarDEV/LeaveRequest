@@ -2,9 +2,16 @@ package com.backyardev.util;
 
 public class CompoffReqObject {
 
-	String ecode, name, project, teamLead, manager, compDate, ticket, desc;
-	int id, nightShift,status= 0;
+	String ecode, name, project, teamLead, manager, compDate, ticket, desc, status;
+	int id;
+	String nightShift = "0";
 	
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
+	}
 	public String getEcode() {
 		return ecode;
 	}
@@ -59,11 +66,17 @@ public class CompoffReqObject {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public int getNightShift() {
-		return nightShift;
+	public String getNightShift() {
+		String nightShiftStatus;
+		if(nightShift.equals("1")) {
+			nightShiftStatus = "Night Shift";
+		}else {
+			nightShiftStatus = "No";
+		}
+		System.out.println("Night Shift: "+ nightShiftStatus);
+		return nightShiftStatus;
 	}
-	public void setNightShift(int nightShift) {
+	public void setNightShift(String nightShift) {
 		this.nightShift = nightShift;
 	}
-
 }

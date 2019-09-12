@@ -12,7 +12,7 @@
 				<h3>Leave Request</h3><br>
 				<div class="form-group">
 					<label for="name">Name of the Employee</label>
-					<input class="form-control" id="name" required type="text" readonly value="<%=resultSet.get(i).getName()%>"  name="name" placeholder="Name" />
+					<input class="form-control" id="name" required type="text" readonly value="${name}"  name="name" placeholder="Name" />
 				</div>
 				<div class="form-row">
 					<div class="col-sm-6">
@@ -24,7 +24,7 @@
 					<div class="col-sm-6">
 						<div class="form-group">
 							<label for="project">Project</label>
-							<input class="form-control"  readonly id="project" value="<%=resultSet.get(i).getProjectName()%>" required type="text" name="project" placeholder="Project" />
+							<input class="form-control"  readonly id="project" value="${project}" required type="text" name="project" placeholder="Project" />
 						</div>
 					</div>
 				</div>
@@ -77,7 +77,7 @@
 				<br>
 				<div class="form-group">
 					<label for="leave-desc">Leave Description/Reason</label>
-					<input class="form-control"  readonly required id="leave-desc" type="text"  value="<%=resultSet.get(i).getLeaveDesc() %>" placeholder="Brief Description" name="leave-desc" />
+					<textarea class="form-control" readonly name="leave-desc"  id="leave-desc"  placeholder="<%=resultSet.get(i).getLeaveDesc() %>" rows="3"></textarea>
 				</div>
 				<!--  <button type="submit" class="btn btn-primary">Approve</button>
 				<button type="submit" class="btn btn-danger">Reject</button>-->

@@ -1,4 +1,4 @@
-<%@page import="com.backyardev.util.DatabaseQueries"%>
+<%@page import="com.backyardev.util.LeaveRequestService"%>
 <%@page import=" java.util.ArrayList"%>
 <%@page import=" com.backyardev.util.LeaveReqObject"%>
 <jsp:include page="/WEB-INF/layout.jsp"></jsp:include>
@@ -26,7 +26,7 @@
          String ecode = (String) session.getAttribute("ecode");
          String desg = (String) session.getAttribute("desg");
          String name = (String) session.getAttribute("name");
-         ArrayList<LeaveReqObject> resultSet = DatabaseQueries.getTable(desg,name,ecode);
+         ArrayList<LeaveReqObject> resultSet = LeaveRequestService.populateLeaveTable(desg,name,ecode);
          %>
       <% for(int i = 0; i < resultSet.size(); i+=1) { %>
       <tr id=" <%=resultSet.get(i).getId()%>"  class="targetRow">

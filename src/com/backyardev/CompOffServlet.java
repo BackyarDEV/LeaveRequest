@@ -29,13 +29,13 @@ public class CompOffServlet extends HttpServlet{
 		String desc = req.getParameter("comp-desc");
 		String ticket = req.getParameter("ticket");
 		String avail = req.getParameter("avail");
-		int night = 0;
+		String night = "0";
 		
 		if(comp_date.equals("yy-mm-dd") || desc == null || ticket == null || avail == null || project == null || teamLead == null || manager == null) {
 			out.write(returnString);
 		} else {
 			if(avail.equals("avail")) {
-				night = 1;
+				night = "1";
 			}
 			
 			CompoffReqObject obj = new CompoffReqObject();
