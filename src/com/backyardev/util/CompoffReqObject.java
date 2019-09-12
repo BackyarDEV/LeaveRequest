@@ -2,9 +2,15 @@ package com.backyardev.util;
 
 public class CompoffReqObject {
 
-	String ecode, name, project, teamLead, manager, compDate, ticket, desc;
+	String ecode, name, project, teamLead, manager, compDate, ticket, desc, status;
 	int id, nightShift = 0;
 	
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
+	}
 	public String getEcode() {
 		return ecode;
 	}

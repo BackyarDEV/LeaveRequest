@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 
 public class DatabaseQueries {
 	
@@ -101,70 +100,135 @@ public class DatabaseQueries {
 		return returnBool;
 	}
 
-	public static ArrayList<LeaveReqObject> getTable(String desg, String tl_name, String ecode) {
+	public static ResultSet getLeaveTable(String desg, String tl_name, String ecode) {
 		
-		ArrayList<LeaveReqObject> lr = new ArrayList<LeaveReqObject>();
 		conn = createConnection();
 		try{ 
 			if (desg.equals("Admin") || desg.equals("Super_Admin")) {
-				sql = "SELECT LEAVE_REQUEST.id, LEAVE_REQUEST.ecode, LEAVE_REQUEST.leave_start_date, LEAVE_REQUEST.leave_end_date, "
-						+ "LEAVE_REQUEST.number_of_days, LEAVE_REQUEST.full_day_leave, LEAVE_REQUEST.half_day_leave, LEAVE_REQUEST.leave_type, "
-						+ "LEAVE_REQUEST.leave_desc, LEAVE_STATUS.status, EMPLOYEES.name, EMPLOYEES.project, EMPLOYEES.team_lead, "
-						+ "EMPLOYEES.project_manager FROM LEAVE_REQUEST, LEAVE_STATUS, EMPLOYEES WHERE LEAVE_REQUEST.id = LEAVE_STATUS.id AND "
+				sql = "SELECT LEAVE_REQUEST.id, "
+						+ "LEAVE_REQUEST.ecode, "
+						+ "LEAVE_REQUEST.leave_start_date, "
+						+ "LEAVE_REQUEST.leave_end_date, "
+						+ "LEAVE_REQUEST.number_of_days, "
+						+ "LEAVE_REQUEST.full_day_leave, "
+						+ "LEAVE_REQUEST.half_day_leave, "
+						+ "LEAVE_REQUEST.leave_type, "
+						+ "LEAVE_REQUEST.leave_desc, "
+						+ "LEAVE_STATUS.status, "
+						+ "EMPLOYEES.name, "
+						+ "EMPLOYEES.project, "
+						+ "EMPLOYEES.team_lead, "
+						+ "EMPLOYEES.project_manager "
+						+ "FROM LEAVE_REQUEST, LEAVE_STATUS, EMPLOYEES WHERE LEAVE_REQUEST.id = LEAVE_STATUS.id AND "
 						+ "EMPLOYEES.ecode = LEAVE_REQUEST.ecode order by leave_request_time desc";
 				pst = conn.prepareStatement(sql);
 			} else if (desg.equals("TeamLead")) {
-				sql = "SELECT LEAVE_REQUEST.id, LEAVE_REQUEST.ecode, LEAVE_REQUEST.leave_start_date, LEAVE_REQUEST.leave_end_date, "
-						+ "LEAVE_REQUEST.number_of_days, LEAVE_REQUEST.full_day_leave, LEAVE_REQUEST.half_day_leave, LEAVE_REQUEST.leave_type, "
-						+ "LEAVE_REQUEST.leave_desc, LEAVE_STATUS.status, EMPLOYEES.name, EMPLOYEES.project, EMPLOYEES.team_lead, "
-						+ "EMPLOYEES.project_manager FROM LEAVE_REQUEST, LEAVE_STATUS, EMPLOYEES WHERE LEAVE_REQUEST.id = LEAVE_STATUS.id AND "
+				sql = "SELECT LEAVE_REQUEST.id, "
+						+ "LEAVE_REQUEST.ecode, "
+						+ "LEAVE_REQUEST.leave_start_date, "
+						+ "LEAVE_REQUEST.leave_end_date, "
+						+ "LEAVE_REQUEST.number_of_days, "
+						+ "LEAVE_REQUEST.full_day_leave, "
+						+ "LEAVE_REQUEST.half_day_leave, "
+						+ "LEAVE_REQUEST.leave_type, "
+						+ "LEAVE_REQUEST.leave_desc, "
+						+ "LEAVE_STATUS.status, "
+						+ "EMPLOYEES.name, "
+						+ "EMPLOYEES.project, "
+						+ "EMPLOYEES.team_lead, "
+						+ "EMPLOYEES.project_manager "
+						+ "FROM LEAVE_REQUEST, LEAVE_STATUS, EMPLOYEES WHERE LEAVE_REQUEST.id = LEAVE_STATUS.id AND "
 						+ "EMPLOYEES.ecode = LEAVE_REQUEST.ecode AND EMPLOYEES.team_lead = ? order by leave_request_time desc";
 				pst = conn.prepareStatement(sql);
 				pst.setString(1, tl_name);
 			} else {
-				sql = "SELECT LEAVE_REQUEST.id, LEAVE_REQUEST.ecode, LEAVE_REQUEST.leave_start_date, LEAVE_REQUEST.leave_end_date, "
-						+ "LEAVE_REQUEST.number_of_days, LEAVE_REQUEST.full_day_leave, LEAVE_REQUEST.half_day_leave, LEAVE_REQUEST.leave_type, "
-						+ "LEAVE_REQUEST.leave_desc, LEAVE_STATUS.status, EMPLOYEES.name, EMPLOYEES.project, EMPLOYEES.team_lead, "
-						+ "EMPLOYEES.project_manager FROM LEAVE_REQUEST, LEAVE_STATUS, EMPLOYEES WHERE LEAVE_REQUEST.id = LEAVE_STATUS.id "
+				sql = "SELECT LEAVE_REQUEST.id, "
+						+ "LEAVE_REQUEST.ecode, "
+						+ "LEAVE_REQUEST.leave_start_date, "
+						+ "LEAVE_REQUEST.leave_end_date, "
+						+ "LEAVE_REQUEST.number_of_days, "
+						+ "LEAVE_REQUEST.full_day_leave, "
+						+ "LEAVE_REQUEST.half_day_leave, "
+						+ "LEAVE_REQUEST.leave_type, "
+						+ "LEAVE_REQUEST.leave_desc, "
+						+ "LEAVE_STATUS.status, "
+						+ "EMPLOYEES.name, "
+						+ "EMPLOYEES.project, "
+						+ "EMPLOYEES.team_lead, "
+						+ "EMPLOYEES.project_manager "
+						+ "FROM LEAVE_REQUEST, LEAVE_STATUS, EMPLOYEES WHERE LEAVE_REQUEST.id = LEAVE_STATUS.id "
 						+ "AND LEAVE_REQUEST.ecode = ? AND LEAVE_REQUEST.ecode = EMPLOYEES.ecode order by leave_request_time desc";
 				pst = conn.prepareStatement(sql);
 				pst.setString(1, ecode);
 			}
 			rs = pst.executeQuery();
 			
-			while (rs.next()) {
-				LeaveReqObject obj = new LeaveReqObject();
-				if(rs.getInt("status")== 0) {
-					obj.setStatus("Pending");
-				} else if(rs.getInt("status")== 1) {
-					obj.setStatus("Approved");
-				} else {
-					obj.setStatus("Rejected");
-				}
-				
-				if(rs.getInt("half_day_leave") == 1) {
-					obj.setHalfDayLeave(1);
-				} else if(rs.getInt("full_day_leave") == 1) {
-					obj.setFullDayLeave(1);
-				} 
-				
-				obj.setId(rs.getInt("id"));
-				obj.setEcode(rs.getString("ecode"));
-				obj.setName(rs.getString("name"));
-				obj.setTeamLead(rs.getString("team_lead"));
-				obj.setProjectManager(rs.getString("project_manager"));
-				obj.setProjectName(rs.getString("project"));
-				obj.setStartDate(rs.getString("leave_start_date"));
-				obj.setEndDate(rs.getString("leave_end_date"));
-				obj.setNumberOfDays(rs.getInt("number_of_days"));
-				obj.setLeaveType(rs.getString("leave_type"));
-				obj.setLeaveDesc(rs.getString("leave_desc"));
-				lr.add(obj);
-			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		} 
-		return lr;
+		return rs;
+	}
+	
+	public static ResultSet getCompoffTable(String desg, String tl_name, String ecode) {
+		
+		conn = createConnection();
+		try {
+			if (desg.equals("Admin") || desg.equals("Super_Admin")) {
+				sql = "select COMPOFF_REQUEST.id, "
+						+ "COMPOFF_REQUEST.ecode, "
+						+ "COMPOFF_REQUEST.comp_date, "
+						+ "COMPOFF_REQUEST.description, "
+						+ "COMPOFF_REQUEST.ticket_scr, "
+						+ "COMPOFF_REQUEST.night_shift, "
+						+ "COMPOFF_REQUEST.status, "
+						+ "EMPLOYEES.name,"
+						+ "EMPLOYEES.project,"
+						+ "EMPLOYEES.team_lead,"
+						+ "EMPLOYEES.project_manager "
+						+ "from COMPOFF_REQUEST, EMPLOYEES where COMPOFF_REQUEST.ecode = EMPLOYEES.ecode "
+						+ "order by COMPOFF_REQUEST.request_timestamp desc";
+				pst = conn.prepareStatement(sql);
+			} else if (desg.equals("TeamLead")) {
+				sql = "select COMPOFF_REQUEST.id,"
+						+ "COMPOFF_REQUEST.ecode," 
+						+ "COMPOFF_REQUEST.comp_date," 
+						+ "COMPOFF_REQUEST.description," 
+						+ "COMPOFF_REQUEST.ticket_scr," 
+						+ "COMPOFF_REQUEST.night_shift," 
+						+ "COMPOFF_REQUEST.status," 
+						+ "EMPLOYEES.name," 
+						+ "EMPLOYEES.project," 
+						+ "EMPLOYEES.team_lead," 
+						+ "EMPLOYEES.project_manager "
+						+ "from COMPOFF_REQUEST, EMPLOYEES where COMPOFF_REQUEST.ecode = EMPLOYEES.ecode "
+						+ "and EPLOYEES.team_lead = ? " 
+						+ "order by COMPOFF_REQUEST.request_timestamp desc";
+				pst = conn.prepareStatement(sql);
+				pst.setString(1, tl_name);
+			} else {
+				sql = "select COMPOFF_REQUEST.id, "
+						+ "COMPOFF_REQUEST.ecode, "
+						+ "COMPOFF_REQUEST.comp_date, "
+						+ "COMPOFF_REQUEST.description, "
+						+ "COMPOFF_REQUEST.ticket_scr, "
+						+ "COMPOFF_REQUEST.night_shift, "
+						+ "COMPOFF_REQUEST.status, "
+						+ "EMPLOYEES.name, "
+						+ "EMPLOYEES.project, "
+						+ "EMPLOYEES.team_lead, "
+						+ "EMPLOYEES.project_manager "
+						+ "from COMPOFF_REQUEST, EMPLOYEES where COMPOFF_REQUEST.ecode = EMPLOYEES.ecode "
+						+ "and COMPOFF_REQUEST.ecode = ? "
+						+ "order by COMPOFF_REQUEST.request_timestamp desc";
+				pst = conn.prepareStatement(sql);
+				pst.setString(1, ecode);
+			}
+			rs = pst.executeQuery();
+			
+		} catch(Exception ex) {
+			ex.printStackTrace();
+		}
+		return rs;
 	}
 	
 	public static boolean insertCompoffRequest(CompoffReqObject obj) {

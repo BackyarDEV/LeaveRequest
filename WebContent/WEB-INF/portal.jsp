@@ -1,4 +1,4 @@
-<%@page import="com.backyardev.util.DatabaseQueries"%>
+<%@page import="com.backyardev.util.LeaveRequestService"%>
 <%@page import=" java.util.ArrayList"%>
 <%@page import=" com.backyardev.util.LeaveReqObject"%>
 <jsp:include page="/WEB-INF/layout.jsp"></jsp:include>
@@ -22,12 +22,12 @@
       </tr>
    </thead>
    <tbody>
-      <% 
-         String ecode = (String) session.getAttribute("ecode");
-         String desg = (String) session.getAttribute("desg");
-         String name = (String) session.getAttribute("name");
-         ArrayList<LeaveReqObject> resultSet = DatabaseQueries.getTable(desg,name,ecode);
-         %>
+      <%
+      	String ecode = (String) session.getAttribute("ecode");
+               String desg = (String) session.getAttribute("desg");
+               String name = (String) session.getAttribute("name");
+               ArrayList<LeaveReqObject> resultSet = LeaveRequestService.populateLeaveTable(desg,name,ecode);
+      %>
       <% for(int i = 0; i < resultSet.size(); i+=1) { %>
       <tr>
          <td><%=resultSet.get(i).getEcode() %></td>
@@ -65,7 +65,12 @@
       <% } %>
    </tbody>
 </table>
-<script src="static/portalJs.js"></script>
-
+<script src="/LeaveRequest/static/portalJs.js"></script>
+<script>
+	$(document).ready(function() {
+		$('#all-req').css('color', '#f1f1f1');
+		$('#all-req').css('font-size', '1.2rem');
+	});
+</script>
 </body>
 </html>
