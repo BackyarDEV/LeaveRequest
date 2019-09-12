@@ -188,7 +188,6 @@ public class DatabaseQueries {
 		}
 		return returnBool;
 	}
-	
 	public static ArrayList<LeaveReqObject> getLeave(String id) {
 		ArrayList<LeaveReqObject> arrayList = new ArrayList<LeaveReqObject>();
 		conn = createConnection();
@@ -217,7 +216,6 @@ public class DatabaseQueries {
 		return arrayList;
 		
 	}
-	
 	public static void closeConnection() {
 		
 		try {
@@ -231,7 +229,5 @@ public class DatabaseQueries {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-	
-		
 	}
 }

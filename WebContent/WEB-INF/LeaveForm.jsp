@@ -1,5 +1,5 @@
 <jsp:include page="/WEB-INF/layout.jsp"></jsp:include>
-		
+		<div class="alert" style="display: none; width: 65%; margin-left: auto; margin-right: auto;" role="alert"></div>		
 		<form class="form leave-form" method="post" action="leave">
 				<h3>Leave Request</h3><br>
 				<div class="form-group">
@@ -38,13 +38,15 @@
 					<div class="col-sm-6">
 						<div class="form-group">
 							<label for="leave-start">Leave Start Date</label>
-							<input class="form-control"  class="date-format"  id="leave-start"   required type="text"  name="leave-start"  onclick="cal()"  value="yy-mm-dd" autocomplete="off"  data-validation="date" data-validation-error-msg="Please select a start date"/>
+							<input class="form-control date-format"  id="leave-start"   required type="text"  name="leave-start"  onclick="cal()"  value="yy-mm-dd" autocomplete="off" />
+
 						</div>
 					</div>
 					<div class="col-sm-6">
 						<div class="form-group">
 							<label for="leave-end">Leave End Date</label>
-							<input class="form-control "  class="date-format"  id="leave-end"    required type="text"  name="leave-end" onchange="cal()"  value="yy-mm-dd" autocomplete="off"  data-validation="date" data-validation-error-msg="Please select an end date"/>
+							<input class="form-control date-format"  id="leave-end"    required type="text"  name="leave-end" onchange="cal()"  value="yy-mm-dd" autocomplete="off"/>
+
 						</div>
 					</div>
 				</div>
@@ -58,6 +60,7 @@
 					<div class="col-sm-6">
 						<div class="form-group">
 							<label for="leave-type">Leave Type</label>
+
 							<select class="form-control" id="leave-type" name="leave-type" data-validation="required" data-validation-error-msg="Please select leave type">
 								<option selected value="null" disabled>-Select an option-</option>
 								<option value="Sick Leave">Sick Leave</option>
@@ -70,14 +73,16 @@
 						</div>
 					</div>
 				</div>
-				<div class="form-radio" style="display: inherit;">
-					<input type="radio" name="day-leave" value="full-day" checked> Full Day Leave
-					<input type="radio" style="margin-left:10%;" name="day-leave" value="half-day"> Half Day Leave
+				<div class="form-check form-check-inline" style="display: inherit;">
+					<input class="form-check-input" id="full-radio" type="radio" name="day-leave" value="full-day" checked>
+					<label class="form-check-label mr-3" for="full-radio"> Full Day Leave</label>
+					<input class="form-check-input"  type="radio" id="half-radio" name="day-leave" value="half-day">
+					<label class="form-check-label" for="half-radio">Half Day Leave</label>
 				</div>
 				<br>
 				<div class="form-group">
 					<label for="leave-desc">Leave Description/Reason</label>
-					<input class="form-control" required id="leave-desc" type="text" placeholder="Brief Description" name="leave-desc"  data-validation="length"  data-validation-length="5-140" data-validation-error-msg="Leave description must be between 5-140 characters"/>
+					<textarea class="form-control" required id="leave-desc" rows="3" placeholder="Brief Description" name="leave-desc"  data-validation="length"  data-validation-length="5-140" data-validation-error-msg="Leave description must be between 5-140 characters"></textarea>
 				</div>
 				<button type="submit" class="btn btn-primary">Submit</button>
 			</form>
@@ -103,7 +108,6 @@
 			        </div>
 			    </div>
 			</div>
-	
 	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.3.26/jquery.form-validator.min.js"></script>
 	<script src="/LeaveRequest/static/formJs.js"></script>
 

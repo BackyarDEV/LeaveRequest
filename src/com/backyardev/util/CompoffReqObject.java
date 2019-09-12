@@ -4,7 +4,7 @@ public class CompoffReqObject {
 
 	String ecode, name, project, teamLead, manager, compDate, ticket, desc;
 	int id, nightShift,status= 0;
-	
+
 	public String getEcode() {
 		return ecode;
 	}
@@ -65,5 +65,4 @@ public class CompoffReqObject {
 	public void setNightShift(int nightShift) {
 		this.nightShift = nightShift;
 	}
-
 }

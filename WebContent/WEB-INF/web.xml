@@ -34,6 +34,15 @@
 
   
   <servlet>
+    <servlet-name>CompOff</servlet-name>
+    <servlet-class>com.backyardev.CompOffServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CompOff</servlet-name>
+    <url-pattern>/compoff</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
     <servlet-name>Logout</servlet-name>
     <servlet-class>com.backyardev.LogoutServlet</servlet-class>
   </servlet>
