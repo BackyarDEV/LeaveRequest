@@ -52,7 +52,6 @@ function cal(){
         document.getElementById("number-days").value=GetDays();
     }  
 }
-
 //Method for calander range
 $( "#leave-start" ).datepicker({
 	  dateFormat: "yy-mm-dd"

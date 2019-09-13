@@ -154,7 +154,7 @@ public class LeaveRequestService {
 				obj.setDesc(rs.getString("description"));
 				obj.setProject(rs.getString("project"));
 				obj.setManager(rs.getString("project_manager"));
-				obj.setNightShift(rs.getString("night_shift"));
+				obj.setNightShift(Integer.parseInt(rs.getString("night_shift")));
 				obj.setTicket(rs.getString("ticket_scr"));
 				al.add(obj);
 			}

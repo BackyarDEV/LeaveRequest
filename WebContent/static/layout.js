@@ -6,6 +6,7 @@ $(function(){
 		$('.sidenav').css('width', '240px');
 		$('.main-div').css('margin-left', '240px');
 	}
+
 	$('.sidenav-toggle').click(function(){
 		var toggleWidth;
 		if (window.matchMedia("(max-width: 600px)").matches){
@@ -15,6 +16,7 @@ $(function(){
 			toggleWidth = $(".sidenav").width() == 240 ? "0px" : "240px";
 			$('.sidenav').animate({ width: toggleWidth }, 150);
 			$('.main-div').animate({ marginLeft: toggleWidth}, 150);
+
 		}
 	});
 });

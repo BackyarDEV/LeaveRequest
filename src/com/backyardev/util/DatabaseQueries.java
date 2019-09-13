@@ -105,7 +105,7 @@ public class DatabaseQueries {
 		}
 		return returnBool;
 	}
-
+  
 	// Get table for leave requests
 	public static ResultSet getLeaveTable(String desg, String tl_name, String ecode) {
 			
@@ -386,8 +386,7 @@ public class DatabaseQueries {
 		return arrayList;
 		
 	}
-	
-	
+
 	// Close connection
 	public static void closeConnection() {
 		
@@ -402,7 +401,5 @@ public class DatabaseQueries {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-	
-		
 	}
 }

@@ -63,10 +63,3 @@ $('.targetRow').click(function() {
 		window.location.replace(url);
 });
 
-
-
-
-
-
-
-

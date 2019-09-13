@@ -14,8 +14,8 @@
         <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
         <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
         <link rel="stylesheet" href="/LeaveRequest/static/style.css">
-		
-        <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+
+      	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
         <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
@@ -52,7 +52,7 @@
 				<a href="/LeaveRequest/portal" id="all-req">My Leave Requests</a>
 				<a href="/LeaveRequest/comp" id="all-comp">My Comp-Off Requests</a>
 				<a href="/LeaveRequest/leave" id="new-req">New Leave Request</a>	
-				<a href="/LeaveRequest/compoff" id="comp-req">New Comp-Off Request</a>	
+				<a href="/LeaveRequest/compoff" id="comp-req">New Comp-Off Request</a>
 			</div>
 		</div>	
 		<div style="margin-left: 240px; margin-top: 50px; padding: 40px;" class="main-div">
