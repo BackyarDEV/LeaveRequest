@@ -46,17 +46,6 @@ $('.btn-check').click(function(s) {
     });
 });
 
-$(document).ready(function() {
-	$('#all-req').css('color', '#f1f1f1');
-	$('#all-req').css('font-size', '1.2rem');
-    $('#data-table').DataTable({
-    	"ordering": false
-    },
-    {
-        "pagingType": "scrolling"
-    });
-});
-
 function sort(){
 	 $('#data-table').DataTable({
 	 		destroy: true,
@@ -73,11 +62,4 @@ $('.targetRow').click(function() {
 		console.log(url);
 		window.location.replace(url);
 });
-
-
-
-
-
-
-
 
