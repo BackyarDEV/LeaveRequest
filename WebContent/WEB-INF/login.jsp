@@ -3,7 +3,10 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+		<link rel="stylesheet" href="/LeaveRequest/static/style.css">
+		
 	    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
 	    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
@@ -24,10 +27,10 @@
 		<title>Login</title>
 	</head>
 	<body>
-      <div class="login-container login" style="min-width: 300px; max-width: 500px; width: 60%; margin-left: auto; margin-right: auto; margin-bottom: 4%; margin-top: 4%; background:#fff;">
+      <div class="login-container login" >
          <div class="row row-login">
             <div class='col-md-12 form-col'>
-               <form class="form form-login" action="login" method="post" style="border-radius: 0.5rem; box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 9px 26px 0 rgba(0, 0, 0, 0.19); border: solid 1px e0e0e0; padding: 6%;">
+               <form class="form form-login" action="login" method="post">
                   <h2>Login</h2>
                   <br>
                   <div class="form-group">

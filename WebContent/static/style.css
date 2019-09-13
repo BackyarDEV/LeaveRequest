@@ -1,6 +1,17 @@
+.form-login{
+	border-radius: 0.5rem;
+	box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 9px 26px 0 rgba(0, 0, 0, 0.19);
+	padding: 2%;
+	width: 35%;
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 4%;
+	margin-top: 4%;
+	background:#fff;
+}
+
 .navbar{
 	background-color: #212121;
-	height: 50px;
 }
 
 .navbar-toggler{
@@ -13,11 +24,10 @@
 	position: fixed;
 	z-index: 1;
 	top: 0; 
-	background-color: #232323;
+	background-color: #303030;
 	left: 0;
 	overflow-x: hidden;
-	margin-top: 50px;
-	opacity: 0.9;
+	margin-top: 55px;
 }
 
 .sidenav-link{
@@ -51,21 +61,9 @@
 	padding-right: 1em;
 }
 
-.leave-container{
-	min-width: 300px;
-	max-width: 800px;
-	width: 100%;
-	padding: 4%; 
-	margin-left: 240px;
-	margin-right: auto;
-	margin-bottom: 2%;
-	margin-top: 4%;
-	background:#fff;
-}
-
 .leave-form{
 	border-radius: 0.5rem;
-	width: 65%;
+	width: 75%;
 	margin-left: auto;
 	margin-right: auto;
 	box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 9px 26px 0 rgba(0, 0, 0, 0.19);
@@ -164,4 +162,48 @@ div.scrollable {
 .fa-sort{
 	color: #dbdbdb;
 }
+
+@media only screen and (max-width: 600px) {
+	.leave-form{
+		border-radius: 0.5rem;
+		width: 100%;
+		margin-left: auto;
+		margin-right: auto;
+		box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 9px 26px 0 rgba(0, 0, 0, 0.19);
+		border: solid 1px e0e0e0;
+		padding: 4%;
+	}
+	.sidenav{
+		width: 100%;
+		height: 100%;
+		position: fixed;
+		z-index: 1;
+		top: 0; 
+		background-color: #303030;
+		left: 0;
+		overflow-x: hidden;
+		margin-top: 50px;
+	}	 
+	.form-login{
+		border-radius: 0.5rem;
+		box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 9px 26px 0 rgba(0, 0, 0, 0.19);
+		padding: 6%;
+		width: 85%;
+		margin-top: 20%;
+		margin-bottom: 20%;
+		background:#fff;
+	}
+	
+}
+
+.text-pending{
+	color:#3c6382;
+}
+.text-approved{
+	color:#20bf6b;
+}
+.text-rejected{
+	color:#e55039;
+}
+
 

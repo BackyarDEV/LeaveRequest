@@ -15,7 +15,7 @@
 				<h3>Comp-Off Request</h3><br>
 				<div class="form-group">
 					<label for="name">Name of the Employee</label>
-					<input class="form-control" id="name" required type="text" readonly value="${name}"   name="name" placeholder="Name"/>
+					<input class="form-control" id="name" required type="text" readonly value="<%=resultSet.get(i).getName()%>"   name="name" placeholder="Name"/>
 				</div>
 				<div class="form-row">
 					<div class="col-sm-6">
@@ -27,7 +27,7 @@
 					<div class="col-sm-6">
 						<div class="form-group">
 							<label for="project">Project</label>
-							<input class="form-control"  id="project" value="${project}"  readonly required type="text" name="project"   placeholder="Project"/>
+							<input class="form-control"  id="project" value="<%=resultSet.get(i).getProject()%>"  readonly required type="text" name="project"   placeholder="Project"/>
 						</div>
 					</div>
 				</div>
@@ -35,13 +35,13 @@
 					<div class="col-sm-6">
 						<div class="form-group">
 							<label for="tLead">Team Lead</label>
-							<input class="form-control" id="tLead" required value="${lead}" readonly  type="text" name="tLead"  placeholder="Team Lead"/>
+							<input class="form-control" id="tLead" required value="<%=resultSet.get(i).getTeamLead()%>" readonly  type="text" name="tLead"  placeholder="Team Lead"/>
 						</div>
 					</div>
 					<div class="col-sm-6">
 						<div class="form-group">
 							<label for="manager">Project Manager</label>
-							<input class="form-control" id="manager" required value="${manager}"  readonly type="text" name="manager" placeholder="Team Lead"/>
+							<input class="form-control" id="manager" required value="<%=resultSet.get(i).getManager()%>"  readonly type="text" name="manager" placeholder="Team Lead"/>
 						</div>
 					</div>
 				</div>
@@ -100,8 +100,6 @@
 		<script src="//cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.3.26/jquery.form-validator.min.js"></script>
 		<script>
 			$(function(){
-				$('#comp-req').css('color', '#f1f1f1');
-				$('#comp-req').css('font-size', '1.2rem');
 				$('#submitFormModal').modal({ show: false});
 				$( "#comp-date" ).datepicker({
 					  dateFormat: "yy-mm-dd"

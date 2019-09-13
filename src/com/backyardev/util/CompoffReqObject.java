@@ -73,7 +73,6 @@ public class CompoffReqObject {
 		}else {
 			nightShiftStatus = "No";
 		}
-		System.out.println("Night Shift: "+ nightShiftStatus);
 		return nightShiftStatus;
 	}
 	public void setNightShift(String nightShift) {

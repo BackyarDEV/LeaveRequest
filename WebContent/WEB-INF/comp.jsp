@@ -39,20 +39,20 @@
     	<!-- changes action/status column view based on designation --> 
          <% if(session.getAttribute("desg").equals("Developer")) { %> <!-- designation is developer -->
 		         <% if ((al.get(i).getStatus()).equals("Pending")) { %> 
-		         <td class="text-warning font-weight-bold"><%=al.get(i).getStatus()%></td>
+		         <td class="text-pending font-weight-bold"><%=al.get(i).getStatus()%></td>
 		         <% } %>
 		         <% if((al.get(i).getStatus()).equals("Approved")) { %>
-		         <td class="text-primary  font-weight-bold"><%=al.get(i).getStatus()%></td>
+		         <td class="text-approved  font-weight-bold"><%=al.get(i).getStatus()%></td>
 		         <% } %>
 		         <% if ((al.get(i).getStatus()).equals("Rejected")) { %>
-		         <td class="text-danger font-weight-bold"><%=al.get(i).getStatus()%></td>
+		         <td class="text-rejected font-weight-bold"><%=al.get(i).getStatus()%></td>
 		         <% } %>
          <% } else { %>	<!-- designation is !developer-->	
          <!-- changes action/status column view based on status-->
 		         <% if ((al.get(i).getStatus()).equals("Approved")) { %>	<!-- status == approved -->	
-		   			<td class="text-primary font-weight-bold" > Approved </td>
+		   			<td class="text-approved font-weight-bold" > Approved </td>
 				<% } else if ((al.get(i).getStatus()).equals("Rejected")) { %>	<!-- status == rejected -->	
-		         <td class="text-danger font-weight-bold" > Rejected </td>
+		         <td class="text-rejected font-weight-bold" > Rejected </td>
 		         <% } else { %>	<!-- status == pending -->	
 		         <td class="">
 		            <button type="button" class=" btn-check" id="<%=al.get(i).getId()%>"><i class="fas fa-check "></i></button>

@@ -24,7 +24,6 @@ public class CompDisplayServlet extends HttpServlet {
 				
 				String url = req.getRequestURI().replace("/LeaveRequest/comp/", "");
 				String  newUrl  =  url.replace("static/loading.gif", "");
-				System.out.println(newUrl);
 				DatabaseQueries databaseQuery = new DatabaseQueries();
 				databaseQuery.getCompLeave(newUrl);
 			
