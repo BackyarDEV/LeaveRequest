@@ -23,14 +23,9 @@ public class LeaveDisplayServlet extends HttpServlet {
 		try{
 			if(session.getAttribute("ecode") != null) {
 				
-				String url = req.getRequestURI().replace("/LeaveRequest/leave/", "");
-				String  newUrl  =  url.replace("static/loading.gif", "");
-				System.out.println(newUrl);
-				DatabaseQueries databaseQuery = new DatabaseQueries();
-				databaseQuery.getLeave(newUrl);
+			
 				
-				
-				
+	
 				
 				RequestDispatcher rd = req.getRequestDispatcher("/WEB-INF/leaveDisplay.jsp");
 				rd.forward(req, resp);

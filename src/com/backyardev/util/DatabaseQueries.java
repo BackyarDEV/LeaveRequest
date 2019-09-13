@@ -264,21 +264,67 @@ public class DatabaseQueries {
 		return returnBool;
 	}
 	
+	// Get Ecode from leave_request table
+	public static String getEcode(String id) {
+		conn = createConnection();
+		String ecode = null;
+		sql = "SELECT ecode from LEAVE_REQUEST where id = ? ";
+		try {
+			pst = conn.prepareStatement(sql);
+			pst.setString(1, id);
+			rs = pst.executeQuery();
+			
+			while(rs.next()) {
+				ecode = rs.getString("ecode");
+				
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return ecode;
+		
+	}
+	
 	// Get indivisual leave on click of tr 
 	public static ArrayList<LeaveReqObject> getLeave(String id) {
 		ArrayList<LeaveReqObject> arrayList = new ArrayList<LeaveReqObject>();
+		String ecode = getEcode(id);
 		conn = createConnection();
 		try {
-			sql = "select * from LEAVE_REQUEST where id = ?";
+			sql = "SELECT LEAVE_REQUEST.id, "
+					+ "LEAVE_REQUEST.ecode, "
+					+ "LEAVE_REQUEST.leave_start_date, "
+					+ "LEAVE_REQUEST.leave_end_date, "
+					+ "LEAVE_REQUEST.number_of_days, "
+					+ "LEAVE_REQUEST.full_day_leave, "
+					+ "LEAVE_REQUEST.half_day_leave, "
+					+ "LEAVE_REQUEST.leave_type, "
+					+ "LEAVE_REQUEST.leave_desc, "
+					+ "LEAVE_STATUS.status, "
+					+ "EMPLOYEES.name, "
+					+ "EMPLOYEES.project, "
+					+ "EMPLOYEES.team_lead, "
+					+ "EMPLOYEES.project_manager "
+					+ "FROM LEAVE_REQUEST, LEAVE_STATUS, EMPLOYEES WHERE LEAVE_REQUEST.ecode = EMPLOYEES.ecode AND "
+					+ "LEAVE_REQUEST.id = LEAVE_STATUS.id AND "
+					+ "LEAVE_REQUEST.id = ? AND "
+					+ " LEAVE_REQUEST.ecode = ? order by leave_request_time desc";
 			pst = conn.prepareStatement(sql);
 			pst.setString(1, id);
+			pst.setString(2, ecode);
 			rs = pst.executeQuery();
 			while (rs.next()) {
 				LeaveReqObject obj = new LeaveReqObject();
 				obj.setId(rs.getInt("id"));
+				obj.setStatus(rs.getString("status"));
 				obj.setEcode(rs.getString("ecode"));
-			//	obj.setName(rs.getString("name"));
-			//	obj.setProjectName(rs.getString("project_name"));
+				obj.setName(rs.getString("name"));
+				obj.setTeamLead(rs.getString("team_lead"));
+				obj.setProjectManager(rs.getString("project_manager"));
+				obj.setProjectName(rs.getString("project"));
 				obj.setStartDate(rs.getString("leave_start_date"));
 				obj.setEndDate(rs.getString("leave_end_date"));
 				obj.setNumberOfDays(rs.getInt("number_of_days"));
@@ -297,20 +343,40 @@ public class DatabaseQueries {
 	// Get indivisual comp-off leave on click of tr
 	public static ArrayList<CompoffReqObject> getCompLeave(String id) {
 		ArrayList<CompoffReqObject> arrayList = new ArrayList<CompoffReqObject>();
+		String ecode = getEcode(id);
 		conn = createConnection();
 		try {
-			sql = "select  * from COMPOFF_REQUEST where id = ?";
+			sql = "select COMPOFF_REQUEST.id, "
+					+ "COMPOFF_REQUEST.ecode, "
+					+ "COMPOFF_REQUEST.comp_date, "
+					+ "COMPOFF_REQUEST.description, "
+					+ "COMPOFF_REQUEST.ticket_scr, "
+					+ "COMPOFF_REQUEST.night_shift, "
+					+ "COMPOFF_REQUEST.status, "
+					+ "EMPLOYEES.name,"
+					+ "EMPLOYEES.project,"
+					+ "EMPLOYEES.team_lead,"
+					+ "EMPLOYEES.project_manager "
+					+ "from COMPOFF_REQUEST, EMPLOYEES where COMPOFF_REQUEST.ecode = EMPLOYEES.ecode AND "
+					+ "COMPOFF_REQUEST.id = ?  "
+					+ "order by COMPOFF_REQUEST.request_timestamp desc";
 			pst = conn.prepareStatement(sql);
 			pst.setString(1, id);
 			rs = pst.executeQuery();
 			while (rs.next()) {
 				CompoffReqObject obj = new CompoffReqObject();
+				obj.setId(rs.getInt("id"));
 				obj.setEcode(rs.getString("ecode"));
 				obj.setCompDate(rs.getString("comp_date"));
 				obj.setDesc(rs.getString("description"));
 				obj.setTicket(rs.getString("ticket_scr"));
 				obj.setNightShift(rs.getString("night_shift"));
 				obj.setStatus(rs.getString("status"));
+				obj.setName(rs.getString("name"));
+				obj.setProject(rs.getString("project"));
+				obj.setTeamLead(rs.getString("team_lead"));
+				obj.setManager(rs.getString("project_manager"));
+				
 				arrayList.add(obj);
 			}
 		} catch (SQLException e) {
@@ -320,7 +386,7 @@ public class DatabaseQueries {
 		return arrayList;
 		
 	}
-	
+
 	// Close connection
 	public static void closeConnection() {
 		

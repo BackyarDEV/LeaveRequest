@@ -12,7 +12,6 @@
 
 .navbar{
 	background-color: #212121;
-	height: 50px;
 }
 
 .navbar-toggler{
@@ -28,7 +27,7 @@
 	background-color: #303030;
 	left: 0;
 	overflow-x: hidden;
-	margin-top: 50px;
+	margin-top: 55px;
 }
 
 .sidenav-link{
@@ -196,4 +195,14 @@ div.scrollable {
 	}
 	
 }
+
+  .text-pending{
+    color:#3c6382;
+  }
+  .text-approved{
+    color:#20bf6b;
+  }
+  .text-rejected{
+    color:#e55039;
+  }
 
