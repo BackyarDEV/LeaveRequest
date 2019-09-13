@@ -16,7 +16,7 @@
 					<div class="col-sm-6">
 						<div class="form-group">
 							<label for="project">Project</label>
-							<input class="form-control" id="project" value="${project}" required type="text" name="project" placeholder="Project"  data-validation="required" data-validation-error-msg="Enter your project name"/>
+							<input class="form-control" id="project" value="${project}"  readonly required type="text" name="project" placeholder="Project"  data-validation="required" data-validation-error-msg="Enter your project name"/>
 						</div>
 					</div>
 				</div>
@@ -24,13 +24,13 @@
 					<div class="col-sm-6">
 						<div class="form-group">
 							<label for="tLead">Team Lead</label>
-							<input class="form-control" id="tLead" required value="${lead}" type="text" name="tLead" placeholder="Team Lead" data-validation="length"  data-validation-length="min3" data-validation-error-msg="Name is is shorter than 3 characters"/>
+							<input class="form-control" id="tLead" required value="${lead}"  readonly type="text" name="tLead" placeholder="Team Lead" data-validation="length"  data-validation-length="min3" data-validation-error-msg="Name is is shorter than 3 characters"/>
 						</div>
 					</div>
 					<div class="col-sm-6">
 						<div class="form-group">
 							<label for="manager">Project Manager</label>
-							<input class="form-control" id="manager" value="${manager}" required type="text" name="manager" placeholder="Project Manager" data-validation="length"  data-validation-length="min3" data-validation-error-msg="Name is is shorter than 3 characters"/>
+							<input class="form-control" id="manager" value="${manager}"  readonly required type="text" name="manager" placeholder="Project Manager" data-validation="length"  data-validation-length="min3" data-validation-error-msg="Name is is shorter than 3 characters"/>
 						</div>
 					</div>
 				</div>

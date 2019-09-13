@@ -15,16 +15,6 @@
     <url-pattern>/leave</url-pattern>
   </servlet-mapping>
   <servlet>
-    <servlet-name>Comp</servlet-name>
-    <servlet-class>com.backyardev.CompServlet</servlet-class>
-  </servlet>
-  
-  <servlet-mapping>
-    <servlet-name>Comp</servlet-name>
-    <url-pattern>/comp</url-pattern>
-  </servlet-mapping>
-  
-  <servlet>
     <servlet-name>CompOff</servlet-name>
     <servlet-class>com.backyardev.CompOffServlet</servlet-class>
   </servlet>
@@ -32,7 +22,22 @@
     <servlet-name>CompOff</servlet-name>
     <url-pattern>/compoff</url-pattern>
   </servlet-mapping>
-  
+  <servlet>
+    <servlet-name>Comp</servlet-name>
+    <servlet-class>com.backyardev.CompServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Comp</servlet-name>
+    <url-pattern>/comp</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>CompDisplayServlet</servlet-name>
+    <servlet-class>com.backyardev.CompDisplayServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CompDisplayServlet</servlet-name>
+    <url-pattern>/comp/*</url-pattern>
+  </servlet-mapping>
   <servlet>
     <servlet-name>LeaveDisplayServlet</servlet-name>
     <servlet-class>com.backyardev.LeaveDisplayServlet</servlet-class>
@@ -41,7 +46,6 @@
     <servlet-name>LeaveDisplayServlet</servlet-name>
     <url-pattern>/leave/*</url-pattern>
   </servlet-mapping>
-  
   <servlet>
     <servlet-name>Logout</servlet-name>
     <servlet-class>com.backyardev.LogoutServlet</servlet-class>
@@ -85,5 +89,24 @@
   <welcome-file-list>
     <welcome-file>/WEB-INF/login.jsp</welcome-file>
   </welcome-file-list>
-
+  <servlet>
+    <description></description>
+    <display-name>CompOffPortalServlet</display-name>
+    <servlet-name>CompOffPortalServlet</servlet-name>
+    <servlet-class>com.backyardev.CompOffPortalServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CompOffPortalServlet</servlet-name>
+    <url-pattern>/CompOffPortalServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ActionCompLeaveServlet</display-name>
+    <servlet-name>ActionCompLeaveServlet</servlet-name>
+    <servlet-class>com.backyardev.ActionCompLeaveServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ActionCompLeaveServlet</servlet-name>
+    <url-pattern>/ActionCompLeaveServlet</url-pattern>
+  </servlet-mapping>
 </web-app>

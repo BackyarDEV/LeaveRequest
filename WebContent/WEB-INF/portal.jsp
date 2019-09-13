@@ -22,12 +22,12 @@
       </tr>
    </thead>
    <tbody>
-      <%
-      	String ecode = (String) session.getAttribute("ecode");
-               String desg = (String) session.getAttribute("desg");
-               String name = (String) session.getAttribute("name");
-               ArrayList<LeaveReqObject> resultSet = LeaveRequestService.populateLeaveTable(desg,name,ecode);
-      %>
+      <% 
+         String ecode = (String) session.getAttribute("ecode");
+         String desg = (String) session.getAttribute("desg");
+         String name = (String) session.getAttribute("name");
+         ArrayList<LeaveReqObject> resultSet = LeaveRequestService.populateLeaveTable(desg,name,ecode);
+         %>
       <% for(int i = 0; i < resultSet.size(); i+=1) { %>
       <tr id=" <%=resultSet.get(i).getId()%>"  class="targetRow">
          <td><%=resultSet.get(i).getEcode() %></td>

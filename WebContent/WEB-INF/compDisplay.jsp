@@ -1,22 +1,33 @@
+<%@page import="com.backyardev.util.DatabaseQueries"%>
+<%@page import=" java.util.ArrayList"%>
+<%@page import="com.backyardev.util.CompoffReqObject"%>
+
 <jsp:include page="/WEB-INF/layout.jsp"></jsp:include>
+
+      <%
+  		String url = (String)request.getAttribute("javax.servlet.forward.request_uri");
+		String updatedUrl = url.replace("/LeaveRequest/comp/","");
+	 	ArrayList<CompoffReqObject> resultSet = DatabaseQueries.getCompLeave(updatedUrl);
+      %>
+        <% for(int i = 0; i < resultSet.size(); i+=1) { %>
 			<div class="alert" style="display: none; width: 65%; margin-left: auto; margin-right: auto;" role="alert"></div>
 			<form class="form leave-form" method="post" action="compoff">
 				<h3>Comp-Off Request</h3><br>
 				<div class="form-group">
 					<label for="name">Name of the Employee</label>
-					<input class="form-control" id="name" required type="text" readonly value="${name}" name="name" placeholder="Name"/>
+					<input class="form-control" id="name" required type="text" readonly value="${name}"   name="name" placeholder="Name"/>
 				</div>
 				<div class="form-row">
 					<div class="col-sm-6">
 						<div class="form-group">
 							<label for="ecode">Ecode</label>
-							<input class="form-control" id="ecode" required type="text" readonly name="ecode" value="${ecode}" placeholder="Ecode"/>
+							<input class="form-control" id="ecode" required type="text" readonly name="ecode" value="<%=resultSet.get(i).getEcode()%>"   placeholder="Ecode"/>
 						</div>
 					</div>
 					<div class="col-sm-6">
 						<div class="form-group">
 							<label for="project">Project</label>
-							<input class="form-control"  id="project" value="${project}"  readonly required type="text" name="project" placeholder="Project"/>
+							<input class="form-control"  id="project" value="${project}"  readonly required type="text" name="project"   placeholder="Project"/>
 						</div>
 					</div>
 				</div>
@@ -24,7 +35,7 @@
 					<div class="col-sm-6">
 						<div class="form-group">
 							<label for="tLead">Team Lead</label>
-							<input class="form-control" id="tLead" required value="${lead}" readonly  type="text" name="tLead" placeholder="Team Lead"/>
+							<input class="form-control" id="tLead" required value="${lead}" readonly  type="text" name="tLead"  placeholder="Team Lead"/>
 						</div>
 					</div>
 					<div class="col-sm-6">
@@ -38,26 +49,30 @@
 					<div class="col-sm-6">
 						<div class="form-group">
 							<label for="ticket">Ticket/SCR</label>
-							<input class="form-control" id="ticket" required type="text" name="ticket" autocomplete="off"/>
+							<input class="form-control" id="ticket" required type="text"  value="<%=resultSet.get(i).getTicket()%>" readonly name="ticket" autocomplete="off"/>
 						</div>
 					</div>
 					<div class="col-sm-6">
 						<div class="form-group">
 							<label for="comp-date">Date</label>
-							<input class="form-control date-format" id="comp-date" required type="text" name="comp-date" value="yy-mm-dd" autocomplete="off"/>
+							<input class="form-control date-format" id="comp-date" required type="text"  value="<%=resultSet.get(i).getCompDate()%>" readonly  name="comp-date" value="yy-mm-dd" autocomplete="off"/>
 						</div>
+					</div>
+				</div>
+				<div>
+					<div class="form-group">
+						<label for="night-shift">Night Shift</label>
+						<input class="form-control date-format" id="comp-date" required type="text"  value="<%=resultSet.get(i).getNightShift()%>" readonly  name="comp-date" autocomplete="off"/>
 					</div>
 				</div>
 				<div class="form-group">
 					<label for="comp-desc">Description</label>
-					<textarea class="form-control" required name="comp-desc"  placeholder="Brief Description" rows="3" autocomplete="off"></textarea>
+					<textarea class="form-control" required name="comp-desc"  placeholder="<%=resultSet.get(i).getDesc()%>"  readonly rows="3" autocomplete="off"></textarea>
 				</div>
-				<div class="from-check" style="display: inherit; margin: 20px;">
-					<input type="checkbox" class="form-check-input" id="avail" name="avail" value="avail"/>
-					<label class="form-check-label" for="avail">Availing against Extra Nights</label>
-				</div>
-				<button type="submit" class="btn btn-primary">Submit</button>
+				
 			</form>
+			
+		    <% } %>	
 			<div class="modal fade" id="submitFormModal" tabindex="-1" role="dialog" aria-labelledby="submitFormModalTitle" aria-hidden="true">
 			    <div class="modal-dialog modal-dialog-centered" role="document">
 			        <div class="modal-content">
