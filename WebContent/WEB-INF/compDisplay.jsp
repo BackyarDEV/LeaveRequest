@@ -1,33 +1,50 @@
-<%@page import="com.backyardev.util.DatabaseQueries"%>
+<%@page import="com.backyardev.util.LeaveRequestService"%>
 <%@page import=" java.util.ArrayList"%>
 <%@page import="com.backyardev.util.CompoffReqObject"%>
 
 <jsp:include page="/WEB-INF/layout.jsp"></jsp:include>
 
       <%
-  		String url = (String)request.getAttribute("javax.servlet.forward.request_uri");
+      	String desg = (String)session.getAttribute("desg");
+      	String url = (String)request.getAttribute("javax.servlet.forward.request_uri");
 		String updatedUrl = url.replace("/LeaveRequest/comp/","");
-	 	ArrayList<CompoffReqObject> resultSet = DatabaseQueries.getCompLeave(updatedUrl);
+	 	CompoffReqObject obj = LeaveRequestService.getCompoff(updatedUrl);
+	 	boolean no_comp = false;
+	 	if(obj.getName() == null){%>
+	 		<h4><b>The page you requested doesn't exist.</b></h4>
+	 	<% } else {
+	 	boolean check = false;
+  		if (desg.equals("TeamLead")){
+  			check = obj.getTeamLead().equals(session.getAttribute("name"));
+  		} else if (desg.equals("Manager")){
+  			check = obj.getManager().equals(session.getAttribute("name"));
+  		} else if (desg.equals("Super_Admin")){
+  			check = true;
+  		} else if(desg.equals("Admin")){
+  			check = true;
+  		} else {
+  			check = obj.getEcode().equals(session.getAttribute("ecode"));
+  		}
       %>
-        <% for(int i = 0; i < resultSet.size(); i+=1) { %>
+        <% if(check) { %>
 			<div class="alert" style="display: none; width: 65%; margin-left: auto; margin-right: auto;" role="alert"></div>
 			<form class="form leave-form" method="post" action="compoff">
 				<h3>Comp-Off Request</h3><br>
 				<div class="form-group">
 					<label for="name">Name of the Employee</label>
-					<input class="form-control" id="name" required type="text" readonly value="<%=resultSet.get(i).getName()%>"   name="name" placeholder="Name"/>
+					<input class="form-control" id="name" required type="text" readonly value="<%=obj.getName()%>"   name="name" placeholder="Name"/>
 				</div>
 				<div class="form-row">
 					<div class="col-sm-6">
 						<div class="form-group">
 							<label for="ecode">Ecode</label>
-							<input class="form-control" id="ecode" required type="text" readonly name="ecode" value="<%=resultSet.get(i).getEcode()%>"   placeholder="Ecode"/>
+							<input class="form-control" id="ecode" required type="text" readonly name="ecode" value="<%=obj.getEcode()%>"   placeholder="Ecode"/>
 						</div>
 					</div>
 					<div class="col-sm-6">
 						<div class="form-group">
 							<label for="project">Project</label>
-							<input class="form-control"  id="project" value="<%=resultSet.get(i).getProject()%>"  readonly required type="text" name="project"   placeholder="Project"/>
+							<input class="form-control"  id="project" value="<%=obj.getProject()%>"  readonly required type="text" name="project"   placeholder="Project"/>
 						</div>
 					</div>
 				</div>
@@ -35,13 +52,13 @@
 					<div class="col-sm-6">
 						<div class="form-group">
 							<label for="tLead">Team Lead</label>
-							<input class="form-control" id="tLead" required value="<%=resultSet.get(i).getTeamLead()%>" readonly  type="text" name="tLead"  placeholder="Team Lead"/>
+							<input class="form-control" id="tLead" required value="<%=obj.getTeamLead()%>" readonly  type="text" name="tLead"  placeholder="Team Lead"/>
 						</div>
 					</div>
 					<div class="col-sm-6">
 						<div class="form-group">
 							<label for="manager">Project Manager</label>
-							<input class="form-control" id="manager" required value="<%=resultSet.get(i).getManager()%>"  readonly type="text" name="manager" placeholder="Team Lead"/>
+							<input class="form-control" id="manager" required value="<%=obj.getManager()%>"  readonly type="text" name="manager" placeholder="Team Lead"/>
 						</div>
 					</div>
 				</div>
@@ -49,30 +66,31 @@
 					<div class="col-sm-6">
 						<div class="form-group">
 							<label for="ticket">Ticket/SCR</label>
-							<input class="form-control" id="ticket" required type="text"  value="<%=resultSet.get(i).getTicket()%>" readonly name="ticket" autocomplete="off"/>
+							<input class="form-control" id="ticket" required type="text"  value="<%=obj.getTicket()%>" readonly name="ticket" autocomplete="off"/>
 						</div>
 					</div>
 					<div class="col-sm-6">
 						<div class="form-group">
 							<label for="comp-date">Date</label>
-							<input class="form-control date-format" id="comp-date" required type="text"  value="<%=resultSet.get(i).getCompDate()%>" readonly  name="comp-date" value="yy-mm-dd" autocomplete="off"/>
+							<input class="form-control date-format" id="comp-date" required type="text"  value="<%=obj.getCompDate()%>" readonly  name="comp-date" value="yy-mm-dd" autocomplete="off"/>
 						</div>
 					</div>
 				</div>
 				<div>
 					<div class="form-group">
 						<label for="night-shift">Night Shift</label>
-						<input class="form-control date-format" id="comp-date" required type="text"  value="<%=resultSet.get(i).getNightShift()%>" readonly  name="comp-date" autocomplete="off"/>
+						<input class="form-control date-format" id="comp-date" required type="text"  value="<%=obj.getNightShift()%>" readonly  name="comp-date" autocomplete="off"/>
 					</div>
 				</div>
 				<div class="form-group">
 					<label for="comp-desc">Description</label>
-					<textarea class="form-control" required name="comp-desc"  placeholder="<%=resultSet.get(i).getDesc()%>"  readonly rows="3" autocomplete="off"></textarea>
+					<textarea class="form-control" required name="comp-desc"  placeholder="<%=obj.getDesc()%>"  readonly rows="3" autocomplete="off"></textarea>
 				</div>
 				
 			</form>
-			
-		    <% } %>	
+			<% } else{%>
+				<h4><b>You are not authorised to visit this page.</b></h4>
+		    <% }}%>
 			<div class="modal fade" id="submitFormModal" tabindex="-1" role="dialog" aria-labelledby="submitFormModalTitle" aria-hidden="true">
 			    <div class="modal-dialog modal-dialog-centered" role="document">
 			        <div class="modal-content">
@@ -141,4 +159,5 @@
 			}
 		</script>
 	</body>
+</html>
 		

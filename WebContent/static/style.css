@@ -87,6 +87,11 @@ table {
 	font-size: 14px;
 	border-collapse: collapse;
 }
+
+tbody{
+	cursor: pointer;
+}
+
 .rm-border{
 	border:none;
 }

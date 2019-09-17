@@ -154,7 +154,7 @@ public class LeaveRequestService {
 				obj.setDesc(rs.getString("description"));
 				obj.setProject(rs.getString("project"));
 				obj.setManager(rs.getString("project_manager"));
-				obj.setNightShift(Integer.parseInt(rs.getString("night_shift")));
+				obj.setNightShift(rs.getString("night_shift"));
 				obj.setTicket(rs.getString("ticket_scr"));
 				al.add(obj);
 			}
@@ -163,6 +163,56 @@ public class LeaveRequestService {
 		}
 		DatabaseQueries.closeConnection();
 		return al;
+	}
+	
+	public static LeaveReqObject getLeave(String id){
+		LeaveReqObject obj = new LeaveReqObject();
+		ResultSet rs = DatabaseQueries.getLeave(id);
+		try {
+			if (rs.next()) {
+				
+				obj.setId(rs.getInt("id"));
+				obj.setStatus(rs.getString("status"));
+				obj.setEcode(rs.getString("ecode"));
+				obj.setName(rs.getString("name"));
+				obj.setTeamLead(rs.getString("team_lead"));
+				obj.setProjectManager(rs.getString("project_manager"));
+				obj.setProjectName(rs.getString("project"));
+				obj.setStartDate(rs.getString("leave_start_date"));
+				obj.setEndDate(rs.getString("leave_end_date"));
+				obj.setNumberOfDays(rs.getInt("number_of_days"));
+				obj.setLeaveType(rs.getString("leave_type"));
+				obj.setLeaveDesc(rs.getString("leave_desc"));
+			}
+		} catch(Exception ex) {
+			ex.printStackTrace();
+		}
+		return obj;
+	}
+	
+	public static CompoffReqObject getCompoff(String id){
+		CompoffReqObject obj = new CompoffReqObject();
+		ResultSet rs = DatabaseQueries.getCompLeave(id);
+		try {
+			if (rs.next()) {
+				
+				obj.setId(rs.getInt("id"));
+				obj.setEcode(rs.getString("ecode"));
+				obj.setCompDate(rs.getString("comp_date"));
+				obj.setDesc(rs.getString("description"));
+				obj.setTicket(rs.getString("ticket_scr"));
+				obj.setNightShift(rs.getString("night_shift"));
+				obj.setStatus(rs.getString("status"));
+				obj.setName(rs.getString("name"));
+				obj.setProject(rs.getString("project"));
+				obj.setTeamLead(rs.getString("team_lead"));
+				obj.setManager(rs.getString("project_manager"));
+			
+			}
+		} catch(Exception ex) {
+			ex.printStackTrace();
+		}
+		return obj;
 	}
 	
 	private static boolean validateMail(String mail){

@@ -69,8 +69,8 @@
 <script src="/LeaveRequest/static/compDisplayJs.js"></script>
 <script>
 	$(document).ready(function() {
-		$('#all-req').css('color', '#f1f1f1');
-		$('#all-req').css('font-size', '1.2rem');
+		$('#all-comp').css('color', '#f1f1f1');
+		$('#all-comp').css('font-size', '1.2rem');
 		$('#data-table').DataTable({
 			"ordering": false
 		},
