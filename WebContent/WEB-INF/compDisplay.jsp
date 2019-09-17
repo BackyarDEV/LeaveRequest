@@ -86,77 +86,63 @@
 					<label for="comp-desc">Description</label>
 					<textarea class="form-control" required name="comp-desc"  placeholder="<%=obj.getDesc()%>"  readonly rows="3" autocomplete="off"></textarea>
 				</div>
-				
+				<br>
+				<% if(obj.getStatus().equals("0") && (desg.equals("TeamLead") || desg.equals("Manager"))){ %>
+					<div class="text-center">
+						<button class="btn btn-primary mr-5 check" type="button" id="<%out.print(obj.getId());%>" style="width: 100px">Approve</button>
+						<button class="btn btn-danger ml-5 reject" type="button" id="<%out.print(obj.getId());%>" style="width: 100px">Decline</button>
+					</div>
 			</form>
-			<% } else{%>
+			<% }} else{%>
 				<h4><b>You are not authorised to visit this page.</b></h4>
 		    <% }}%>
-			<div class="modal fade" id="submitFormModal" tabindex="-1" role="dialog" aria-labelledby="submitFormModalTitle" aria-hidden="true">
-			    <div class="modal-dialog modal-dialog-centered" role="document">
-			        <div class="modal-content">
-			            <div class="modal-header">
-			                <h4 class="modal-title" id="ModalTitle">Request Comp-Off?</h4>
-			                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-			                    <span aria-hidden="true">&times;</span>
-		                    </button>
-			            </div>
-			            <div class="modal-body">
-			                <p>Are you sure you want to request for Comp-Off?</p><br>
-			                <div style="text-align: center; display: none;" id="progress">
-			                    <img src="static/loading.gif" alt="loading..">
-			                </div>
-			            </div>
-			            <div class="modal-footer">
-			                <button type="button" class="btn btn-secondary" id="modal-dismiss-btn" data-dismiss="modal">Cancel</button>
-			                <button id="submitFormBtn" value="Add" class="btn btn-primary">Yes</button>
-			            </div>
-			        </div>
-			    </div>
-			</div>
-			
 		</div>
 		<script src="//cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.3.26/jquery.form-validator.min.js"></script>
 		<script>
-			$(function(){
-				$('#submitFormModal').modal({ show: false});
-				$( "#comp-date" ).datepicker({
-					  dateFormat: "yy-mm-dd"
-				});
+			$('.check').click(function(e){
+				var url = "/LeaveRequest/ActionCompLeaveServlet";
+			    var method = "post";
+			    var id = $(this).attr("id")
+			    console.log(id);
+	
+			    $.ajax({
+			        type: method,
+			        url: url,
+			        data: {
+			            'id': id,
+			            'action': 'approve'
+			        },
+			        success: function(data) {
+			            if (data == "true") {
+			                window.location.replace('/LeaveRequest/comp');
+			            } else {
+			                alert('Error!');
+			            }
+			        }
+			    });
 			});
-			$('.form').submit(function(s){
-				s.preventDefault();
-				console.log('cvla: '+$('#comp-date').val());
-				$('#submitFormModal').modal('show');
-				$('#submitFormBtn').click(function(){
-					$('#progress').css('display', 'block');
-					var form = $('.form');
-					var url = form.attr("action");
-					var method = form.attr("method");
-					$.ajax({
-						type: method,
-						url: url,
-						data: form.serialize(),
-						success: function(data){
-							if (data == "true"){
-								showAlert('Post Success!', 'alert-success');
-							} else if(data == "null"){
-								showAlert('All Fields are compulsory!', 'alert-warning');
-							}
-						}
-					});
-				});
+			$('.reject').click(function(){
+				var url = "/LeaveRequest/ActionCompLeaveServlet";
+			    var method = "post";
+			    var id = $(this).attr("id")
+			    console.log(id);
+	
+			    $.ajax({
+			        type: method,
+			        url: url,
+			        data: {
+			            'id': id,
+			            'action': 'reject'
+			        },
+			        success: function(data) {
+			            if (data == "true") {
+			                window.location.replace('/LeaveRequest/comp');
+			            } else {
+			                alert('Error!');
+			            }
+			        }
+			    });
 			});
-			function showAlert(msg, type){
-				$('#progress').css('display', 'none');
-				$('#submitFormModal').modal('hide');
-				$('.alert').addClass(type);
-				$('.alert').html(msg);
-				$('.alert').css('display', 'block');
-				$('html, body').animate({scrollTop: 0});
-				$(".alert").fadeTo(2000, 500).slideUp(500, function(){
-				    $(".alert").slideUp(500);
-				});
-			}
 		</script>
 	</body>
 </html>

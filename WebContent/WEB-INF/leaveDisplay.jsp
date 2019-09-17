@@ -58,7 +58,7 @@
 					<div class="col-sm-6">
 						<div class="form-group">
 							<label for="manager">Project Manager</label>
-							<input class="form-control"  readonly id="manager" value="<%=obj.getProjectManager()%>""  type="text" name="manager" placeholder="Project Manager" />
+							<input class="form-control"  readonly id="manager" value="<%=obj.getProjectManager()%>" type="text" name="manager" placeholder="Project Manager" />
 						</div>
 					</div>
 				</div>
@@ -100,36 +100,61 @@
 					<label for="leave-desc">Leave Description/Reason</label>
 					<textarea class="form-control" readonly name="leave-desc"  id="leave-desc"  placeholder="<%=obj.getLeaveDesc() %>" rows="3"></textarea>
 				</div>
+				<br>
+				<% if(obj.getStatus().equals("0") && (desg.equals("TeamLead") || desg.equals("Manager"))){ %>
+					<div class="text-center">
+						<button class="btn btn-primary mr-5 check" type="button" id="<%out.print(obj.getId());%>" style="width: 100px">Approve</button>
+						<button class="btn btn-danger ml-5 reject" type="button" id="<%out.print(obj.getId());%>" style="width: 100px">Decline</button>
+					</div>
 			</form>
-		    <% } else{%>
+		    <% }} else{%>
 		    	<h4><b>You are not authorised to visit this page.</b></h4>
 		    <% }}%>
-		    
-			<div class="modal fade" id="submitFormModal" tabindex="-1" role="dialog" aria-labelledby="submitFormModalTitle" aria-hidden="true">
-			    <div class="modal-dialog modal-dialog-centered" role="document">
-			        <div class="modal-content">
-			            <div class="modal-header">
-			                <h4 class="modal-title" id="ModalTitle">Request Leave?</h4>
-			                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-			                    <span aria-hidden="true">&times;</span>
-		                    </button>
-			            </div>
-			            <div class="modal-body">
-			                <p>Are you sure you want to request for leave?</p><br>
-			                <div style="text-align: center; display: none;" id="progress">
-			                    <img src="static/loading.gif" alt="loading..">
-			                </div>
-			            </div>
-			            <div class="modal-footer">
-			                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-			                <button id="submitFormBtn" value="Add" class="btn btn-primary">Yes</button>
-			            </div>
-			        </div>
-			    </div>
-			</div>
-    
+		    <script>
+				$('.check').click(function(e){
+					var url = "/LeaveRequest/ActionLeaveServlet";
+				    var method = "post";
+				    var id = $(this).attr("id")
+				    console.log(id);
 
-	<script src="/LeaveRequest/static/formJs.js"></script>
+				    $.ajax({
+				        type: method,
+				        url: url,
+				        data: {
+				            'id': id,
+				            'action': 'approve'
+				        },
+				        success: function(data) {
+				            if (data == "true") {
+				                window.location.replace('/LeaveRequest/portal');
+				            } else {
+				                alert('Error!');
+				            }
+				        }
+				    });
+				});
+				$('.reject').click(function(){
+					var url = "/LeaveRequest/ActionLeaveServlet";
+				    var method = "post";
+				    var id = $(this).attr("id")
+				    console.log(id);
 
+				    $.ajax({
+				        type: method,
+				        url: url,
+				        data: {
+				            'id': id,
+				            'action': 'reject'
+				        },
+				        success: function(data) {
+				            if (data == "true") {
+				                window.location.replace('/LeaveRequest/portal');
+				            } else {
+				                alert('Error!');
+				            }
+				        }
+				    });
+				});
+			</script>
 	</body>
 </html>
