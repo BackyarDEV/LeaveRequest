@@ -59,30 +59,30 @@
         <pathelement location="../../Downloads/mysql-connector-java-5.1.10/mysql-connector-java-5.1.10-bin.jar"/>
     </path>
     <path id="LeaveRequest.classpath">
-        <pathelement location="build/classes"/>
+        <pathelement location="bin"/>
         <path refid="Apache Tomcat v9.0 [Apache Tomcat v9.0].libraryclasspath"/>
         <path refid="Web App Libraries.libraryclasspath"/>
         <path refid="EAR Libraries.libraryclasspath"/>
         <path refid="MySQL JDBC Driver.libraryclasspath"/>
     </path>
     <target name="init">
-        <mkdir dir="build/classes"/>
-        <copy includeemptydirs="false" todir="build/classes">
+        <mkdir dir="bin"/>
+        <copy includeemptydirs="false" todir="bin">
             <fileset dir="src">
                 <exclude name="**/*.java"/>
             </fileset>
         </copy>
     </target>
     <target name="clean">
- 		<delete dir="build/classes"/>
-		<delete dir="build/dist"/>
+ 		<delete dir="bin"/>
+		<delete dir="dist"/>
     </target>
     <target depends="clean" name="cleanall"/>
     <target depends="build-subprojects,build-project" name="build"/>
     <target name="build-subprojects"/>
     <target depends="init" name="build-project">
         <echo message="${ant.project.name}: ${ant.file}"/>
-        <javac debug="true" debuglevel="${debuglevel}" destdir="build/classes" includeantruntime="false" source="${source}" target="${target}">
+        <javac debug="true" debuglevel="${debuglevel}" destdir="bin" includeantruntime="false" source="${source}" target="${target}">
             <src path="src"/>
             <classpath refid="LeaveRequest.classpath"/>
         </javac>
@@ -102,14 +102,14 @@
         <antcall target="build"/>
     </target>
   	<target name = "build-war">
-  	   <war destfile = "build/dist/LeaveRequest.war" webxml = "WebContent/WEB-INF/web.xml">
+  	   <war destfile = "dist/LeaveRequest.war" webxml = "WebContent/WEB-INF/web.xml">
   	      <fileset dir = "WebContent/">
   	         <include name = "**/*.*"/>
   	      </fileset>
   	   	  <fileset dir="../LeaveRequest">
 	  	     <include name="**/*.java"/>
 	  	  </fileset>
-	  	  <classes dir="build/classes">
+	  	  <classes dir="bin">
 	  	      <include name="**/*.class"/>
 	  	  </classes>
   	   </war>

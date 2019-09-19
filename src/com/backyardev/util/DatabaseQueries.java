@@ -5,7 +5,6 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 
 public class DatabaseQueries {
 	
@@ -210,7 +209,7 @@ public class DatabaseQueries {
 							+ "EMPLOYEES.team_lead," 
 							+ "EMPLOYEES.project_manager "
 							+ "from COMPOFF_REQUEST, EMPLOYEES where COMPOFF_REQUEST.ecode = EMPLOYEES.ecode "
-							+ "and EPLOYEES.team_lead = ? " 
+							+ "and EMPLOYEES.team_lead = ? " 
 							+ "order by COMPOFF_REQUEST.request_timestamp desc";
 					pst = conn.prepareStatement(sql);
 					pst.setString(1, tl_name);
@@ -265,100 +264,86 @@ public class DatabaseQueries {
 		return returnBool;
 	}
 	
-	// Get individual leave on click of tr 
-	public static ArrayList<LeaveReqObject> getLeave(String id) {
-		ArrayList<LeaveReqObject> arrayList = new ArrayList<LeaveReqObject>();
+	// Get indivisual leave on click of tr 
+	public static ResultSet getLeave(String id) {
 		conn = createConnection();
 		try {
-			sql = "select * from LEAVE_REQUEST where id = ?";
+			sql = "SELECT LEAVE_REQUEST.id, "
+					+ "LEAVE_REQUEST.ecode, "
+					+ "LEAVE_REQUEST.leave_start_date, "
+					+ "LEAVE_REQUEST.leave_end_date, "
+					+ "LEAVE_REQUEST.number_of_days, "
+					+ "LEAVE_REQUEST.full_day_leave, "
+					+ "LEAVE_REQUEST.half_day_leave, "
+					+ "LEAVE_REQUEST.leave_type, "
+					+ "LEAVE_REQUEST.leave_desc, "
+					+ "LEAVE_STATUS.status, "
+					+ "EMPLOYEES.name, "
+					+ "EMPLOYEES.project, "
+					+ "EMPLOYEES.team_lead, "
+					+ "EMPLOYEES.project_manager "
+					+ "FROM LEAVE_REQUEST, LEAVE_STATUS, EMPLOYEES WHERE LEAVE_REQUEST.ecode = EMPLOYEES.ecode AND "
+					+ "LEAVE_REQUEST.id = LEAVE_STATUS.id AND "
+					+ "LEAVE_REQUEST.id = ? AND "
+					+ "LEAVE_REQUEST.ecode = EMPLOYEES.ecode order by leave_request_time desc";
 			pst = conn.prepareStatement(sql);
 			pst.setString(1, id);
 			rs = pst.executeQuery();
-			while (rs.next()) {
-				LeaveReqObject obj = new LeaveReqObject();
-				obj.setId(rs.getInt("id"));
-				obj.setEcode(rs.getString("ecode"));
-			//	obj.setName(rs.getString("name"));
-			//	obj.setProjectName(rs.getString("project_name"));
-				obj.setStartDate(rs.getString("leave_start_date"));
-				obj.setEndDate(rs.getString("leave_end_date"));
-				obj.setNumberOfDays(rs.getInt("number_of_days"));
-				obj.setLeaveType(rs.getString("leave_type"));
-				obj.setLeaveDesc(rs.getString("leave_desc"));
-				arrayList.add(obj);
-			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
-		return arrayList;
+		return rs;
 		
 	}
 	
 	// Get indivisual comp-off leave on click of tr
-	public static ArrayList<CompoffReqObject> getCompLeave(String id) {
-		ArrayList<CompoffReqObject> arrayList = new ArrayList<CompoffReqObject>();
+	public static ResultSet getCompLeave(String id) {
 		conn = createConnection();
 		try {
-			sql = "select  * from COMPOFF_REQUEST where id = ?";
+			sql = "select COMPOFF_REQUEST.id, "
+					+ "COMPOFF_REQUEST.ecode, "
+					+ "COMPOFF_REQUEST.comp_date, "
+					+ "COMPOFF_REQUEST.description, "
+					+ "COMPOFF_REQUEST.ticket_scr, "
+					+ "COMPOFF_REQUEST.night_shift, "
+					+ "COMPOFF_REQUEST.status, "
+					+ "EMPLOYEES.name,"
+					+ "EMPLOYEES.project,"
+					+ "EMPLOYEES.team_lead,"
+					+ "EMPLOYEES.project_manager "
+					+ "from COMPOFF_REQUEST, EMPLOYEES where COMPOFF_REQUEST.ecode = EMPLOYEES.ecode AND "
+					+ "COMPOFF_REQUEST.id = ?  "
+					+ "order by COMPOFF_REQUEST.request_timestamp desc";
 			pst = conn.prepareStatement(sql);
 			pst.setString(1, id);
 			rs = pst.executeQuery();
-			while (rs.next()) {
-				CompoffReqObject obj = new CompoffReqObject();
-				obj.setEcode(rs.getString("ecode"));
-				obj.setCompDate(rs.getString("comp_date"));
-				obj.setDesc(rs.getString("description"));
-				obj.setTicket(rs.getString("ticket_scr"));
-				obj.setNightShift(rs.getString("night_shift"));
-				obj.setStatus(rs.getString("status"));
-				arrayList.add(obj);
-			}
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		
-		return arrayList;
+		return rs;
 		
 	}
-//	
-//	
-//	// Get Comp-off dates for availing in Leave Form
-//	
-	
-	public static ArrayList<Date> getCompoffDates(String ecode) {
-		
-		System.out.println("Inside Dates Function");
-		System.out.println("Ecode: "+ecode);
 
+  // Get Comp-off dates for availing in Leave Form
+	public static ArrayList<Date> getCompoffDates(String ecode) {
 		ArrayList<Date> dates = new ArrayList<Date>();
 		sql = "select * from COMPOFF_REQUEST where ecode = ? ";
 		try {
-//			pst.clearBatch();
 			conn = createConnection();
-
 			pst =  conn.prepareStatement(sql);
-			System.out.println("Ecode: "+ecode);
 			pst.setString(1, ecode);
 			ResultSet rs = pst.executeQuery();
 			while(rs.next()) {
-				System.out.println(rs.getDate("comp_date"));
-
 				dates.add(rs.getDate("comp_date"));
 			}
 		} catch(Exception ex) {
 			ex.printStackTrace();
-		}
-		for(int i=0; i<dates.size(); i++) {
-			//System.out.println("Dates in arraylist: "+ dates.get(i));
-		}
+    }
 		return dates;
 	}
-//	
-//	
-	
-	
-	
+
 	// Close connection
 	public static void closeConnection() {
 		

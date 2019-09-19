@@ -9,8 +9,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.backyardev.util.DatabaseQueries;
-
 /**
  * Servlet implementation class CompDisplayServlet
  */
@@ -21,15 +19,6 @@ public class CompDisplayServlet extends HttpServlet {
 		HttpSession session = req.getSession(false);
 		try{
 			if(session.getAttribute("ecode") != null) {
-				
-				String url = req.getRequestURI().replace("/LeaveRequest/comp/", "");
-				String  newUrl  =  url.replace("static/loading.gif", "");
-				System.out.println(newUrl);
-				DatabaseQueries databaseQuery = new DatabaseQueries();
-				databaseQuery.getCompLeave(newUrl);
-			
-				
-				
 				RequestDispatcher rd = req.getRequestDispatcher("/WEB-INF/compDisplay.jsp");
 				rd.forward(req, resp);
 			} else {
@@ -40,7 +29,6 @@ public class CompDisplayServlet extends HttpServlet {
 		}
 	}
 	
-
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 	}

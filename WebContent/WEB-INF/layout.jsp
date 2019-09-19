@@ -49,8 +49,8 @@
 		</nav>
 		<div class="sidenav">
 			<div class='sidenav-link'>
-				<a href="/LeaveRequest/portal" id="all-req">My Leave Requests</a>
-				<a href="/LeaveRequest/comp" id="all-comp">My Comp-Off Requests</a>
+				<a href="/LeaveRequest/portal" id="all-req">Leave Requests</a>
+				<a href="/LeaveRequest/comp" id="all-comp">Comp-Off Requests</a>
 				<a href="/LeaveRequest/leave" id="new-req">New Leave Request</a>	
 				<a href="/LeaveRequest/compoff" id="comp-req">New Comp-Off Request</a>
 			</div>
