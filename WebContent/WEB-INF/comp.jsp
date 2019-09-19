@@ -9,15 +9,16 @@
          <th scope="col" >Ecode <i class="fas fa-sort ml-1" onclick="sort()"></i></th>
          <th scope="col">Name <i class="fas fa-sort ml-1" onclick="sort()"></i></th>
          <th scope="col">TL <i class="fas fa-sort ml-1" onclick="sort()"></i></th>
-          <th scope="col">Ticket/Scr <i class="fas fa-sort ml-1" onclick="sort()"></i></th>
-          <th scope="col">Date <i class="fas fa-sort ml-1" onclick="sort()"></i></th>
-          <th scope="col">Night Shift <i class="fas fa-sort ml-1" onclick="sort()"></i></th>
+         <th scope="col">Ticket/Scr <i class="fas fa-sort ml-1" onclick="sort()"></i></th>
+         <th scope="col">Date <i class="fas fa-sort ml-1" onclick="sort()"></i></th>
+         <th scope="col">Night Shift <i class="fas fa-sort ml-1" onclick="sort()"></i></th>
         
-		 <% if(session.getAttribute("desg").equals("Developer")){ %>
-         <th scope="col">Status <i class="fas fa-sort ml-1" onclick="sort()"> </i></th>
+		     <% if(session.getAttribute("desg").equals("Developer")){ %>
+            <th scope="col">Status <i class="fas fa-sort ml-1" onclick="sort()"> </i></th>
          <% } else { %>
-         <th scope="col">Action <i class="fas fa-sort ml-1" onclick="sort()"> </i></th>
+            <th scope="col">Action <i class="fas fa-sort ml-1" onclick="sort()"> </i></th>
          <% } %>
+
       </tr>
    </thead>
    <tbody>
@@ -67,6 +68,15 @@
 <script src="/LeaveRequest/static/portalJs.js"></script>
 <script src="/LeaveRequest/static/compDisplayJs.js"></script>
 <script>
+	$(document).ready(function() {
+		$('#all-comp').css('color', '#f1f1f1');
+		$('#all-comp').css('font-size', '1.2rem');
+		$('#data-table').DataTable({
+			"ordering": false,
+			"pagingType": "full_numbers"
+		},
+		);
+	});
 </script>
 </body>
 </html>

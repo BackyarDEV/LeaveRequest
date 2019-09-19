@@ -130,7 +130,6 @@ this.leaveDesc = leaveDesc;
 }
 
 public String getDayLeave() {
-	int   dayLeave = fullDayLeave;
 	String stringDayLeave = String.valueOf(fullDayLeave);
 	if(stringDayLeave.equals("1")){
 		stringDayLeave = "Full Day";
@@ -138,7 +137,7 @@ public String getDayLeave() {
 	else if(stringDayLeave.equals("0")){
 		stringDayLeave = "Half Day";
 	}	
-return stringDayLeave;
+	return stringDayLeave;
 }
 
 public void setDayLeave(int fullDayLeave) {

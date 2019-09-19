@@ -87,6 +87,11 @@ table {
 	font-size: 14px;
 	border-collapse: collapse;
 }
+
+tbody{
+	cursor: pointer;
+}
+
 .rm-border{
 	border:none;
 }
@@ -196,14 +201,18 @@ div.scrollable {
 	
 }
 
-.text-pending{
-	color:#3c6382;
+  .text-pending{
+    color:#3c6382;
+  }
+  .text-approved{
+    color:#20bf6b;
+  }
+  .text-rejected{
+    color:#e55039;
+  }
+  
+  .form-control[readonly] {
+    background-color: #ffffff;
+    opacity: 1;
 }
-.text-approved{
-	color:#20bf6b;
-}
-.text-rejected{
-	color:#e55039;
-}
-
 

@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 
 public class DatabaseQueries {
 	
@@ -105,7 +104,7 @@ public class DatabaseQueries {
 		}
 		return returnBool;
 	}
-
+  
 	// Get table for leave requests
 	public static ResultSet getLeaveTable(String desg, String tl_name, String ecode) {
 			
@@ -209,7 +208,7 @@ public class DatabaseQueries {
 							+ "EMPLOYEES.team_lead," 
 							+ "EMPLOYEES.project_manager "
 							+ "from COMPOFF_REQUEST, EMPLOYEES where COMPOFF_REQUEST.ecode = EMPLOYEES.ecode "
-							+ "and EPLOYEES.team_lead = ? " 
+							+ "and EMPLOYEES.team_lead = ? " 
 							+ "order by COMPOFF_REQUEST.request_timestamp desc";
 					pst = conn.prepareStatement(sql);
 					pst.setString(1, tl_name);
@@ -264,34 +263,8 @@ public class DatabaseQueries {
 		return returnBool;
 	}
 	
-	// Get Ecode from leave_request table
-	public static String getEcode(String id) {
-		conn = createConnection();
-		String ecode = null;
-		sql = "SELECT ecode from LEAVE_REQUEST where id = ? ";
-		try {
-			pst = conn.prepareStatement(sql);
-			pst.setString(1, id);
-			rs = pst.executeQuery();
-			
-			while(rs.next()) {
-				ecode = rs.getString("ecode");
-				
-			}
-			
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		return ecode;
-		
-	}
-	
 	// Get indivisual leave on click of tr 
-	public static ArrayList<LeaveReqObject> getLeave(String id) {
-		ArrayList<LeaveReqObject> arrayList = new ArrayList<LeaveReqObject>();
-		String ecode = getEcode(id);
+	public static ResultSet getLeave(String id) {
 		conn = createConnection();
 		try {
 			sql = "SELECT LEAVE_REQUEST.id, "
@@ -311,39 +284,19 @@ public class DatabaseQueries {
 					+ "FROM LEAVE_REQUEST, LEAVE_STATUS, EMPLOYEES WHERE LEAVE_REQUEST.ecode = EMPLOYEES.ecode AND "
 					+ "LEAVE_REQUEST.id = LEAVE_STATUS.id AND "
 					+ "LEAVE_REQUEST.id = ? AND "
-					+ " LEAVE_REQUEST.ecode = ? order by leave_request_time desc";
+					+ "LEAVE_REQUEST.ecode = EMPLOYEES.ecode order by leave_request_time desc";
 			pst = conn.prepareStatement(sql);
 			pst.setString(1, id);
-			pst.setString(2, ecode);
 			rs = pst.executeQuery();
-			while (rs.next()) {
-				LeaveReqObject obj = new LeaveReqObject();
-				obj.setId(rs.getInt("id"));
-				obj.setStatus(rs.getString("status"));
-				obj.setEcode(rs.getString("ecode"));
-				obj.setName(rs.getString("name"));
-				obj.setTeamLead(rs.getString("team_lead"));
-				obj.setProjectManager(rs.getString("project_manager"));
-				obj.setProjectName(rs.getString("project"));
-				obj.setStartDate(rs.getString("leave_start_date"));
-				obj.setEndDate(rs.getString("leave_end_date"));
-				obj.setNumberOfDays(rs.getInt("number_of_days"));
-				obj.setLeaveType(rs.getString("leave_type"));
-				obj.setLeaveDesc(rs.getString("leave_desc"));
-				arrayList.add(obj);
-			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
-		return arrayList;
+		return rs;
 		
 	}
 	
 	// Get indivisual comp-off leave on click of tr
-	public static ArrayList<CompoffReqObject> getCompLeave(String id) {
-		ArrayList<CompoffReqObject> arrayList = new ArrayList<CompoffReqObject>();
-		String ecode = getEcode(id);
+	public static ResultSet getCompLeave(String id) {
 		conn = createConnection();
 		try {
 			sql = "select COMPOFF_REQUEST.id, "
@@ -363,31 +316,15 @@ public class DatabaseQueries {
 			pst = conn.prepareStatement(sql);
 			pst.setString(1, id);
 			rs = pst.executeQuery();
-			while (rs.next()) {
-				CompoffReqObject obj = new CompoffReqObject();
-				obj.setId(rs.getInt("id"));
-				obj.setEcode(rs.getString("ecode"));
-				obj.setCompDate(rs.getString("comp_date"));
-				obj.setDesc(rs.getString("description"));
-				obj.setTicket(rs.getString("ticket_scr"));
-				obj.setNightShift(rs.getString("night_shift"));
-				obj.setStatus(rs.getString("status"));
-				obj.setName(rs.getString("name"));
-				obj.setProject(rs.getString("project"));
-				obj.setTeamLead(rs.getString("team_lead"));
-				obj.setManager(rs.getString("project_manager"));
-				
-				arrayList.add(obj);
-			}
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		
-		return arrayList;
+		return rs;
 		
 	}
-	
-	
+
 	// Close connection
 	public static void closeConnection() {
 		
@@ -402,7 +339,5 @@ public class DatabaseQueries {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-	
-		
 	}
 }

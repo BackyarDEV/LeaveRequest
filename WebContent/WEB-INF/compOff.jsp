@@ -107,7 +107,7 @@
 						data: form.serialize(),
 						success: function(data){
 							if (data == "true"){
-								showAlert('Post Success!', 'alert-success');
+								window.location.replace("comp");
 							} else if(data == "null"){
 								showAlert('All Fields are compulsory!', 'alert-warning');
 							}
