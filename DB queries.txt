@@ -9,3 +9,7 @@ alter table LEAVE_REQUEST drop column name;
 alter table LEAVE_REQUEST drop column team_lead;
 alter table LEAVE_REQUEST drop column project_manager;
 alter table LEAVE_REQUEST drop column project_name;
+
+3)Alter Leave Request table : // 19/09/2019
+ALTER TABLE LEAVE_REQUEST ADD avail_comp int(11) default 0;
+ALTER TABLE LEAVE_REQUEST ADD comp_id int(11)
