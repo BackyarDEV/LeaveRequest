@@ -1,6 +1,7 @@
 package com.backyardev.util;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -13,7 +14,7 @@ public class DatabaseQueries {
 	private static String sql = "";
 	
 	//Get Database connection
-	private static Connection createConnection() {
+	public static Connection createConnection() {
 		
 		try {
 			DatabaseConnection dc = DatabaseConnection.getInstance();
@@ -24,7 +25,7 @@ public class DatabaseQueries {
 		return conn;
 	}
 	
-	// Get Auth fot login
+	// Get Auth for login
 	public static ResultSet getAuth(String email) {
 		
 		conn = createConnection();
@@ -323,6 +324,24 @@ public class DatabaseQueries {
 		
 		return rs;
 		
+	}
+
+  // Get Comp-off dates for availing in Leave Form
+	public static ArrayList<Date> getCompoffDates(String ecode) {
+		ArrayList<Date> dates = new ArrayList<Date>();
+		sql = "select * from COMPOFF_REQUEST where ecode = ? ";
+		try {
+			conn = createConnection();
+			pst =  conn.prepareStatement(sql);
+			pst.setString(1, ecode);
+			ResultSet rs = pst.executeQuery();
+			while(rs.next()) {
+				dates.add(rs.getDate("comp_date"));
+			}
+		} catch(Exception ex) {
+			ex.printStackTrace();
+    }
+		return dates;
 	}
 
 	// Close connection

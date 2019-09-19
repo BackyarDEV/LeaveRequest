@@ -79,6 +79,11 @@ public class LeaveRequestService {
 		try {
 			if(DatabaseQueries.insertCompoffRequest(obj)) {
 				returnString = "true";	
+				if (CompoffMail.prepareMail(obj)){
+					returnString = "true";
+				} else {
+					returnString = "mail_not_sent";
+				}
 			} else {
 				returnString = "insertion_error";
 			}
