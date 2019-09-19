@@ -79,6 +79,11 @@ public class LeaveRequestService {
 		try {
 			if(DatabaseQueries.insertCompoffRequest(obj)) {
 				returnString = "true";	
+				if (CompoffMail.prepareMail(obj)){
+					returnString = "true";
+				} else {
+					returnString = "mail_not_sent";
+				}
 			} else {
 				returnString = "insertion_error";
 			}
@@ -154,7 +159,7 @@ public class LeaveRequestService {
 				obj.setDesc(rs.getString("description"));
 				obj.setProject(rs.getString("project"));
 				obj.setManager(rs.getString("project_manager"));
-				obj.setNightShift(Integer.parseInt(rs.getString("night_shift")));
+				obj.setNightShift(rs.getString("night_shift"));
 				obj.setTicket(rs.getString("ticket_scr"));
 				al.add(obj);
 			}

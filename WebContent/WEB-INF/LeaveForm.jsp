@@ -1,4 +1,12 @@
+<%@page import="com.backyardev.util.DatabaseQueries"%>
+<%@page import=" java.util.ArrayList"%>
+
 <jsp:include page="/WEB-INF/layout.jsp"></jsp:include>
+		<%
+			String  ecode =  session.getAttribute("ecode").toString() ;
+		 	ArrayList dates = DatabaseQueries.getCompoffDates(ecode);
+		%>	
+		
 		<div class="alert" style="display: none; width: 65%; margin-left: auto; margin-right: auto;" role="alert"></div>		
 		<form class="form leave-form" method="post" action="leave">
 				<h3>Leave Request</h3><br>
@@ -84,9 +92,28 @@
 					<label for="leave-desc">Leave Description/Reason</label>
 					<textarea class="form-control" required id="leave-desc" rows="3" placeholder="Brief Description" name="leave-desc"  data-validation="length"  data-validation-length="5-140" data-validation-error-msg="Leave description must be between 5-140 characters"></textarea>
 				</div>
-				<button type="submit" class="btn btn-primary">Submit</button>
+				<div class="form-row">
+					<div class="col-sm-6">
+						<div class="form-group">
+				             <input type="checkbox" id="avail-compoff" value="avail-compoff">Avail Comp-off<br>	
+						</div>
+					</div>
+				
+					<div class="col-sm-6">
+						<select disabled class="form-control" id="select-date" name="select-date" >
+								<option selected value="null" disabled>-Select an option-</option>
+								<% for (int i=0;i<dates.size();i++){ %>
+								<option><%= dates.get(i) %></option>
+								<% } %>
+							</select>
+					</div>
+		        </div>
+		        <div>
+				<button  type="submit" class="btn btn-primary">Submit</button>
+				</div>		
 			</form>
-			<div class="modal fade" id="submitFormModal" tabindex="-1" role="dialog" aria-labelledby="submitFormModalTitle" aria-hidden="true">
+			
+		<div class="modal fade" id="submitFormModal" tabindex="-1" role="dialog" aria-labelledby="submitFormModalTitle" aria-hidden="true">
 			    <div class="modal-dialog modal-dialog-centered" role="document">
 			        <div class="modal-content">
 			            <div class="modal-header">
@@ -108,8 +135,28 @@
 			        </div>
 			    </div>
 			</div>
+			
+			
+			
+			
+			
 	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.3.26/jquery.form-validator.min.js"></script>
 	<script src="/LeaveRequest/static/formJs.js"></script>
-
+	<script>
+	    $(document).ready(function() {
+	    	$('#avail-compoff').change(function() 
+	    			  {
+	    			    if(this.checked == true)
+	    			    {
+	    			         $("#select-date").attr("disabled",false);
+	    			    }
+	    			    else
+	    			  {
+	    			    	$("#select-date").attr("disabled",true);
+	    			  }
+	    			  });      
+	    });
+	</script>	
+	
 	</body>
 </html>

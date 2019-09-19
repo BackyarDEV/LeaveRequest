@@ -1,6 +1,7 @@
 package com.backyardev.util;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -14,7 +15,7 @@ public class DatabaseQueries {
 	private static String sql = "";
 	
 	//Get Database connection
-	private static Connection createConnection() {
+	public static Connection createConnection() {
 		
 		try {
 			DatabaseConnection dc = DatabaseConnection.getInstance();
@@ -25,7 +26,7 @@ public class DatabaseQueries {
 		return conn;
 	}
 	
-	// Get Auth fot login
+	// Get Auth for login
 	public static ResultSet getAuth(String email) {
 		
 		conn = createConnection();
@@ -264,7 +265,7 @@ public class DatabaseQueries {
 		return returnBool;
 	}
 	
-	// Get indivisual leave on click of tr 
+	// Get individual leave on click of tr 
 	public static ArrayList<LeaveReqObject> getLeave(String id) {
 		ArrayList<LeaveReqObject> arrayList = new ArrayList<LeaveReqObject>();
 		conn = createConnection();
@@ -320,6 +321,43 @@ public class DatabaseQueries {
 		return arrayList;
 		
 	}
+//	
+//	
+//	// Get Comp-off dates for availing in Leave Form
+//	
+	
+	public static ArrayList<Date> getCompoffDates(String ecode) {
+		
+		System.out.println("Inside Dates Function");
+		System.out.println("Ecode: "+ecode);
+
+		ArrayList<Date> dates = new ArrayList<Date>();
+		sql = "select * from COMPOFF_REQUEST where ecode = ? ";
+		try {
+//			pst.clearBatch();
+			conn = createConnection();
+
+			pst =  conn.prepareStatement(sql);
+			System.out.println("Ecode: "+ecode);
+			pst.setString(1, ecode);
+			ResultSet rs = pst.executeQuery();
+			while(rs.next()) {
+				System.out.println(rs.getDate("comp_date"));
+
+				dates.add(rs.getDate("comp_date"));
+			}
+		} catch(Exception ex) {
+			ex.printStackTrace();
+		}
+		for(int i=0; i<dates.size(); i++) {
+			//System.out.println("Dates in arraylist: "+ dates.get(i));
+		}
+		return dates;
+	}
+//	
+//	
+	
+	
 	
 	// Close connection
 	public static void closeConnection() {
