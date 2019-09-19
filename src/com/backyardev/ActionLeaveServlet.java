@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.backyardev.util.DatabaseConnection;
+import com.backyardev.util.DatabaseQueries;
 
 /**
  * Servlet implementation class ActionLeaveServlet
@@ -38,10 +39,11 @@ public class ActionLeaveServlet extends HttpServlet {
 			status = -1;
 		}
 		
+		
 		try {
 			DatabaseConnection db = DatabaseConnection.getInstance();
-			conn = db.getConnection();	
-			sql = "UPDATE LEAVE_STATUS SET STATUS = "+ status + " WHERE id =  " + id ;
+			conn = db.getConnection();
+			sql = "UPDATE LEAVE_STATUS SET STATUS  = "+ status + " WHERE id =  " + id ;
 			pst = conn.prepareStatement(sql);
 			pst.execute();
 			

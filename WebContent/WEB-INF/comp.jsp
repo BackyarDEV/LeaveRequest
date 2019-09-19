@@ -6,6 +6,7 @@
 <table class="table hover nowrap  mt-5"  id="data-table">
    <thead>
       <tr>
+      <th scope="col" >Leave ID <i class="fas fa-sort ml-1" onclick="sort()"></i></th>
          <th scope="col" >Ecode <i class="fas fa-sort ml-1" onclick="sort()"></i></th>
          <th scope="col">Name <i class="fas fa-sort ml-1" onclick="sort()"></i></th>
          <th scope="col">TL <i class="fas fa-sort ml-1" onclick="sort()"></i></th>
@@ -30,6 +31,7 @@
       %>
       <% for(int i = 0; i < al.size(); i+=1) { %>
       <tr  id=" <%=al.get(i).getId()%>" class="targetRow">
+       	<td><%=al.get(i).getId() %></td>
          <td><%=al.get(i).getEcode() %></td>
          <td><%=al.get(i).getName() %></td>
          <td><%=al.get(i) .getTeamLead()%></td>
@@ -73,8 +75,9 @@
 		$('#all-comp').css('font-size', '1.2rem');
 		$('#data-table').DataTable({
 			"ordering": false,
-			"pagingType": "full_numbers"
-		},
+			"pagingType": "full_numbers",
+			 fixedHeader: true
+		}
 		);
 	});
 </script>

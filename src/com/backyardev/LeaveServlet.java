@@ -27,6 +27,13 @@ public class LeaveServlet extends HttpServlet{
 		String leaveType = req.getParameter("leave-type");
 		String dayLeave = req.getParameter("day-leave");
 		String leaveDesc = req.getParameter("leave-desc");
+		String availComp = req.getParameter("avail-comp");
+		String compId = req.getParameter("comp-id");
+
+		System.out.println("Avail comp:  "+ availComp);
+		System.out.println("Comp Id:  "+ compId);
+		System.out.println("dayLeave:  "+ dayLeave);
+		
 		int numberOfDays = Integer.parseInt(req.getParameter("number-days"));
 		PrintWriter out = res.getWriter();		
 
@@ -49,6 +56,15 @@ public class LeaveServlet extends HttpServlet{
 			} else {
 				obj.setHalfDayLeave(1);
 			}
+			try {
+				if (availComp.equals("comp-off")) {
+					obj.setAvailComp(1);
+					obj.setCompId(compId);
+				} 
+			}catch(NullPointerException e) {
+				
+			}
+			
 			returnString = LeaveRequestService.leaveService(obj);
 			out.write(returnString);
 		}

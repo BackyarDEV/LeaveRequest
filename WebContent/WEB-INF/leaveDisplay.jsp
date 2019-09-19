@@ -90,10 +90,15 @@
 						</div>
 					</div>
 				</div>
-				<div>
-					
-				<label for="day-leave">Half Day/ Full Day</label>
-				<input class="form-control"  readonly type="text" value="<%= obj.getDayLeave() %>" name="day-leave"/>
+				<div class="form-row">
+				<div  class="col-sm-6">		
+					<label for="day-leave">Half Day/ Full Day</label>
+					<input class="form-control"  readonly type="text" value="<%= obj.getDayLeave() %>" name="day-leave"/>
+				</div>
+				<div  class="col-sm-6">		
+					<label for="day-leave">Availing against Comp-off</label>
+					<input class="form-control"  readonly type="text" value="<%= obj.getCompId() %>" name="day-leave"/>
+				</div>
 				</div>
 				<br>
 				<div class="form-group">

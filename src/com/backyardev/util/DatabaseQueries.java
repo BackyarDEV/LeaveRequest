@@ -1,9 +1,11 @@
 package com.backyardev.util;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class DatabaseQueries {
 	
@@ -13,7 +15,7 @@ public class DatabaseQueries {
 	private static String sql = "";
 	
 	//Get Database connection
-	private static Connection createConnection() {
+	public static Connection createConnection() {
 		
 		try {
 			DatabaseConnection dc = DatabaseConnection.getInstance();
@@ -24,7 +26,7 @@ public class DatabaseQueries {
 		return conn;
 	}
 	
-	// Get Auth fot login
+	// Get Auth for login
 	public static ResultSet getAuth(String email) {
 		
 		conn = createConnection();
@@ -39,6 +41,7 @@ public class DatabaseQueries {
 		return rs;
 	}
 	
+	
 	// InsertLeaveRequest - Inserts leaves in LEAVE_REQUEST table
 	public static boolean insertLeaveRequest(LeaveReqObject obj) {
 		
@@ -47,10 +50,10 @@ public class DatabaseQueries {
 		boolean returnBool = false;
 		try {
 			if (obj.getHalfDayLeave() == 1) {
-				sql = "insert into LEAVE_REQUEST(ecode,leave_start_date, leave_end_date, leave_type, leave_desc, number_of_days, half_day_leave) values(?,?,?,?,?,  " + numberOfDays + " ," + 1 + ");";
+				sql = "insert into LEAVE_REQUEST(ecode,leave_start_date, leave_end_date, leave_type, leave_desc, number_of_days, half_day_leave,avail_comp,comp_id) values(?,?,?,?,?,  " + numberOfDays + " ," + 1 + ",?,?"+");";
 				pst = conn.prepareStatement(sql);
 			} else {
-				sql = "insert into LEAVE_REQUEST(ecode, leave_start_date, leave_end_date, leave_type, leave_desc, number_of_days, full_day_leave) values(?,?,?,?,?," + numberOfDays + " ," + 1 + ");";
+				sql = "insert into LEAVE_REQUEST(ecode, leave_start_date, leave_end_date, leave_type, leave_desc, number_of_days, full_day_leave,avail_comp,comp_id) values(?,?,?,?,?," + numberOfDays + " ," + 1 +  ",?,?"+");";
 				pst = conn.prepareStatement(sql);
 			}
 			pst.setString(1, obj.getEcode());
@@ -58,6 +61,8 @@ public class DatabaseQueries {
 			pst.setString(3, obj.getEndDate());
 			pst.setString(4, obj.getLeaveType());
 			pst.setString(5, obj.getLeaveDesc());
+			pst.setInt(6, obj.getAvailComp());
+			pst.setString(7, obj.getCompId());
 			
 			boolean execute = pst.execute();
 			if(!execute) {
@@ -88,6 +93,24 @@ public class DatabaseQueries {
 			ex.printStackTrace();
 		}
 		return id;
+	}
+	
+	//Get Comp-off Leave ID
+	public static int getCompLeaveID(int id) {
+		int compId = 0;
+		sql = "select comp_id from LEAVE_REQUEST  where id = ? ";
+		try {
+			pst.clearBatch();
+			pst =  conn.prepareStatement(sql);
+			pst.setInt(1, id);
+			ResultSet rs = pst.executeQuery();
+			if(rs.next()) {
+				compId = rs.getInt("comp_id");
+			}
+		} catch(Exception ex) {
+			ex.printStackTrace();
+		}
+		return compId;
 	}
 	
 	// Set Leave Status
@@ -275,6 +298,7 @@ public class DatabaseQueries {
 					+ "LEAVE_REQUEST.full_day_leave, "
 					+ "LEAVE_REQUEST.half_day_leave, "
 					+ "LEAVE_REQUEST.leave_type, "
+					+ "LEAVE_REQUEST.comp_id, "
 					+ "LEAVE_REQUEST.leave_desc, "
 					+ "LEAVE_STATUS.status, "
 					+ "EMPLOYEES.name, "
@@ -323,6 +347,24 @@ public class DatabaseQueries {
 		
 		return rs;
 		
+	}
+
+	// Get Comp-off dates for availing in Leave Form
+	public static ArrayList<Integer> getCompoffDates(String ecode) {
+		ArrayList<Integer> leaveID = new ArrayList<Integer>();
+		sql = "select * from COMPOFF_REQUEST where ecode = ? order by COMPOFF_REQUEST.request_timestamp desc ";
+		try {
+			conn = createConnection();
+			pst =  conn.prepareStatement(sql);
+			pst.setString(1, ecode);
+			ResultSet rs = pst.executeQuery();
+			while(rs.next()) {
+				leaveID.add(rs.getInt("id"));
+			}
+		} catch(Exception ex) {
+			ex.printStackTrace();
+    }
+		return leaveID;
 	}
 
 	// Close connection

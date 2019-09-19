@@ -16,6 +16,10 @@ private int id;
 private int numberOfDays;
 private int halfDayLeave=0; 
 private int fullDayLeave=0;
+private int availComp =0;
+private String  compId = null;
+String stringDayLeave = null;
+
 
 public int getId() {
 return id;
@@ -130,18 +134,34 @@ this.leaveDesc = leaveDesc;
 }
 
 public String getDayLeave() {
-	String stringDayLeave = String.valueOf(fullDayLeave);
-	if(stringDayLeave.equals("1")){
+	if(fullDayLeave==1){
 		stringDayLeave = "Full Day";
 	}
-	else if(stringDayLeave.equals("0")){
+	else{
 		stringDayLeave = "Half Day";
 	}	
 	return stringDayLeave;
 }
 
 public void setDayLeave(int fullDayLeave) {
-this.fullDayLeave = fullDayLeave;
+	this.fullDayLeave = fullDayLeave;
+}
+
+
+public int getAvailComp() {
+	return availComp;
+}
+
+public void setAvailComp(int num ) {
+	this.availComp = num;
+}
+
+public String getCompId() {
+	return compId;
+}
+
+public void setCompId(String compId2 ) {
+	this.compId = compId2;
 }
 
 }

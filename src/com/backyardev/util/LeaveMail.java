@@ -94,7 +94,7 @@ public class LeaveMail {
 		boolean returnBool = false;
 		Properties prop = new Properties();
 		
-		prop.load(new FileInputStream("/home/mayanksinha/leave-servlet/servlet.properties"));
+		prop.load(new FileInputStream("/home/aakashgautam/leave-servlet/servlet.properties"));
 		String EMAIL_U = prop.getProperty("EMAIL_U");
 		String EMAIL_P = prop.getProperty("EMAIL_P");
 		
