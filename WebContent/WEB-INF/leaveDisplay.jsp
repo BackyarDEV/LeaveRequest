@@ -1,6 +1,8 @@
 <%@page import="com.backyardev.util.LeaveRequestService"%>
+<%@page import="com.backyardev.util.DatabaseQueries"%>
 <%@page import=" java.util.ArrayList"%>
 <%@page import=" java.sql.ResultSet" %>
+<%@page import="com.backyardev.util.CompoffReqObject"%>
 <%@page import=" com.backyardev.util.LeaveReqObject"%>
 <jsp:include page="/WEB-INF/layout.jsp"></jsp:include>
       	<% 
@@ -8,7 +10,10 @@
 	    	String url = (String)request.getAttribute("javax.servlet.forward.request_uri");
       		String newUrl = url.replace("/LeaveRequest/leave/","");
       		String updatedUrl = newUrl.replace("static/loading.gif", "");
+      		int id = Integer.parseInt(updatedUrl);
       		LeaveReqObject obj = LeaveRequestService.getLeave(updatedUrl);
+      		ArrayList<CompoffReqObject> cobj = DatabaseQueries.getCompLeaveDate(id);
+
       		boolean no_comp = false;
     	 	if(obj.getName() == null){%>
     	 		<h4 class="text-center"><b>The page you requested doesn't exist.</b></h4>
@@ -95,10 +100,12 @@
 					<label for="day-leave">Half Day/ Full Day</label>
 					<input class="form-control"  readonly type="text" value="<%= obj.getDayLeave() %>" name="day-leave"/>
 				</div>
+				 <% for(int i = 0; i < cobj.size(); i+=1) { %>
 				<div  class="col-sm-6">		
 					<label for="day-leave">Availing against Comp-off</label>
-					<input class="form-control"  readonly type="text" value="<%= obj.getCompId() %>" name="day-leave"/>
+					<input class="form-control"  readonly type="text" value="<%= cobj.get(i).getCompDate()%>" name="day-leave"/>
 				</div>
+				 <% } %>
 				</div>
 				<br>
 				<div class="form-group">

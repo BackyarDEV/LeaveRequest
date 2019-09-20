@@ -12,12 +12,14 @@ private String endDate;
 private String leaveType;
 private String leaveDesc; 
 private String status;
+private String  compId;
+private String compDate;
 private int id;
 private int numberOfDays;
 private int halfDayLeave=0; 
 private int fullDayLeave=0;
 private int availComp =0;
-private String  compId = null;
+
 String stringDayLeave = null;
 
 
@@ -162,6 +164,14 @@ public String getCompId() {
 
 public void setCompId(String compId2 ) {
 	this.compId = compId2;
+}
+
+public String getCompDate() {
+	return compDate;
+}
+
+public void setCompDate(String compDate ) {
+	this.compDate = compDate;
 }
 
 }

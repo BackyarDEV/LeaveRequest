@@ -1,10 +1,12 @@
 <%@page import="com.backyardev.util.DatabaseQueries"%>
 <%@page import=" java.util.ArrayList"%>
+<%@page import=" java.util.List"%>
+<%@page import="com.backyardev.util.CompoffReqObject"%>
 
 <jsp:include page="/WEB-INF/layout.jsp"></jsp:include>
 		<%
 			String  ecode =  session.getAttribute("ecode").toString() ;
-		 	ArrayList dates = DatabaseQueries.getCompoffDates(ecode);
+		 	ArrayList<CompoffReqObject> obj =  DatabaseQueries.getCompoffDates(ecode);
 		%>	
 		
 		<div class="alert" style="display: none; width: 65%; margin-left: auto; margin-right: auto;" role="alert"></div>		
@@ -95,15 +97,15 @@
 				<div class="form-row">
 					<div class="col-sm-6">
 						<div class="form-group">
-				             <input type="checkbox"  id="avail-compoff"  name="avail-comp" value="comp-off">Avail Comp-Off<br>	
+				             <input type="checkbox"  id="avail-compoff"  name="avail-comp" value="comp-off"> Avail Comp-Off<br>	
 						</div>
 					</div>
 				
 					<div class="col-sm-6">
 						<select disabled class="form-control" id="select-date" name="comp-id" >
 								<option selected value="null" disabled>-Select an option-</option>
-								<% for (int i=0;i<dates.size();i++){ %>
-								<option value="<%= dates.get(i) %>"><%= dates.get(i) %></option>
+								<% for (int i=0;i<obj.size();i++){ %>
+								<option value="<%= obj.get(i).getId() %>"><%= obj.get(i).getCompDate() %></option>
 								<% } %>
 							</select>
 					</div>

@@ -95,22 +95,52 @@ public class DatabaseQueries {
 		return id;
 	}
 	
-	//Get Comp-off Leave ID
-	public static int getCompLeaveID(int id) {
-		int compId = 0;
-		sql = "select comp_id from LEAVE_REQUEST  where id = ? ";
+	//Get Comp-off Leave ID from Leave_Requests
+	public static int getCompId(int  id) {
+		conn = createConnection();
+		int  compId = 0;
+		sql = "SELECT comp_id from LEAVE_REQUEST where id = ? ";
+		try {
+			pst = conn.prepareStatement(sql);
+			pst.setInt(1, id);
+			rs = pst.executeQuery();
+			
+			while(rs.next()) {
+				compId = rs.getInt("comp_id");
+				
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return compId;
+		
+	}
+	
+	//Get Comp-off  date from Compoff_Requests
+	public static ArrayList<CompoffReqObject> getCompLeaveDate(int id) {
+		String compDate = null;
+		int compId = getCompId(id);
+		ArrayList<CompoffReqObject> al = new ArrayList<>();
+		sql = "select comp_date from COMPOFF_REQUEST  where id = ? ";
 		try {
 			pst.clearBatch();
 			pst =  conn.prepareStatement(sql);
-			pst.setInt(1, id);
+			pst.setInt(1, compId);
 			ResultSet rs = pst.executeQuery();
 			if(rs.next()) {
-				compId = rs.getInt("comp_id");
+				CompoffReqObject obj = new CompoffReqObject();
+				compDate = rs.getString("comp_date");
+				obj.setCompDate(rs.getString("comp_date"));
+				al.add(obj);
 			}
 		} catch(Exception ex) {
 			ex.printStackTrace();
 		}
-		return compId;
+
+		return al;
 	}
 	
 	// Set Leave Status
@@ -350,21 +380,27 @@ public class DatabaseQueries {
 	}
 
 	// Get Comp-off dates for availing in Leave Form
-	public static ArrayList<Integer> getCompoffDates(String ecode) {
-		ArrayList<Integer> leaveID = new ArrayList<Integer>();
+	public static  ArrayList<CompoffReqObject> getCompoffDates(String ecode) {
+		ArrayList<CompoffReqObject> al = new ArrayList<>();
 		sql = "select * from COMPOFF_REQUEST where ecode = ? order by COMPOFF_REQUEST.request_timestamp desc ";
 		try {
 			conn = createConnection();
 			pst =  conn.prepareStatement(sql);
 			pst.setString(1, ecode);
 			ResultSet rs = pst.executeQuery();
+			
 			while(rs.next()) {
-				leaveID.add(rs.getInt("id"));
+				CompoffReqObject obj = new CompoffReqObject();
+				obj.setId(rs.getInt("id"));
+				obj.setCompDate(rs.getString("comp_date"));
+				al.add(obj);
 			}
+			System.out.println("rs: "+ rs);
+	
 		} catch(Exception ex) {
 			ex.printStackTrace();
     }
-		return leaveID;
+		return al;
 	}
 
 	// Close connection

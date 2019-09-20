@@ -9,9 +9,10 @@
       	String url = (String)request.getAttribute("javax.servlet.forward.request_uri");
 		String updatedUrl = url.replace("/LeaveRequest/comp/","");
 	 	CompoffReqObject obj = LeaveRequestService.getCompoff(updatedUrl);
+	 	
 	 	boolean no_comp = false;
 	 	if(obj.getName() == null){%>
-	 		<h4><b>The page you requested doesn't exist.</b></h4>
+	 		<h4 class="text-center"><b>The page you requested doesn't exist.</b></h4>
 	 	<% } else {
 	 	boolean check = false;
   		if (desg.equals("TeamLead")){
@@ -89,12 +90,12 @@
 				<br>
 				<% if(obj.getStatus().equals("0") && (desg.equals("TeamLead") || desg.equals("Manager"))){ %>
 					<div class="text-center">
-						<button class="btn btn-primary mr-5 check" type="button" id="<%out.print(obj.getId());%>" style="width: 100px">Approve</button>
-						<button class="btn btn-danger ml-5 reject" type="button" id="<%out.print(obj.getId());%>" style="width: 100px">Decline</button>
+						<button class="btn btn-primary mr-3 check" type="button" id="<%out.print(obj.getId());%>" style="width: 100px">Approve</button>
+						<button class="btn btn-danger reject" type="button" id="<%out.print(obj.getId());%>" style="width: 100px">Decline</button>
 					</div>
 			</form>
 			<% }} else{%>
-				<h4><b>You are not authorised to visit this page.</b></h4>
+				<h4 class="text-center"><b>You are not authorised to visit this page.</b></h4>
 		    <% }}%>
 		</div>
 		<script src="//cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.3.26/jquery.form-validator.min.js"></script>
