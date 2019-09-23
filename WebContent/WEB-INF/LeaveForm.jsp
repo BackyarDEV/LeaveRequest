@@ -97,7 +97,7 @@
 				<div class="form-row">
 					<div class="col-sm-6">
 						<div class="form-group">
-				             <input type="checkbox"  id="avail-compoff"  name="avail-comp" value="comp-off"> Avail Comp-Off<br>	
+				             <input type="checkbox"  id="avail-compoff"  name="avail-comp" value="comp-off"> Avail Comp-Off<br>
 						</div>
 					</div>
 				
@@ -107,7 +107,7 @@
 								<% for (int i=0;i<obj.size();i++){ %>
 								<option value="<%= obj.get(i).getId() %>"><%= obj.get(i).getCompDate() %></option>
 								<% } %>
-							</select>
+            </select>
 					</div>
 		        </div>
 		        <div>

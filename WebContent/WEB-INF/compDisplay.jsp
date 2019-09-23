@@ -4,11 +4,11 @@
 
 <jsp:include page="/WEB-INF/layout.jsp"></jsp:include>
 
-      <%
-      	String desg = (String)session.getAttribute("desg");
-      	String url = (String)request.getAttribute("javax.servlet.forward.request_uri");
-		String updatedUrl = url.replace("/LeaveRequest/comp/","");
-	 	CompoffReqObject obj = LeaveRequestService.getCompoff(updatedUrl);
+  <%
+    String desg = (String)session.getAttribute("desg");
+    String url = (String)request.getAttribute("javax.servlet.forward.request_uri");
+    String updatedUrl = url.replace("/LeaveRequest/comp/","");
+    CompoffReqObject obj = LeaveRequestService.getCompoff(updatedUrl);
 	 	
 	 	boolean no_comp = false;
 	 	if(obj.getName() == null){%>

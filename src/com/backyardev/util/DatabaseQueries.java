@@ -5,7 +5,6 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 
 public class DatabaseQueries {
 	
@@ -383,12 +382,13 @@ public class DatabaseQueries {
 	public static  ArrayList<CompoffReqObject> getCompoffDates(String ecode) {
 		ArrayList<CompoffReqObject> al = new ArrayList<>();
 		sql = "select * from COMPOFF_REQUEST where ecode = ? order by COMPOFF_REQUEST.request_timestamp desc ";
+
 		try {
 			conn = createConnection();
 			pst =  conn.prepareStatement(sql);
 			pst.setString(1, ecode);
 			ResultSet rs = pst.executeQuery();
-			
+      
 			while(rs.next()) {
 				CompoffReqObject obj = new CompoffReqObject();
 				obj.setId(rs.getInt("id"));
