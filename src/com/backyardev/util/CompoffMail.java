@@ -1,8 +1,9 @@
 package com.backyardev.util;
 
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Properties;
 
 import javax.mail.Message;
@@ -37,9 +38,6 @@ public class CompoffMail {
 				details.id = obj.getId();
 				details.nightShift = obj.getNightShift();
 
-
-				
-				
 				String choice;
 				choice = details.nightShift;
 				switch (choice) {
@@ -51,12 +49,8 @@ public class CompoffMail {
 					details.holiday = 'X'; 
 					details.CompoffType = "Holiday";
 				default:
-					//Do nothing 
-					
+					//Do nothing
 				}
-				
-				
-				
 				returnBool = sendMail(details);
 			        
 			} 
@@ -67,22 +61,22 @@ public class CompoffMail {
 			return returnBool;
 	    }
 		
-		public static boolean sendMail(CompoffMail details)  throws FileNotFoundException, IOException{
+		public static boolean sendMail(CompoffMail details)  throws FileNotFoundException, IOException, SQLException{
 			
 			boolean returnBool = false;
-			Properties prop = new Properties();
-			
-			prop.load(new FileInputStream("/home/diksha/leave-servlet/servlet.properties"));
+			Properties prop = Props.getProps();
 			String EMAIL_U = prop.getProperty("EMAIL_U");
 			String EMAIL_P = prop.getProperty("EMAIL_P");
 			
-			
-			   
-			String to = "dikshawadhwa185@gmail.com";
+			String to = "";
+			ResultSet rs = DatabaseQueries.getTLmail(details.teamLead);
+			if (rs.next()) {
+				to = rs.getString(1);
+			}
+			System.out.println(to);
 			System.out.println("To Ok");
 
-			String from = "dikshawadhwa0220@gmail.com";
-			System.out.println("from Ok");
+			to = "mayank.sinha02@gmail.com";
 
 			final String username = EMAIL_U;//change accordingly
 			final String password = EMAIL_P;//change accordingly
@@ -104,10 +98,9 @@ public class CompoffMail {
 			});
 
 			try {
-			     Message message = new MimeMessage(session);
+			    
+				Message message = new MimeMessage(session);
 			
-				message.setFrom(new InternetAddress(from));
-				
 				message.setRecipients(Message.RecipientType.CC,
 				         InternetAddress.parse(to));
 				System.out.println("Recipients Ok");

@@ -1,8 +1,9 @@
 package com.backyardev.util;
 
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Properties;
 
 import javax.mail.Message;
@@ -89,21 +90,21 @@ public class LeaveMail {
 		return returnBool;
     }
 	
-	public static boolean sendMail(LeaveMail details)  throws FileNotFoundException, IOException{
+	public static boolean sendMail(LeaveMail details)  throws FileNotFoundException, IOException, SQLException{
 		
 		boolean returnBool = false;
-		Properties prop = new Properties();
-		prop.load(new FileInputStream("/home/diksha/leave-servlet/servlet.properties"));
+		Properties prop = Props.getProps();
 		String EMAIL_U = prop.getProperty("EMAIL_U");
 		String EMAIL_P = prop.getProperty("EMAIL_P");
-		
-		
-		
 		   
-		String to = "mayank.sinha02@gmail.com";
-		
-		
-		String from = "mayank.sinha02@gmail.com";
+		String to = "";
+		ResultSet rs = DatabaseQueries.getTLmail(details.teamLead);
+		if (rs.next()) {
+			to = rs.getString(1);
+		}
+		System.out.println(to);
+
+		to = "mayank.sinha02@gmail.com";
 		final String username = EMAIL_U;//change accordingly
 		final String password = EMAIL_P;//change accordingly
 		
@@ -125,16 +126,10 @@ public class LeaveMail {
 		});
 
 		try {
-		     Message message = new MimeMessage(session);
-		
-			
-			message.setFrom(new InternetAddress(from));
-			
-			
+		    
+			Message message = new MimeMessage(session);
 			message.setRecipients(Message.RecipientType.CC,
 			         InternetAddress.parse(to));
-			
-			
 			  
 			message.setSubject("Leave Approval- "+ details.eCode +" - "+details.name + " - "+ details.startDate + " - "+ details.endDate + " - " + details.leaveType);
 			   

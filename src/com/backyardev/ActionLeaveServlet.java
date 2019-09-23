@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.backyardev.util.DatabaseConnection;
-import com.backyardev.util.DatabaseQueries;
 
 /**
  * Servlet implementation class ActionLeaveServlet

@@ -59,5 +59,5 @@
 				<a href="/LeaveRequest/compoff" id="comp-req">New Comp-Off Request</a>
 			</div>
 		</div>	
-		<div style="margin-left: 240px; margin-top: 50px; padding: 40px;" class="main-div">
+		
 

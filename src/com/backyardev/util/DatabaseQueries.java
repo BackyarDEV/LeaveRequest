@@ -1,10 +1,10 @@
 package com.backyardev.util;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class DatabaseQueries {
 	
@@ -40,6 +40,19 @@ public class DatabaseQueries {
 		return rs;
 	}
 	
+	//Get email id of teamLead
+	public static ResultSet getTLmail(String tl_name) {
+		conn = createConnection();
+		sql = "select email from EMPLOYEES where name = ?";
+		try {
+			pst = conn.prepareStatement(sql);
+			pst.setString(1, tl_name);
+			rs = pst.executeQuery();
+		} catch(Exception ex) {
+			ex.printStackTrace();
+		}
+		return rs;
+	}
 	
 	// InsertLeaveRequest - Inserts leaves in LEAVE_REQUEST table
 	public static boolean insertLeaveRequest(LeaveReqObject obj) {
@@ -110,7 +123,6 @@ public class DatabaseQueries {
 			}
 			
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -120,7 +132,6 @@ public class DatabaseQueries {
 	
 	//Get Comp-off  date from Compoff_Requests
 	public static ArrayList<CompoffReqObject> getCompLeaveDate(int id) {
-		String compDate = null;
 		int compId = getCompId(id);
 		ArrayList<CompoffReqObject> al = new ArrayList<>();
 		sql = "select comp_date from COMPOFF_REQUEST  where id = ? ";
@@ -131,7 +142,6 @@ public class DatabaseQueries {
 			ResultSet rs = pst.executeQuery();
 			if(rs.next()) {
 				CompoffReqObject obj = new CompoffReqObject();
-				compDate = rs.getString("comp_date");
 				obj.setCompDate(rs.getString("comp_date"));
 				al.add(obj);
 			}
@@ -382,20 +392,18 @@ public class DatabaseQueries {
 	public static  ArrayList<CompoffReqObject> getCompoffDates(String ecode) {
 		ArrayList<CompoffReqObject> al = new ArrayList<>();
 		sql = "select * from COMPOFF_REQUEST where ecode = ? order by COMPOFF_REQUEST.request_timestamp desc ";
-
 		try {
 			conn = createConnection();
 			pst =  conn.prepareStatement(sql);
 			pst.setString(1, ecode);
 			ResultSet rs = pst.executeQuery();
-      
+			
 			while(rs.next()) {
 				CompoffReqObject obj = new CompoffReqObject();
 				obj.setId(rs.getInt("id"));
 				obj.setCompDate(rs.getString("comp_date"));
 				al.add(obj);
 			}
-			System.out.println("rs: "+ rs);
 	
 		} catch(Exception ex) {
 			ex.printStackTrace();

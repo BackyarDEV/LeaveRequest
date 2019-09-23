@@ -5,6 +5,7 @@
 <%@page import="com.backyardev.util.CompoffReqObject"%>
 <%@page import=" com.backyardev.util.LeaveReqObject"%>
 <jsp:include page="/WEB-INF/layout.jsp"></jsp:include>
+<div style="margin-left: 240px; margin-top: 50px; padding: 40px;" class="main-div">
       <% 
         String desg = (String)session.getAttribute("desg");
         String url = (String)request.getAttribute("javax.servlet.forward.request_uri");
@@ -125,6 +126,7 @@
 		    <% }} else{%>
 		    	<h4 class="text-center"><b>You are not authorised to visit this page.</b></h4>
 		    <% }}%>
+		    </div>
 		    <script>
 				$('.check').click(function(e){
 					var url = "/LeaveRequest/ActionLeaveServlet";

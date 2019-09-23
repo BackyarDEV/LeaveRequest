@@ -4,6 +4,7 @@
 <%@page import="com.backyardev.util.CompoffReqObject"%>
 
 <jsp:include page="/WEB-INF/layout.jsp"></jsp:include>
+	<div style="margin-left: 240px; margin-top: 50px; padding: 40px;" class="main-div">
 		<%
 			String  ecode =  session.getAttribute("ecode").toString() ;
 		 	ArrayList<CompoffReqObject> obj =  DatabaseQueries.getCompoffDates(ecode);
@@ -96,9 +97,10 @@
 				</div>
 				<div class="form-row">
 					<div class="col-sm-6">
-						<div class="form-group">
-				             <input type="checkbox"  id="avail-compoff"  name="avail-comp" value="comp-off"> Avail Comp-Off<br>
-						</div>
+						<div class="form-check">
+				             <input type="checkbox" class="form-check-input" id="avail-compoff" name="avail-comp" value="comp-off">
+				             <label for="avail-compoff" class="form-check-label">Avail Comp-Off</label>
+						</div><br>
 					</div>
 				
 					<div class="col-sm-6">
@@ -107,57 +109,52 @@
 								<% for (int i=0;i<obj.size();i++){ %>
 								<option value="<%= obj.get(i).getId() %>"><%= obj.get(i).getCompDate() %></option>
 								<% } %>
-            </select>
+            			</select>
 					</div>
 		        </div>
 		        <div>
 				<button  type="submit" class="btn btn-primary">Submit</button>
 				</div>		
 			</form>
+		</div>
 			
 		<div class="modal fade" id="submitFormModal" tabindex="-1" role="dialog" aria-labelledby="submitFormModalTitle" aria-hidden="true">
-			    <div class="modal-dialog modal-dialog-centered" role="document">
-			        <div class="modal-content">
-			            <div class="modal-header">
-			                <h4 class="modal-title" id="ModalTitle">Request Leave?</h4>
-			                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-			                    <span aria-hidden="true">&times;</span>
-		                    </button>
-			            </div>
-			            <div class="modal-body">
-			                <p>Are you sure you want to request for leave?</p><br>
-			                <div style="text-align: center; display: none;" id="progress">
-			                    <img src="static/loading.gif" alt="loading..">
-			                </div>
-			            </div>
-			            <div class="modal-footer">
-			                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-			                <button id="submitFormBtn" value="Add" class="btn btn-primary">Yes</button>
-			            </div>
-			        </div>
-			    </div>
-			</div>
-			
-			
-			
-			
+		    <div class="modal-dialog modal-dialog-centered" role="document">
+		        <div class="modal-content">
+		            <div class="modal-header">
+		                <h4 class="modal-title" id="ModalTitle">Request Leave?</h4>
+		                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		                    <span aria-hidden="true">&times;</span>
+	                    </button>
+		            </div>
+		            <div class="modal-body">
+		                <p>Are you sure you want to request for leave?</p><br>
+		                <div style="text-align: center; display: none;" id="progress">
+		                    <img src="static/loading.gif" alt="loading..">
+		                </div>
+		            </div>
+		            <div class="modal-footer">
+		                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+		                <button id="submitFormBtn" value="Add" class="btn btn-primary">Yes</button>
+		            </div>
+		        </div>
+		    </div>
+		</div>			
 			
 	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.3.26/jquery.form-validator.min.js"></script>
 	<script src="/LeaveRequest/static/formJs.js"></script>
 	<script>
 
 	    $(document).ready(function() {
-	    	$('#avail-compoff').change(function() 
-	    			  {
-	    			    if(this.checked == true)
-	    			    {
-	    			         $("#select-date").attr("disabled",false);
-	    			    }
-	    			    else
-	    			  {
-	    			    	$("#select-date").attr("disabled",true);
-	    			  }
-	    			  });      
+	    	$('#avail-compoff').change(function() {
+  			    if(this.checked == true)
+  			    {
+  			         $("#select-date").attr("disabled",false);
+  			    }
+  			    else {
+ 			    	$("#select-date").attr("disabled",true);
+  			  	}
+			});      
 	    });
     	$(function(){
 	        $('#new-req').css('color', '#f1f1f1');
