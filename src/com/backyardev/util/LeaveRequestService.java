@@ -94,6 +94,44 @@ public class LeaveRequestService {
 		return returnString;
 	}
 
+	public static String setLeaveStatus(int id, String action) {
+		String returnString = null;
+		int status = 0;
+		
+		if(action.equals("approve")) {
+			status = 1;
+		}else if(action.equals("reject")){
+			status = -1;
+		}
+		
+		if(DatabaseQueries.setLeaveStatus(status, id)) {
+			returnString = "true";
+		} else {
+			returnString = "false";
+		}
+		DatabaseQueries.closeConnection();
+		return returnString;
+	}
+	
+	public static String setCompStatus(int id, String action) {
+		String returnString = null;
+		int status = 0;
+		
+		if(action.equals("approve")) {
+			status = 1;
+		}else if(action.equals("reject")){
+			status = -1;
+		}
+		
+		if(DatabaseQueries.setCompStatus(status, id)) {
+			returnString = "true";
+		} else {
+			returnString = "false";
+		}
+		DatabaseQueries.closeConnection();
+		return returnString;
+	}
+	
 	public static ArrayList<LeaveReqObject> populateLeaveTable(String desg, String tl_name, String ecode){
 		
 		ArrayList<LeaveReqObject> al = new ArrayList<>();

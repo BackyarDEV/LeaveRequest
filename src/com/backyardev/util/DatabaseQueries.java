@@ -107,6 +107,42 @@ public class DatabaseQueries {
 		return id;
 	}
 	
+	//Set Leave status to approved or rejected
+	public static boolean setLeaveStatus( int status, int id ) {
+		
+		boolean returnBool = false;
+		
+		conn = createConnection();
+		sql = "UPDATE LEAVE_STATUS SET STATUS  = "+ status + " WHERE id =  " + id ;
+		
+		try {
+			pst = conn.prepareStatement(sql);
+			returnBool = !pst.execute();
+			
+		} catch(Exception ex) {
+			ex.printStackTrace();
+		}
+		return returnBool;
+	}
+	
+	// Set Comp-Off status to approved or rejected
+	public static boolean setCompStatus( int status, int id ) {
+		
+		boolean returnBool = false;
+		
+		conn = createConnection();
+		sql = "UPDATE COMPOFF_REQUEST SET STATUS = "+ status + " WHERE id =  " + id ;
+		
+		try {
+			pst = conn.prepareStatement(sql);
+			returnBool = !pst.execute();
+			
+		} catch(Exception ex) {
+			ex.printStackTrace();
+		}
+		return returnBool;
+	}
+	
 	//Get Comp-off Leave ID from Leave_Requests
 	public static int getCompId(int  id) {
 		conn = createConnection();

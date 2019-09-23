@@ -2,8 +2,11 @@
 
 --> ALTER TABLE LEAVE_REQUEST ADD avail_comp int(11) default 0;
 --> ALTER TABLE LEAVE_REQUEST ADD comp_id int(11)
---> ALTER TABLE LEAVE_REQUEST ADD reviewed_by varchar(100);
---> ALTER TABLE LEAVE_REQUEST ADD reviewed_time timestamp null default null on update current_timestamp;
+
+2) Alter Leave Status Table: // 19/09/2019
+
+--> ALTER TABLE LEAVE_STATUS ADD reviewed_by varchar(100);
+--> ALTER TABLE LEAVE_STATUS ADD reviewed_time timestamp null default null on update current_timestamp;
 
 2) Alter Comp-Off table: // 19/09/2019
 
