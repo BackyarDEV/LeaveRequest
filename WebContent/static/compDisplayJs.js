@@ -1,20 +1,3 @@
-  $(document).ready(function() {
-		$('#all-comp').css('color', '#f1f1f1');
-		$('#all-comp').css('font-size', '1.2rem');
-		$('#data-table').DataTable({
-			destroy: true,
-			"ordering": false
-		},
-		{
-			"pagingType": "scrolling"
-		});
-	});
-	
-	$('.targetRow').click(function() {
-		var url = "comp/"+$(this).attr("id").trim()
-		console.log(url);
-		window.location.replace(url);
-    
 $('.targetRow').click(function() {
 	var url = "comp/"+$(this).attr("id").trim()
 	console.log(url);

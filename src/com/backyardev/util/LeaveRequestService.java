@@ -1,6 +1,7 @@
 package com.backyardev.util;
 
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.regex.Pattern;
 
@@ -186,7 +187,9 @@ public class LeaveRequestService {
 				obj.setStartDate(rs.getString("leave_start_date"));
 				obj.setEndDate(rs.getString("leave_end_date"));
 				obj.setNumberOfDays(rs.getInt("number_of_days"));
+				obj.setDayLeave(rs.getInt("full_day_leave"));
 				obj.setLeaveType(rs.getString("leave_type"));
+				obj.setCompId(rs.getString("comp_id"));
 				obj.setLeaveDesc(rs.getString("leave_desc"));
 			}
 		} catch(Exception ex) {

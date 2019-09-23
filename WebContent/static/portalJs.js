@@ -49,7 +49,8 @@ $('.btn-check').click(function(s) {
 function sort(){
 	 $('#data-table').DataTable({
 	 		destroy: true,
-	    	"ordering": true
+	    	"ordering": true,
+	    	fixedHeader: true,
 	    },
 	    {
 	        "pagingType": "scrolling"

@@ -40,6 +40,7 @@ public class DatabaseQueries {
 		return rs;
 	}
 	
+	
 	// InsertLeaveRequest - Inserts leaves in LEAVE_REQUEST table
 	public static boolean insertLeaveRequest(LeaveReqObject obj) {
 		
@@ -48,10 +49,10 @@ public class DatabaseQueries {
 		boolean returnBool = false;
 		try {
 			if (obj.getHalfDayLeave() == 1) {
-				sql = "insert into LEAVE_REQUEST(ecode,leave_start_date, leave_end_date, leave_type, leave_desc, number_of_days, half_day_leave) values(?,?,?,?,?,  " + numberOfDays + " ," + 1 + ");";
+				sql = "insert into LEAVE_REQUEST(ecode,leave_start_date, leave_end_date, leave_type, leave_desc, number_of_days, half_day_leave,avail_comp,comp_id) values(?,?,?,?,?,  " + numberOfDays + " ," + 1 + ",?,?"+");";
 				pst = conn.prepareStatement(sql);
 			} else {
-				sql = "insert into LEAVE_REQUEST(ecode, leave_start_date, leave_end_date, leave_type, leave_desc, number_of_days, full_day_leave) values(?,?,?,?,?," + numberOfDays + " ," + 1 + ");";
+				sql = "insert into LEAVE_REQUEST(ecode, leave_start_date, leave_end_date, leave_type, leave_desc, number_of_days, full_day_leave,avail_comp,comp_id) values(?,?,?,?,?," + numberOfDays + " ," + 1 +  ",?,?"+");";
 				pst = conn.prepareStatement(sql);
 			}
 			pst.setString(1, obj.getEcode());
@@ -59,6 +60,8 @@ public class DatabaseQueries {
 			pst.setString(3, obj.getEndDate());
 			pst.setString(4, obj.getLeaveType());
 			pst.setString(5, obj.getLeaveDesc());
+			pst.setInt(6, obj.getAvailComp());
+			pst.setString(7, obj.getCompId());
 			
 			boolean execute = pst.execute();
 			if(!execute) {
@@ -89,6 +92,54 @@ public class DatabaseQueries {
 			ex.printStackTrace();
 		}
 		return id;
+	}
+	
+	//Get Comp-off Leave ID from Leave_Requests
+	public static int getCompId(int  id) {
+		conn = createConnection();
+		int  compId = 0;
+		sql = "SELECT comp_id from LEAVE_REQUEST where id = ? ";
+		try {
+			pst = conn.prepareStatement(sql);
+			pst.setInt(1, id);
+			rs = pst.executeQuery();
+			
+			while(rs.next()) {
+				compId = rs.getInt("comp_id");
+				
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return compId;
+		
+	}
+	
+	//Get Comp-off  date from Compoff_Requests
+	public static ArrayList<CompoffReqObject> getCompLeaveDate(int id) {
+		String compDate = null;
+		int compId = getCompId(id);
+		ArrayList<CompoffReqObject> al = new ArrayList<>();
+		sql = "select comp_date from COMPOFF_REQUEST  where id = ? ";
+		try {
+			pst.clearBatch();
+			pst =  conn.prepareStatement(sql);
+			pst.setInt(1, compId);
+			ResultSet rs = pst.executeQuery();
+			if(rs.next()) {
+				CompoffReqObject obj = new CompoffReqObject();
+				compDate = rs.getString("comp_date");
+				obj.setCompDate(rs.getString("comp_date"));
+				al.add(obj);
+			}
+		} catch(Exception ex) {
+			ex.printStackTrace();
+		}
+
+		return al;
 	}
 	
 	// Set Leave Status
@@ -276,6 +327,7 @@ public class DatabaseQueries {
 					+ "LEAVE_REQUEST.full_day_leave, "
 					+ "LEAVE_REQUEST.half_day_leave, "
 					+ "LEAVE_REQUEST.leave_type, "
+					+ "LEAVE_REQUEST.comp_id, "
 					+ "LEAVE_REQUEST.leave_desc, "
 					+ "LEAVE_STATUS.status, "
 					+ "EMPLOYEES.name, "
@@ -326,22 +378,29 @@ public class DatabaseQueries {
 		
 	}
 
-  // Get Comp-off dates for availing in Leave Form
-	public static ArrayList<Date> getCompoffDates(String ecode) {
-		ArrayList<Date> dates = new ArrayList<Date>();
-		sql = "select * from COMPOFF_REQUEST where ecode = ? ";
+	// Get Comp-off dates for availing in Leave Form
+	public static  ArrayList<CompoffReqObject> getCompoffDates(String ecode) {
+		ArrayList<CompoffReqObject> al = new ArrayList<>();
+		sql = "select * from COMPOFF_REQUEST where ecode = ? order by COMPOFF_REQUEST.request_timestamp desc ";
+
 		try {
 			conn = createConnection();
 			pst =  conn.prepareStatement(sql);
 			pst.setString(1, ecode);
 			ResultSet rs = pst.executeQuery();
+      
 			while(rs.next()) {
-				dates.add(rs.getDate("comp_date"));
+				CompoffReqObject obj = new CompoffReqObject();
+				obj.setId(rs.getInt("id"));
+				obj.setCompDate(rs.getString("comp_date"));
+				al.add(obj);
 			}
+			System.out.println("rs: "+ rs);
+	
 		} catch(Exception ex) {
 			ex.printStackTrace();
     }
-		return dates;
+		return al;
 	}
 
 	// Close connection

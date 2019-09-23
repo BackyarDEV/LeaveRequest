@@ -71,11 +71,11 @@
 		$('#all-req').css('color', '#f1f1f1');
 		$('#all-req').css('font-size', '1.2rem');
 		$('#data-table').DataTable({
-			"ordering": false
-		},
-		{
-			"pagingType": "scrolling"
-		});
+			"ordering": false,
+			"pagingType": "full_numbers",
+			 fixedHeader: true
+		}
+			);
 	});
 </script>
 </body>

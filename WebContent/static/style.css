@@ -210,4 +210,9 @@ div.scrollable {
   .text-rejected{
     color:#e55039;
   }
+  
+  .form-control[readonly] {
+    background-color: #ffffff;
+    opacity: 1;
+}
 
