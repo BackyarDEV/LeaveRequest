@@ -5,7 +5,7 @@
 <%@page import="com.backyardev.util.CompoffReqObject"%>
 <%@page import=" com.backyardev.util.LeaveReqObject"%>
 <jsp:include page="/WEB-INF/layout.jsp"></jsp:include>
-<div style="margin-left: 240px; margin-top: 50px; padding: 40px;" class="main-div">
+<div class="main-div">
       <% 
         String desg = (String)session.getAttribute("desg");
         String url = (String)request.getAttribute("javax.servlet.forward.request_uri");

@@ -4,7 +4,7 @@
 <%@page import="com.backyardev.util.CompoffReqObject"%>
 
 <jsp:include page="/WEB-INF/layout.jsp"></jsp:include>
-	<div style="margin-left: 240px; margin-top: 50px; padding: 40px;" class="main-div">
+	<div class="main-div">
 		<%
 			String  ecode =  session.getAttribute("ecode").toString() ;
 		 	ArrayList<CompoffReqObject> obj =  DatabaseQueries.getCompoffDates(ecode);

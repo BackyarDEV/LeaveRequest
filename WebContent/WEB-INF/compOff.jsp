@@ -1,5 +1,5 @@
 <jsp:include page="/WEB-INF/layout.jsp"></jsp:include>
-	<div style="margin-left: 240px; margin-top: 50px; padding: 40px;" class="main-div">
+	<div class="main-div">
 			<div class="alert" style="display: none; width: 65%; margin-left: auto; margin-right: auto;" role="alert"></div>
 			<form class="form leave-form" method="post" action="compoff">
 				<h3>Comp-Off Request</h3><br>

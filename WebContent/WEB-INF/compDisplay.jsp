@@ -3,7 +3,7 @@
 <%@page import="com.backyardev.util.CompoffReqObject"%>
 
 <jsp:include page="/WEB-INF/layout.jsp"></jsp:include>
-	<div style="margin-left: 240px; margin-top: 50px; padding: 40px;" class="main-div">
+	<div class="main-div">
 	  <%
 	    String desg = (String)session.getAttribute("desg");
 	    String url = (String)request.getAttribute("javax.servlet.forward.request_uri");
@@ -97,6 +97,33 @@
 			<% }} else{%>
 				<h4 class="text-center"><b>You are not authorised to visit this page.</b></h4>
 		    <% }}%>
+		    <div class="modal fade" id="rejectReqModal" tabindex="-1" role="dialog" aria-labelledby="rejectReqModalTitle" aria-hidden="true">
+			    <div class="modal-dialog modal-dialog-centered" role="document">
+			        <div class="modal-content">
+			            <div class="modal-header">
+			                <h4 class="modal-title" id="ModalTitle">Reject Request?</h4>
+			                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			                    <span aria-hidden="true">&times;</span>
+		                    </button>
+			            </div>
+			            <div class="modal-body">
+			                <form class="form">
+			                <div class="form-group">
+				                <label for="reason">Rejection reason</label>
+				                <input class="form-control" id="reason" name="reason" type="text" required placeholder="Reason for rejection"/>
+			                </div>
+			                </form>
+			                <div style="text-align: center; display: none;" id="progress">
+			                    <img src="static/loading.gif" alt="loading..">
+			                </div>
+			            </div>
+			            <div class="modal-footer">
+			                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+			                <button id="<%out.print(obj.getId());%>"class="btn btn-primary reject-btn">Reject</button>
+			            </div>
+			        </div>
+			    </div>
+			</div>	
 		</div>
 		<script src="//cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.3.26/jquery.form-validator.min.js"></script>
 		<script>
@@ -123,27 +150,35 @@
 			    });
 			});
 			$('.reject').click(function(){
+				$('#rejectReqModal').modal('show');
+			});
+			
+			$('.reject-btn').click(function(e){
+				e.preventDefault();
 				var url = "/LeaveRequest/ActionCompLeaveServlet";
 			    var method = "post";
 			    var id = $(this).attr("id")
-			    console.log(id);
+			    var reason = $('#reason').val();
+			    console.log(id+":\n"+reason);
 	
 			    $.ajax({
 			        type: method,
 			        url: url,
 			        data: {
 			            'id': id,
-			            'action': 'reject'
+			            'action': 'reject',
+			            'reason': reason,
 			        },
 			        success: function(data) {
 			            if (data == "true") {
 			                window.location.replace('/LeaveRequest/comp');
 			            } else {
-			                alert('Error!');
+			                alert('error!');
 			            }
 			        }
 			    });
 			});
+			
 		</script>
 	</body>
 </html>

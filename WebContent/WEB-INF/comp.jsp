@@ -2,7 +2,7 @@
 <%@page import="com.backyardev.util.CompoffReqObject"%>
 <%@page import=" java.util.ArrayList"%>
 <jsp:include page="/WEB-INF/layout.jsp"></jsp:include>
-<div style="margin-left: 240px; margin-top: 50px; padding: 40px;" class="main-div">
+<div class="main-div">
 	<table class="table hover nowrap  mt-5"  id="data-table">
 	   <thead>
 	      <tr>
@@ -65,8 +65,34 @@
 	      <% } %>
 	   </tbody>
 	</table>
+	 <div class="modal fade" id="rejectReqModal" tabindex="-1" role="dialog" aria-labelledby="rejectReqModalTitle" aria-hidden="true">
+	 <div class="modal-dialog modal-dialog-centered" role="document">
+ 	    <div class="modal-content">
+	        <div class="modal-header">
+	            <h4 class="modal-title" id="ModalTitle">Reject Request?</h4>
+	            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	                <span aria-hidden="true">&times;</span>
+                </button>
+	        </div>
+	        <div class="modal-body">
+	            <form class="form">
+	            <div class="form-group">
+	             <label for="reason">Rejection reason</label>
+	             <input class="form-control" id="reason" name="reason" type="text" required placeholder="Reason for rejection"/>
+	            </div>
+	            </form>
+	            <div style="text-align: center; display: none;" id="progress">
+	                <img src="static/loading.gif" alt="loading..">
+	            </div>
+	        </div>
+	        <div class="modal-footer">
+	            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+	            <button value="Add" class="btn btn-primary reject-btn">Reject</button>
+	            </div>
+	        </div>
+	    </div>
+	</div>
 </div>
-<script src="/LeaveRequest/static/portalJs.js"></script>
 <script src="/LeaveRequest/static/compDisplayJs.js"></script>
 <script>
 	$(document).ready(function() {

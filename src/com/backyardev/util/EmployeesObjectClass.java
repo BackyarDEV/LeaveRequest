@@ -2,62 +2,62 @@ package com.backyardev.util;
 
 public class EmployeesObjectClass {
 	
-	private String name, ecode, email, project, teamLead, projectManager, designation;
+	private static String name, ecode, email, project, teamLead, projectManager, designation;
 
-	public String getName() {
+	public static String getName() {
 		return name;
 	}
 
 	public void setName(String name) {
-		this.name = name;
+		EmployeesObjectClass.name = name;
 	}
 
-	public String getEcode() {
+	public static String getEcode() {
 		return ecode;
 	}
 
 	public void setEcode(String ecode) {
-		this.ecode = ecode;
+		EmployeesObjectClass.ecode = ecode;
 	}
 
 	public void setEmail(String email) {
-		this.email = email;
+		EmployeesObjectClass.email = email;
 	}
 	
-	public String getEmail() {
+	public static String getEmail() {
 		return email;
 	}
 	
-	public String getProject() {
+	public static String getProject() {
 		return project;
 	}
 
 	public void setProject(String project) {
-		this.project = project;
+		EmployeesObjectClass.project = project;
 	}
 
-	public String getTeamLead() {
+	public static String getTeamLead() {
 		return teamLead;
 	}
 
 	public void setTeamLead(String teamLead) {
-		this.teamLead = teamLead;
+		EmployeesObjectClass.teamLead = teamLead;
 	}
 
-	public String getProjectManager() {
+	public static String getProjectManager() {
 		return projectManager;
 	}
 
 	public void setProjectManager(String projectManager) {
-		this.projectManager = projectManager;
+		EmployeesObjectClass.projectManager = projectManager;
 	}
 
-	public String getDesignation() {
+	public static String getDesignation() {
 		return designation;
 	}
 
 	public void setDesignation(String designation) {
-		this.designation = designation;
+		EmployeesObjectClass.designation = designation;
 	}
 	
 }

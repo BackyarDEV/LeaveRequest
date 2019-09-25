@@ -28,6 +28,7 @@
 	left: 0;
 	overflow-x: hidden;
 	margin-top: 55px;
+	display: block;
 }
 
 .sidenav-link{
@@ -60,6 +61,13 @@
 	color: white;
 	padding-right: 1em;
 }
+
+.main-div{
+	margin-left: 240px;
+	margin-top: 50px;
+	padding: 40px;
+}
+
 
 .leave-form{
 	border-radius: 0.5rem;
@@ -168,7 +176,7 @@ div.scrollable {
 	color: #dbdbdb;
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 768px) {
 	.leave-form{
 		border-radius: 0.5rem;
 		width: 100%;
@@ -188,7 +196,11 @@ div.scrollable {
 		left: 0;
 		overflow-x: hidden;
 		margin-top: 50px;
+		display: none;
 	}	 
+	.main-div{
+		margin-left: 0px;
+	}
 	.form-login{
 		border-radius: 0.5rem;
 		box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 9px 26px 0 rgba(0, 0, 0, 0.19);

@@ -126,12 +126,17 @@ public class DatabaseQueries {
 	}
 	
 	// Set Comp-Off status to approved or rejected
-	public static boolean setCompStatus( int status, int id ) {
+	public static boolean setCompStatus( int status, int id, String reason, String reviewer ) {
 		
 		boolean returnBool = false;
 		
 		conn = createConnection();
-		sql = "UPDATE COMPOFF_REQUEST SET STATUS = "+ status + " WHERE id =  " + id ;
+		if (status == 1) {
+			sql = "UPDATE COMPOFF_REQUEST SET STATUS = "+ status + ", REVIEWED_BY = '"+ reviewer +"'  WHERE id =  " + id ;
+		} else {
+			sql = "UPDATE COMPOFF_REQUEST SET STATUS = "+ status + ", REJECT_REASON = '"+ reason +"', REVIEWED_BY = '"+ reviewer +"' WHERE id =  " + id ;
+		}
+		
 		
 		try {
 			pst = conn.prepareStatement(sql);

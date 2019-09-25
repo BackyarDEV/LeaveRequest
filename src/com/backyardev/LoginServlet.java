@@ -7,7 +7,9 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import com.backyardev.util.EmployeesObjectClass;
 import com.backyardev.util.LeaveRequestService;
 
 public class LoginServlet extends HttpServlet {
@@ -17,9 +19,19 @@ public class LoginServlet extends HttpServlet {
 		String email = req.getParameter("email");
 		String pass = req.getParameter("password");
 		
-		String returnString = LeaveRequestService.loginService(req, email, pass);
-		PrintWriter out = resp.getWriter();
+		boolean returnBool = LeaveRequestService.loginService(email, pass);
+		if(returnBool) {
+			HttpSession session = req.getSession(true);
+			session.setAttribute("ecode", EmployeesObjectClass.getEcode());
+			session.setAttribute("email", email);
+			session.setAttribute("desg", EmployeesObjectClass.getDesignation());
+			session.setAttribute("name", EmployeesObjectClass.getName());
+			session.setAttribute("project", EmployeesObjectClass.getProject());
+			session.setAttribute("manager", EmployeesObjectClass.getProjectManager());
+			session.setAttribute("lead", EmployeesObjectClass.getTeamLead());
+		}
 		
-		out.write(returnString);
+		PrintWriter out = resp.getWriter();
+		out.print(returnBool);
 	}
 }

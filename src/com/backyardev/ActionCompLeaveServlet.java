@@ -6,6 +6,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.backyardev.util.LeaveRequestService;
 
@@ -22,10 +23,16 @@ public class ActionCompLeaveServlet extends HttpServlet {
 
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession sess = request.getSession(false);
 		int id = Integer.parseInt(request.getParameter("id"));
 		String action = request.getParameter("action");
-		
-		response.getWriter().write(LeaveRequestService.setCompStatus(id, action));
+		String reason = null;
+		String reviewer = (String)sess.getAttribute("name");
+		if(action.equals("reject")) {
+			reason = request.getParameter("reason");
+		}
+//		response.getWriter().write(reason);
+		response.getWriter().write(LeaveRequestService.setCompStatus(id, action, reason, reviewer));
 	}
 }
 

@@ -1,5 +1,5 @@
 $('.btn-reject').click(function(s) {
-
+	s.stopPropagation();
     var url = "ActionLeaveServlet";
     var method = "post";
     var id = $(this).attr("id")
@@ -23,7 +23,7 @@ $('.btn-reject').click(function(s) {
 });
 
 $('.btn-check').click(function(s) {
-
+	s.stopPropagation();
     var url = "ActionLeaveServlet";
     var method = "post";
     var id = $(this).attr("id")

@@ -1,20 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-    <!DOCTYPE html>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-    <html>
-
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-        <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-		
-        <title>Reset Password</title>
-    </head>
-    <body>
-	  	<%@ include file="layout.jsp" %>   <!-- Navbar Component -->
-	  	
+  	<%@ include file="layout.jsp" %>
+	<div class="main-div">	  	
 		<div class="container" style="min-width: 300px; max-width: 500px; width: 60%; margin-left: auto; margin-right: auto; margin-bottom: 4%; margin-top: 4%; background:#fff;">
 			<div class="row">
 				<div class="col-sm-12">
@@ -34,6 +19,7 @@
 				</div>
 			</div>
 		</div>
+	</div>
 		<script>
 			$('.form-pass').submit(function(e){
 				e.preventDefault();

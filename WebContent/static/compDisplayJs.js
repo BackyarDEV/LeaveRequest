@@ -1,11 +1,7 @@
-$('.targetRow').click(function() {
-	var url = "comp/"+$(this).attr("id").trim()
-	console.log(url);
-	window.location.replace(url);
-});
-	
-$('.btn-check').click(function(s) {
+var req_id = 0;
 
+$('.btn-check').click(function(s) {
+	s.stopPropagation();
     var url = "ActionCompLeaveServlet";
     var method = "post";
     var id = $(this).attr("id")
@@ -29,25 +25,36 @@ $('.btn-check').click(function(s) {
 });
 	
 $('.btn-reject').click(function(s) {
+	s.stopPropagation();
+	req_id = $(this).attr("id")
+	$('#rejectReqModal').modal('show');
+});
 
-    var url = "ActionCompLeaveServlet";
+$('.reject-btn').click(function(){
+	console.log('workss!');
+	var url = "ActionCompLeaveServlet";
     var method = "post";
-    var id = $(this).attr("id")
-    console.log(id);
-
+    var reason = $('#reason').val();
     $.ajax({
         type: method,
         url: url,
         data: {
-            'id': id,
-            'action': 'reject'
+            'id': req_id,
+            'action': 'reject',
+            'reason': reason
         },
         success: function(data) {
             if (data == "true") {
                 window.location.replace('comp');
             } else {
-                alert('Error!');
+                alert(data);
             }
         }
     });
+});
+
+$('.targetRow').click(function() {
+	var url = "comp/"+$(this).attr("id").trim()
+	console.log(url);
+	window.location.replace(url);
 });

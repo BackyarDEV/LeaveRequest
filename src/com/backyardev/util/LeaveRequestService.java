@@ -4,17 +4,16 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.regex.Pattern;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 public class LeaveRequestService {
 
-	public static String loginService(HttpServletRequest req,String email, String pass) {
+	public static boolean loginService(String email, String pass) {
 		
-		String ecode, project, lead, manager, name, desg, hash, returnString = null;
+		String hash;
+		boolean returnBool = false;
 		
 		if(!validateMail(email)) {
-			returnString = "invalid_mail";
+			returnBool = false;
 		} else {
 			
 			ResultSet rs = DatabaseQueries.getAuth(email);
@@ -22,37 +21,29 @@ public class LeaveRequestService {
 			try {
 				
 				if(!rs.next()) {
-					returnString = "invalid_mail";
+					returnBool = false;
 				} else {
-					ecode = rs.getString("ecode");
-					desg = rs.getString("designation");
+					EmployeesObjectClass obj = new EmployeesObjectClass();
+					obj.setEcode(rs.getString("ecode"));
+					obj.setDesignation(rs.getString("designation"));
 					hash = rs.getString("pass_hash");
-					name = rs.getString("name");
-					project = rs.getString("project");
-					lead = rs.getString("team_lead");
-					manager = rs.getString("project_manager");
-					if (Password.check(pass, hash)) {
-						HttpSession session = req.getSession(true);
-						session.setAttribute("ecode", ecode);
-						session.setAttribute("email", email);
-						session.setAttribute("desg", desg);
-						session.setAttribute("name", name);
-						session.setAttribute("project", project);
-						session.setAttribute("manager", manager);
-						session.setAttribute("lead", lead);
-						
-						returnString = "true";
+					obj.setName(rs.getString("name"));
+					obj.setProject(rs.getString("project"));
+					obj.setTeamLead(rs.getString("team_lead"));
+					obj.setProjectManager(rs.getString("project_manager"));
+					if (Password.check(pass, hash)) {	
+						returnBool = true;
 					} else {
-						returnString = "wrong_pass";
+						returnBool = false;
 					}
 				}
 			} catch(Exception ex) {
-				returnString = "500";
+				returnBool = false;
 				ex.printStackTrace();
 			}
 		}
 		DatabaseQueries.closeConnection();
-		return returnString;
+		return returnBool;
 	}
 	
 	public static String leaveService(LeaveReqObject obj) {
@@ -113,7 +104,7 @@ public class LeaveRequestService {
 		return returnString;
 	}
 	
-	public static String setCompStatus(int id, String action) {
+	public static String setCompStatus(int id, String action, String reason, String reviewer ) {
 		String returnString = null;
 		int status = 0;
 		
@@ -123,7 +114,7 @@ public class LeaveRequestService {
 			status = -1;
 		}
 		
-		if(DatabaseQueries.setCompStatus(status, id)) {
+		if(DatabaseQueries.setCompStatus(status, id, reason, reviewer)) {
 			returnString = "true";
 		} else {
 			returnString = "false";
