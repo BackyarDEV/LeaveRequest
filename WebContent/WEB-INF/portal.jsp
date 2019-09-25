@@ -39,26 +39,26 @@
          <td><%=resultSet.get(i).getLeaveType() %></td>
          <!-- changes action/status column view based on designation --> 
          <% if(session.getAttribute("desg").equals("Developer")) { %> <!-- designation is developer -->
-         <% if ((resultSet.get(i).getStatus()).equals("Pending")) { %> 
-         <td class="text-pending font-weight-bold"><%=resultSet.get(i).getStatus()%></td>
-         <% } %>
-         <% if((resultSet.get(i).getStatus()).equals("Approved")) { %>
-         <td class="text-approved font-weight-bold"><%=resultSet.get(i).getStatus()%></td>
-         <% } %>
-         <% if ((resultSet.get(i).getStatus()).equals("Rejected")) { %>
-         <td class="text-rejected font-weight-bold"><%=resultSet.get(i).getStatus()%></td>
-         <% } %>
-         <% } else { %>	<!-- designation is !developer-->	
-         <!-- changes action/status column view based on status-->	
-         <% if ((resultSet.get(i).getStatus()).equals("Approved")) { %>	<!-- status == approved -->	
-         <td class="text-approved font-weight-bold" > Approved </td>
-         <% } else if ((resultSet.get(i).getStatus()).equals("Rejected")) { %>	<!-- status == rejected -->	
-         <td class="text-rejected font-weight-bold" > Rejected </td>
+		         <% if ((resultSet.get(i).getStatus()).equals("Pending")) { %> 
+		         <td class="text-pending font-weight-bold"><%=resultSet.get(i).getStatus()%></td>
+		         <% } %>
+		         <% if((resultSet.get(i).getStatus()).equals("Approved")) { %>
+		         <td class="text-approved font-weight-bold"><%=resultSet.get(i).getStatus()%></td>
+		         <% } %>
+		         <% if ((resultSet.get(i).getStatus()).equals("Rejected")) { %>
+		         <td class="text-rejected font-weight-bold"><%=resultSet.get(i).getStatus()%></td>
+		         <% } %>
+		         <% } else { %>	<!-- designation is !developer-->	
+		         <!-- changes action/status column view based on status-->	
+		         <% if ((resultSet.get(i).getStatus()).equals("Approved")) { %>	<!-- status == approved -->	
+		         <td class="text-approved font-weight-bold" > Approved </td>
+		         <% } else if ((resultSet.get(i).getStatus()).equals("Rejected")) { %>	<!-- status == rejected -->	
+		         <td class="text-rejected font-weight-bold" > Rejected </td>
          <% } else { %>	<!-- status == pending -->	
-         <td class="">
-            <button type="button" class=" btn-check" id="<%=resultSet.get(i).getId()%>"><i class="fas fa-check "></i></button>
-            <button type="button" class=" btn-reject" id="<%=resultSet.get(i).getId()%>"><i class="fas fa-times"></i></button>
-         </td>
+		         <td class="">
+			            <button type="button" class=" btn-check" id="<%=resultSet.get(i).getId()%>"><i class="fas fa-check "></i></button>
+			            <button type="button" class=" btn-reject" id="<%=resultSet.get(i).getId()%>"><i class="fas fa-times"></i></button>
+		         </td>
          <% } %>
          <% } %>
       </tr>
