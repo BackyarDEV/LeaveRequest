@@ -10,9 +10,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.backyardev.util.LeaveRequestService;
 
-/**
- * Servlet implementation class ActionLeaveServlet
- */
 @WebServlet("/ActionLeaveServlet")
 public class ActionLeaveServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -25,8 +22,10 @@ public class ActionLeaveServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int id = Integer.parseInt(request.getParameter("id"));
 		String action = request.getParameter("action");
-		
-		response.getWriter().write(LeaveRequestService.setLeaveStatus(id, action));
+		boolean ret = LeaveRequestService.setLeaveStatus(id, action);
+		System.out.println(ret);
+		response.getWriter().print(ret);
+
 	}
 
 }

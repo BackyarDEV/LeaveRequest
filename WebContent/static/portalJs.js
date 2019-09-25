@@ -13,6 +13,7 @@ $('.btn-reject').click(function(s) {
             'action': 'reject'
         },
         success: function(data) {
+        	console.log(data);
             if (data == "true") {
                 window.location.replace('portal');
             } else {
@@ -37,6 +38,7 @@ $('.btn-check').click(function(s) {
             'action': 'approve'
         },
         success: function(data) {
+        	console.log(data);
             if (data == "true") {
                 window.location.replace('portal');
             } else {

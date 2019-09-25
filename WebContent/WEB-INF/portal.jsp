@@ -66,6 +66,7 @@
 	   </tbody>
 	</table>
 </div>
+
 <script src="/LeaveRequest/static/portalJs.js"></script>
 <script>
 	$(document).ready(function() {

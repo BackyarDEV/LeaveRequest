@@ -85,10 +85,10 @@ public class LeaveRequestService {
 		return returnString;
 	}
 
-	public static String setLeaveStatus(int id, String action) {
-		String returnString = null;
+	public static boolean setLeaveStatus(int id, String action) {
+		boolean returnBool = false;
 		int status = 0;
-		
+		int comp_id = 0;
 		if(action.equals("approve")) {
 			status = 1;
 		}else if(action.equals("reject")){
@@ -96,12 +96,20 @@ public class LeaveRequestService {
 		}
 		
 		if(DatabaseQueries.setLeaveStatus(status, id)) {
-			returnString = "true";
+			
+			comp_id = DatabaseQueries.getCompId(id);
+			if(!(comp_id == 0)) {
+				if(DatabaseQueries.setCompOffStatus(comp_id,status)) {
+					returnBool = true;
+				}
+			} else {
+				returnBool = true;
+			}
 		} else {
-			returnString = "false";
+			returnBool = false;
 		}
 		DatabaseQueries.closeConnection();
-		return returnString;
+		return returnBool;
 	}
 	
 	public static String setCompStatus(int id, String action, String reason, String reviewer ) {

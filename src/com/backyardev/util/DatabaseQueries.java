@@ -60,7 +60,11 @@ public class DatabaseQueries {
 		conn = createConnection();
 		int id, numberOfDays = obj.getNumberOfDays();
 		boolean returnBool = false;
+		
 		try {
+			//Run a method to update status of compoff leave 
+			setAvailStatus(obj.getCompId());
+			
 			if (obj.getHalfDayLeave() == 1) {
 				sql = "insert into LEAVE_REQUEST(ecode,leave_start_date, leave_end_date, leave_type, leave_desc, number_of_days, half_day_leave,avail_comp,comp_id) values(?,?,?,?,?,  " + numberOfDays + " ," + 1 + ",?,?"+");";
 				pst = conn.prepareStatement(sql);
@@ -152,23 +156,43 @@ public class DatabaseQueries {
 	public static int getCompId(int  id) {
 		conn = createConnection();
 		int  compId = 0;
-		sql = "SELECT comp_id from LEAVE_REQUEST where id = ? ";
-		try {
-			pst = conn.prepareStatement(sql);
-			pst.setInt(1, id);
-			rs = pst.executeQuery();
-			
-			while(rs.next()) {
-				compId = rs.getInt("comp_id");
+		int avail_comp = getAvailComp(id);
+		if (avail_comp == 1) {
+			sql = "SELECT comp_id from LEAVE_REQUEST where id = ? ";
+			try {
+				pst = conn.prepareStatement(sql);
+				pst.setInt(1, id);
+				rs = pst.executeQuery();
 				
+				while(rs.next()) {
+					compId = rs.getInt("comp_id");
+					
+				}
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
 			}
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
 		}
 
 		return compId;
 		
+	}
+	
+	public static int getAvailComp(int  id) {
+		conn = createConnection();
+		int avail_comp = 0;
+		sql = "select avail_comp from LEAVE_REQUEST where id = ?";
+		try {
+			pst = conn.prepareStatement(sql);
+			pst.setInt(1, id);
+			rs = pst.executeQuery();
+			if(rs.next()) {
+				avail_comp = rs.getInt(1);
+			}
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		return avail_comp;
 	}
 	
 	//Get Comp-off  date from Compoff_Requests
@@ -432,7 +456,7 @@ public class DatabaseQueries {
 	// Get Comp-off dates for availing in Leave Form
 	public static  ArrayList<CompoffReqObject> getCompoffDates(String ecode) {
 		ArrayList<CompoffReqObject> al = new ArrayList<>();
-		sql = "select * from COMPOFF_REQUEST where ecode = ? order by COMPOFF_REQUEST.request_timestamp desc ";
+		sql = "select * from COMPOFF_REQUEST where ecode = ?  and avail_status=0 order by COMPOFF_REQUEST.request_timestamp desc ";
 		try {
 			conn = createConnection();
 			pst =  conn.prepareStatement(sql);
@@ -452,6 +476,44 @@ public class DatabaseQueries {
 		return al;
 	}
 
+	// Method to set avail_status in Compoff_Request
+	public static boolean setAvailStatus(String id) {
+		boolean returnBool = false;
+		sql = " update COMPOFF_REQUEST set avail_status=1 where id= ?";
+		System.out.println(sql);
+		try {
+			conn = createConnection();
+			pst =  conn.prepareStatement(sql);
+			pst.setString(1, id);
+			returnBool = !pst.execute();
+			
+		} catch(Exception ex) {
+			ex.printStackTrace();
+		}
+		
+		return returnBool;
+	}
+	
+	// Method to set status in Compoff_Request on leave action
+	public static boolean setCompOffStatus(int compId, int status) {
+		
+		boolean returnBool = false;
+		sql = "update COMPOFF_REQUEST set status= ? where id= ?";
+		try {
+			conn = createConnection();
+			pst =  conn.prepareStatement(sql);
+			pst.setInt(1, status);
+			pst.setInt(2, compId);
+			returnBool = !pst.execute();
+			
+		} catch(Exception ex) {
+			ex.printStackTrace();
+		}
+		
+		return returnBool;
+		
+	}
+
 	// Close connection
 	public static void closeConnection() {
 		
@@ -468,3 +530,4 @@ public class DatabaseQueries {
 		}
 	}
 }
+
