@@ -5,16 +5,18 @@
 <%@page import="com.backyardev.util.CompoffReqObject"%>
 <%@page import=" com.backyardev.util.LeaveReqObject"%>
 <jsp:include page="/WEB-INF/layout.jsp"></jsp:include>
-      	<% 
-      		String desg = (String)session.getAttribute("desg");
-	    	String url = (String)request.getAttribute("javax.servlet.forward.request_uri");
-      		String newUrl = url.replace("/LeaveRequest/leave/","");
-      		String updatedUrl = newUrl.replace("static/loading.gif", "");
-      		int id = Integer.parseInt(updatedUrl);
-      		LeaveReqObject obj = LeaveRequestService.getLeave(updatedUrl);
-      		ArrayList<CompoffReqObject> cobj = DatabaseQueries.getCompLeaveDate(id);
+<div style="margin-left: 240px; margin-top: 50px; padding: 40px;" class="main-div">
+      <% 
+        String desg = (String)session.getAttribute("desg");
+        String url = (String)request.getAttribute("javax.servlet.forward.request_uri");
+        String newUrl = url.replace("/LeaveRequest/leave/","");
+        String updatedUrl = newUrl.replace("static/loading.gif", "");
 
-      		boolean no_comp = false;
+        int id = Integer.parseInt(updatedUrl);
+        LeaveReqObject obj = LeaveRequestService.getLeave(updatedUrl);
+        ArrayList<CompoffReqObject> cobj = DatabaseQueries.getCompLeaveDate(id);
+
+        boolean no_comp = false;
     	 	if(obj.getName() == null){%>
     	 		<h4 class="text-center"><b>The page you requested doesn't exist.</b></h4>
     	 	<% } else {
@@ -32,7 +34,7 @@
       		}
          %>
          
-         <% if(check) { %>
+   <% if(check) { %>
 		<form class="form leave-form" method="post" action="leave">
 				<h3>Leave Request</h3><br>
 				<div class="form-group">
@@ -72,12 +74,13 @@
 						<div class="form-group">
 							<label for="leave-start">Leave Start Date</label>
 							<input class="form-control"  readonly  class="date-format"  id="leave-start"   required type="text"  name="leave-start"  value="<%=obj.getStartDate()%>" autocomplete="off" />
+
 						</div>
 					</div>
 					<div class="col-sm-6">
 						<div class="form-group">
 							<label for="leave-end">Leave End Date</label>
-							<input class="form-control " readonly  class="date-format"  id="leave-end"    required type="text"  name="leave-end"  value="<%=obj.getEndDate()%>" autocomplete="off" />
+	  					<input class="form-control " readonly  class="date-format"  id="leave-end"    required type="text"  name="leave-end"  value="<%=obj.getEndDate()%>" autocomplete="off" />
 						</div>
 					</div>
 				</div>
@@ -106,6 +109,7 @@
 					<input class="form-control"  readonly type="text" value="<%= cobj.get(i).getCompDate()%>" name="day-leave"/>
 				</div>
 				 <% } %>
+
 				</div>
 				<br>
 				<div class="form-group">
@@ -122,6 +126,7 @@
 		    <% }} else{%>
 		    	<h4 class="text-center"><b>You are not authorised to visit this page.</b></h4>
 		    <% }}%>
+		    </div>
 		    <script>
 				$('.check').click(function(e){
 					var url = "/LeaveRequest/ActionLeaveServlet";

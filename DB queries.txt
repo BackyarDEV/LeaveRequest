@@ -1,15 +1,27 @@
+1) Alter Leave Request table: // 19/09/2019
+
+--> ALTER TABLE LEAVE_REQUEST ADD avail_comp int(11) default 0;
+--> ALTER TABLE LEAVE_REQUEST ADD comp_id int(11)
+
+2) Alter Leave Status Table: // 19/09/2019
+
+--> ALTER TABLE LEAVE_STATUS ADD reviewed_by varchar(100);
+--> ALTER TABLE LEAVE_STATUS ADD reviewed_time timestamp null default null on update current_timestamp;
+
+2) Alter Comp-Off table: // 19/09/2019
+
+--> ALTER TABLE COMPOFF_REQUEST ADD reviewed_by varchar(100);
+--> ALTER TABLE COMPOFF_REQUEST ADD reviewed_time timestamp null default null on update current_timestamp;
+
+=============================================================================
+
 1) Comp-Off table: //11/09/2019
 
-create table COMPOFF_REQUEST(id int auto_increment primary key, ecode varchar(10) not null, comp_date date not null, description varchar(200), ticket_scr varchar(20) not null, night_shift int default 0 not null, request_timestamp timestamp default current_timestamp not null, status int default 0 not null);
-
+--> create table COMPOFF_REQUEST(id int auto_increment primary key, ecode varchar(10) not null, comp_date date not null, description varchar(200), ticket_scr varchar(20) not null, night_shift int default 0 not null, request_timestamp timestamp default current_timestamp not null, status int default 0 not null);
 
 2) Alter Leave Request table:  //11/09/2019
 
-alter table LEAVE_REQUEST drop column name;
-alter table LEAVE_REQUEST drop column team_lead;
-alter table LEAVE_REQUEST drop column project_manager;
-alter table LEAVE_REQUEST drop column project_name;
-
-3)Alter Leave Request table : // 19/09/2019
-ALTER TABLE LEAVE_REQUEST ADD avail_comp int(11) default 0;
-ALTER TABLE LEAVE_REQUEST ADD comp_id int(11)
+--> alter table LEAVE_REQUEST drop column name;
+--> alter table LEAVE_REQUEST drop column team_lead;
+--> alter table LEAVE_REQUEST drop column project_manager;
+--> alter table LEAVE_REQUEST drop column project_name;

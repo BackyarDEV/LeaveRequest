@@ -3,12 +3,12 @@
 <%@page import="com.backyardev.util.CompoffReqObject"%>
 
 <jsp:include page="/WEB-INF/layout.jsp"></jsp:include>
-
-      <%
-      	String desg = (String)session.getAttribute("desg");
-      	String url = (String)request.getAttribute("javax.servlet.forward.request_uri");
-		String updatedUrl = url.replace("/LeaveRequest/comp/","");
-	 	CompoffReqObject obj = LeaveRequestService.getCompoff(updatedUrl);
+	<div style="margin-left: 240px; margin-top: 50px; padding: 40px;" class="main-div">
+	  <%
+	    String desg = (String)session.getAttribute("desg");
+	    String url = (String)request.getAttribute("javax.servlet.forward.request_uri");
+	    String updatedUrl = url.replace("/LeaveRequest/comp/","");
+	    CompoffReqObject obj = LeaveRequestService.getCompoff(updatedUrl);
 	 	
 	 	boolean no_comp = false;
 	 	if(obj.getName() == null)	{	%>

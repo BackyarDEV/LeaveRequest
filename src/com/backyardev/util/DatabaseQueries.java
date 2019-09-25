@@ -1,7 +1,6 @@
 package com.backyardev.util;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -41,6 +40,19 @@ public class DatabaseQueries {
 		return rs;
 	}
 	
+	//Get email id of teamLead
+	public static ResultSet getTLmail(String tl_name) {
+		conn = createConnection();
+		sql = "select email from EMPLOYEES where name = ?";
+		try {
+			pst = conn.prepareStatement(sql);
+			pst.setString(1, tl_name);
+			rs = pst.executeQuery();
+		} catch(Exception ex) {
+			ex.printStackTrace();
+		}
+		return rs;
+	}
 	
 	// InsertLeaveRequest - Inserts leaves in LEAVE_REQUEST table
 	public static boolean insertLeaveRequest(LeaveReqObject obj) {
@@ -99,6 +111,42 @@ public class DatabaseQueries {
 		return id;
 	}
 	
+	//Set Leave status to approved or rejected
+	public static boolean setLeaveStatus( int status, int id ) {
+		
+		boolean returnBool = false;
+		
+		conn = createConnection();
+		sql = "UPDATE LEAVE_STATUS SET STATUS  = "+ status + " WHERE id =  " + id ;
+		
+		try {
+			pst = conn.prepareStatement(sql);
+			returnBool = !pst.execute();
+			
+		} catch(Exception ex) {
+			ex.printStackTrace();
+		}
+		return returnBool;
+	}
+	
+	// Set Comp-Off status to approved or rejected
+	public static boolean setCompStatus( int status, int id ) {
+		
+		boolean returnBool = false;
+		
+		conn = createConnection();
+		sql = "UPDATE COMPOFF_REQUEST SET STATUS = "+ status + " WHERE id =  " + id ;
+		
+		try {
+			pst = conn.prepareStatement(sql);
+			returnBool = !pst.execute();
+			
+		} catch(Exception ex) {
+			ex.printStackTrace();
+		}
+		return returnBool;
+	}
+	
 	//Get Comp-off Leave ID from Leave_Requests
 	public static int getCompId(int  id) {
 		conn = createConnection();
@@ -115,7 +163,6 @@ public class DatabaseQueries {
 			}
 			
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -125,7 +172,6 @@ public class DatabaseQueries {
 	
 	//Get Comp-off  date from Compoff_Requests
 	public static ArrayList<CompoffReqObject> getCompLeaveDate(int id) {
-		String compDate = null;
 		int compId = getCompId(id);
 		ArrayList<CompoffReqObject> al = new ArrayList<>();
 		sql = "select comp_date from COMPOFF_REQUEST  where id = ? ";
@@ -136,7 +182,6 @@ public class DatabaseQueries {
 			ResultSet rs = pst.executeQuery();
 			if(rs.next()) {
 				CompoffReqObject obj = new CompoffReqObject();
-				compDate = rs.getString("comp_date");
 				obj.setCompDate(rs.getString("comp_date"));
 				al.add(obj);
 			}

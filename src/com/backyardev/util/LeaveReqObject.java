@@ -137,6 +137,7 @@ this.leaveDesc = leaveDesc;
 
 public String getDayLeave() {
 	if(fullDayLeave==1){
+
 		stringDayLeave = "Full Day";
 	}
 	else{

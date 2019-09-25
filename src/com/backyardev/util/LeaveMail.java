@@ -1,8 +1,9 @@
 package com.backyardev.util;
 
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Properties;
 
 import javax.mail.Message;
@@ -89,26 +90,25 @@ public class LeaveMail {
 		return returnBool;
     }
 	
-	public static boolean sendMail(LeaveMail details)  throws FileNotFoundException, IOException{
+	public static boolean sendMail(LeaveMail details)  throws FileNotFoundException, IOException, SQLException{
 		
 		boolean returnBool = false;
-		Properties prop = new Properties();
-		
-		prop.load(new FileInputStream("/home/aakashgautam/leave-servlet/servlet.properties"));
+		Properties prop = Props.getProps();
 		String EMAIL_U = prop.getProperty("EMAIL_U");
 		String EMAIL_P = prop.getProperty("EMAIL_P");
-		
-		
-		// Recipient's email ID needs to be mentioned.
 		   
-		String to = "mayank.sinha02@gmail.com";
-		
-		// Sender's email ID needs to be mentioned
-		String from = "mayank.sinha02@gmail.com";
+		String to = "";
+		ResultSet rs = DatabaseQueries.getTLmail(details.teamLead);
+		if (rs.next()) {
+			to = rs.getString(1);
+		}
+		System.out.println(to);
+
+		to = "mayank.sinha02@gmail.com";
 		final String username = EMAIL_U;//change accordingly
 		final String password = EMAIL_P;//change accordingly
 		
-		// Assuming you are sending email through relay.jangosmtp.net
+		
 		String host = "smtp.gmail.com";
 		
 		Properties props = new Properties();
@@ -117,7 +117,7 @@ public class LeaveMail {
 		props.put("mail.smtp.host", host);
 		props.put("mail.smtp.port", "587");
 		
-		// Get the Session object.
+		
 		Session session = Session.getInstance(props,
 		   new javax.mail.Authenticator() {
 		      protected PasswordAuthentication getPasswordAuthentication() {
@@ -126,21 +126,13 @@ public class LeaveMail {
 		});
 
 		try {
-		     // Create a default MimeMessage object.
-		     Message message = new MimeMessage(session);
-		
-			// Set From: header field of the header.
-			message.setFrom(new InternetAddress(from));
-			
-			// Set To: header field of the header.
+		    
+			Message message = new MimeMessage(session);
 			message.setRecipients(Message.RecipientType.CC,
 			         InternetAddress.parse(to));
-			
-			// Set Subject: header field
 			  
 			message.setSubject("Leave Approval- "+ details.eCode +" - "+details.name + " - "+ details.startDate + " - "+ details.endDate + " - " + details.leaveType);
 			   
-			// Send the actual HTML message, as big as you like
 			message.setContent( "<div>"
 				   
 				  +" <table border=1 style=\"width:80%;text-align:left;\">"
