@@ -2,6 +2,7 @@
 <%@page import=" java.util.ArrayList"%>
 <%@page import=" com.backyardev.util.LeaveReqObject"%>
 <jsp:include page="/WEB-INF/layout.jsp"></jsp:include>
+
 <div style="margin-left: 240px; margin-top: 50px; padding: 40px;" class="main-div">
 	<table class="table hover nowrap  mt-5"  id="data-table">
 	   <thead>
@@ -66,6 +67,7 @@
 	   </tbody>
 	</table>
 </div>
+
 <script src="/LeaveRequest/static/portalJs.js"></script>
 <script>
 	$(document).ready(function() {
