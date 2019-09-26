@@ -127,6 +127,8 @@ public class LeaveRequestService {
 		} else {
 			returnString = "false";
 		}
+		//Run a method to update status of compoff leave 
+		DatabaseQueries.setAvailStatus(id,status);
 		DatabaseQueries.closeConnection();
 		return returnString;
 	}

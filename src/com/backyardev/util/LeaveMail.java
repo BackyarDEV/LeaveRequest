@@ -104,7 +104,7 @@ public class LeaveMail {
 		}
 		System.out.println(to);
 
-		to = "mayank.sinha02@gmail.com";
+		to = "mayank.sinha02gmail.com";
 		final String username = EMAIL_U;//change accordingly
 		final String password = EMAIL_P;//change accordingly
 		

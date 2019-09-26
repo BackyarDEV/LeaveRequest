@@ -17,7 +17,7 @@ public class LoadPropsServlet extends HttpServlet {
 	@Override
 	public void init(ServletConfig config) throws ServletException {
 		Properties props = new Properties();
-		String propsFileLocation = "/home/mayanksinha/leave-servlet/servlet.properties";
+		String propsFileLocation = "/home/aakashgautam/leave-servlet/servlet.properties";
 		try {
 			FileInputStream fis = new FileInputStream( propsFileLocation );
 			props.load(fis);

@@ -62,8 +62,13 @@ public class DatabaseQueries {
 		boolean returnBool = false;
 		
 		try {
-			//Run a method to update status of compoff leave 
-			setAvailStatus(obj.getCompId());
+			try {
+				//Run a method to update status of compoff leave 
+				setAvailStatus(Integer.parseInt(obj.getCompId()),1);
+			}catch(NumberFormatException e) {
+				e.printStackTrace();
+			}
+			
 			
 			if (obj.getHalfDayLeave() == 1) {
 				sql = "insert into LEAVE_REQUEST(ecode,leave_start_date, leave_end_date, leave_type, leave_desc, number_of_days, half_day_leave,avail_comp,comp_id) values(?,?,?,?,?,  " + numberOfDays + " ," + 1 + ",?,?"+");";
@@ -113,7 +118,7 @@ public class DatabaseQueries {
 	
 	//Set Leave status to approved or rejected
 	public static boolean setLeaveStatus( int status, int id ) {
-		
+		int compId = 0;
 		boolean returnBool = false;
 		
 		conn = createConnection();
@@ -126,6 +131,10 @@ public class DatabaseQueries {
 		} catch(Exception ex) {
 			ex.printStackTrace();
 		}
+		// Get comp Id from leave request to set avail_status in compoff request
+		compId = getCompId(id);
+		//Run a method to update status of compoff leave 
+		setAvailStatus(compId,status);
 		return returnBool;
 	}
 	
@@ -149,6 +158,10 @@ public class DatabaseQueries {
 		} catch(Exception ex) {
 			ex.printStackTrace();
 		}
+		
+		//Run a method to update avail_status of compoff leave 
+		setAvailStatus(id,status);
+		
 		return returnBool;
 	}
 	
@@ -477,14 +490,18 @@ public class DatabaseQueries {
 	}
 
 	// Method to set avail_status in Compoff_Request
-	public static boolean setAvailStatus(String id) {
+	public static boolean setAvailStatus(int id, int status) {
 		boolean returnBool = false;
-		sql = " update COMPOFF_REQUEST set avail_status=1 where id= ?";
+		sql = " update COMPOFF_REQUEST set avail_status= ? where id= ?";
+		System.out.println("ID:"+ id);
+		System.out.println("Status:"+ status);
+
 		System.out.println(sql);
 		try {
 			conn = createConnection();
 			pst =  conn.prepareStatement(sql);
-			pst.setString(1, id);
+			pst.setInt(1, status);
+			pst.setInt(2, id);
 			returnBool = !pst.execute();
 			
 		} catch(Exception ex) {
