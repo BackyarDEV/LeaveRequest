@@ -46,6 +46,18 @@ public class LeaveRequestService {
 		return returnBool;
 	}
 	
+	public static boolean updatePassword(String ecode, String pass, String conf) throws Exception {
+		boolean returnBool = false;
+		String hash = "";
+		if (!validatePass(pass)) {
+			returnBool = false;
+		}else if (pass.equals(conf)) {
+			hash = Password.getSaltedHash(pass);
+			returnBool = DatabaseQueries.updatePass(ecode, hash);
+		}
+		return returnBool;
+	}
+	
 	public static String leaveService(LeaveReqObject obj) {
 		String returnString = null;
 		try {
@@ -85,7 +97,7 @@ public class LeaveRequestService {
 		return returnString;
 	}
 
-	public static boolean setLeaveStatus(int id, String action) {
+	public static boolean setLeaveStatus(int id, String action, String reviewer) {
 		boolean returnBool = false;
 		int status = 0;
 		int comp_id = 0;
@@ -95,7 +107,7 @@ public class LeaveRequestService {
 			status = -1;
 		}
 		
-		if(DatabaseQueries.setLeaveStatus(status, id)) {
+		if(DatabaseQueries.setLeaveStatus(status, id, reviewer)) {
 			
 			comp_id = DatabaseQueries.getCompId(id);
 			if(!(comp_id == 0)) {
@@ -112,8 +124,8 @@ public class LeaveRequestService {
 		return returnBool;
 	}
 	
-	public static String setCompStatus(int id, String action, String reason, String reviewer ) {
-		String returnString = null;
+	public static boolean setCompStatus(int id, String action, String reason, String reviewer ) {
+		boolean returnBool = false;
 		int status = 0;
 		
 		if(action.equals("approve")) {
@@ -123,14 +135,13 @@ public class LeaveRequestService {
 		}
 		
 		if(DatabaseQueries.setCompStatus(status, id, reason, reviewer)) {
-			returnString = "true";
+			//Run a method to update status of compoff leave 
+			returnBool = DatabaseQueries.setAvailStatus(id,status);
 		} else {
-			returnString = "false";
+			returnBool = false;
 		}
-		//Run a method to update status of compoff leave 
-		DatabaseQueries.setAvailStatus(id,status);
 		DatabaseQueries.closeConnection();
-		return returnString;
+		return returnBool;
 	}
 	
 	public static ArrayList<LeaveReqObject> populateLeaveTable(String desg, String tl_name, String ecode){
@@ -259,6 +270,17 @@ public class LeaveRequestService {
 			ex.printStackTrace();
 		}
 		return obj;
+	}
+	
+	private static boolean validatePass(String pass) {
+		
+		String passRegex = "((?=.*[a-z])(?=.*\\d)(?=.*[A-Z])(?=.*[@#$%!]).{8,})";
+		Pattern pat = Pattern.compile(passRegex);
+		if(pass == null) {
+			return false;
+		}
+		return pat.matcher(pass).matches();
+		
 	}
 	
 	private static boolean validateMail(String mail){

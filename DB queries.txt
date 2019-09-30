@@ -1,3 +1,9 @@
+1) Alter LEAVE_STATUS table:  // 30/09/2019
+
+--> ALTER TABLE LEAVE_STATUS DROP COLUMN reject_reason;
+
+=============================================================================
+
 1) Alter Leave Request table: // 19/09/2019
 
 --> ALTER TABLE LEAVE_REQUEST ADD avail_comp int(11) default 0;

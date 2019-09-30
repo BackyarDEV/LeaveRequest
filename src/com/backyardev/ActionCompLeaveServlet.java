@@ -31,7 +31,7 @@ public class ActionCompLeaveServlet extends HttpServlet {
 		if(action.equals("reject")) {
 			reason = request.getParameter("reason");
 		}
-		response.getWriter().write(LeaveRequestService.setCompStatus(id, action, reason, reviewer));
+		response.getWriter().print(LeaveRequestService.setCompStatus(id, action, reason, reviewer));
 	}
 }
 

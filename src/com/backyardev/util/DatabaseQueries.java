@@ -40,6 +40,25 @@ public class DatabaseQueries {
 		return rs;
 	}
 	
+	//update password
+	public static boolean updatePass(String ecode, String hash) {
+		
+		boolean returnBool = false;
+		conn = createConnection();
+		sql = "update EMPLOYEES set pass_hash = ? where ecode = ?";
+		try {
+			pst = conn.prepareStatement(sql);
+			pst.setString(1, hash);
+			pst.setString(2, ecode);
+			returnBool = !pst.execute();
+		} catch(Exception ex) {
+			ex.printStackTrace();
+		}
+		
+		return returnBool;
+	}
+	
+	
 	//Get email id of teamLead
 	public static ResultSet getTLmail(String tl_name) {
 		conn = createConnection();
@@ -62,13 +81,10 @@ public class DatabaseQueries {
 		boolean returnBool = false;
 		
 		try {
-			try {
-				//Run a method to update status of compoff leave 
+			//Run a method to update status of compoff leave 
+			if(obj.getCompId() != null) {
 				setAvailStatus(Integer.parseInt(obj.getCompId()),1);
-			}catch(NumberFormatException e) {
-				e.printStackTrace();
 			}
-			
 			
 			if (obj.getHalfDayLeave() == 1) {
 				sql = "insert into LEAVE_REQUEST(ecode,leave_start_date, leave_end_date, leave_type, leave_desc, number_of_days, half_day_leave,avail_comp,comp_id) values(?,?,?,?,?,  " + numberOfDays + " ," + 1 + ",?,?"+");";
@@ -117,15 +133,16 @@ public class DatabaseQueries {
 	}
 	
 	//Set Leave status to approved or rejected
-	public static boolean setLeaveStatus( int status, int id ) {
+	public static boolean setLeaveStatus( int status, int id, String reviewer ) {
 		int compId = 0;
 		boolean returnBool = false;
 		
 		conn = createConnection();
-		sql = "UPDATE LEAVE_STATUS SET STATUS  = "+ status + " WHERE id =  " + id ;
+		sql = "UPDATE LEAVE_STATUS SET STATUS = "+ status + ", REVIEWED_BY = ? WHERE id = " + id ;
 		
 		try {
 			pst = conn.prepareStatement(sql);
+			pst.setString(1, reviewer);
 			returnBool = !pst.execute();
 			
 		} catch(Exception ex) {
@@ -469,7 +486,7 @@ public class DatabaseQueries {
 	// Get Comp-off dates for availing in Leave Form
 	public static  ArrayList<CompoffReqObject> getCompoffDates(String ecode) {
 		ArrayList<CompoffReqObject> al = new ArrayList<>();
-		sql = "select * from COMPOFF_REQUEST where ecode = ?  and avail_status=0 order by COMPOFF_REQUEST.request_timestamp desc ";
+		sql = "select * from COMPOFF_REQUEST where ecode = ? and status = 1 and avail_status=0 order by COMPOFF_REQUEST.request_timestamp desc ";
 		try {
 			conn = createConnection();
 			pst =  conn.prepareStatement(sql);
@@ -493,10 +510,7 @@ public class DatabaseQueries {
 	public static boolean setAvailStatus(int id, int status) {
 		boolean returnBool = false;
 		sql = " update COMPOFF_REQUEST set avail_status= ? where id= ?";
-		System.out.println("ID:"+ id);
-		System.out.println("Status:"+ status);
-
-		System.out.println(sql);
+		
 		try {
 			conn = createConnection();
 			pst =  conn.prepareStatement(sql);

@@ -30,12 +30,9 @@ function showAlert(msg, type){
 	$('#progress').css('display', 'none');
 	$('#submitFormModal').modal('hide');
 	$('.alert').addClass(type);
-	$('.alert').html(msg);
+	$('.alert-msg').html(msg);
 	$('.alert').css('display', 'block');
 	$('html, body').animate({scrollTop: 0});
-	$(".alert").fadeTo(2000, 500).slideUp(500, function(){
-	    $(".alert").slideUp(500);
-	});
 }
 		
 //Methods to count leave days

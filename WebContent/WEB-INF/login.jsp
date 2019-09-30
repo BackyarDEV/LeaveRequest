@@ -31,35 +31,37 @@
       <div class="login-container login" >
          <div class="row row-login">
             <div class='col-md-12 form-col'>
-               <form class="form form-login" action="login" method="post">
-                  <h2>Login</h2>
-                  <br>
-                  <div class="form-group">
-                     <label for="mail-login">Email address</label>
-                     <input type="email" required class="form-control text-field" id="mail-login" name="email" placeholder="Enter email">
-                     <small class="error" id="login-email-error"> Invalid Email!</small>
-                     <small class="error" id="null-email-error"> * Required Field!</small>
-                  </div>
-                  <div class="form-group">
-                     <label for="pass-login">Password</label>
-                     <input type="password" required class="form-control text-field" id="pass-login" name="password" placeholder="Password">
-                     <small class="error" id="login-pass-error"> Wrong Password!</small>
-                     <small class="error" id="null-pass-error"> * Required Field!</small>
-                     <small class="error" id="user-locked-error"> Account locked! Try 24 hours later.</small>
-                  </div>
-                  <div class="auth-btn">
-                     <br><button type="submit" id="btn-login" class="btn btn-primary">Login</button>
-                     <span class="btn span-forgot">Forgot Password?</span>
-                  </div>
+            	<form class="form form-login" action="login" method="post">
+                	<div class="alert" style="display: none; margin-left: auto; margin-right: auto;" role="alert">
+                  		<span class="alert-msg"></span>
+                  		<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+				  			<span aria-hidden="true">&times;</span>
+			      		</button>
+                  	</div>
+	             	<h2>Login</h2>
+	                <br>
+	                <div class="form-group">
+	                	<label for="mail-login">Email address</label>
+	                    <input type="email" required class="form-control text-field" id="mail-login" name="email" placeholder="Enter email">
+	                </div>
+	                <div class="form-group">
+	                	<label for="pass-login">Password</label>
+	                	<input type="password" required class="form-control text-field" id="pass-login" name="password" placeholder="Password">
+	                </div>
+	                <div class="auth-btn">
+						<br><button type="submit" id="btn-login" class="btn btn-primary">Login</button>
+	                	<span class="btn span-forgot">Forgot Password?</span>
+	                </div>
                </form>
             </div>
          </div>
       </div>
       <script>
+      	// ajax post request
       	$('.form-login').submit(function(e){
       		e.preventDefault();
-      		$('.error').css('display', 'none');
-
+      		$('.alert').css('display', 'none');
+			$('#btn-login').attr('disabled', true);
       		var form = $(this);
       		var url = form.attr('action');
       		var method = form.attr('method');
@@ -69,10 +71,18 @@
        		    url: url,
        		    data: form.serialize(),
        		    success: function(s) {
-       		        "true" == s ? window.location.replace('portal') : "invalid_mail" == s ? ($("#login-email-error").css("display", "block"), $("#mail-login").focus()) : "500" == s ? alert("Server Error! Please try later.") : "wrong_pass" == s && ($("#login-pass-error").css("display", "block"), $("#mail-pass").focus())
+       		    	$('#btn-login').attr('disabled', false), "true" == s ? window.location.replace('portal') : showAlert('Invalid Credentials!','alert-danger'), $('#mail-login').focus();
        		    }
        		});
       	});
+      	
+      //alert method
+		function showAlert(msg, type){
+			$('.alert').addClass(type);
+			$('.alert-msg').html(msg);
+			$('.alert').css('display', 'block');
+			$('html, body').animate({scrollTop: 0});
+		}
       </script>
 	</body>
 </html>

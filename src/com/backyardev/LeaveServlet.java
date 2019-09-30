@@ -29,10 +29,6 @@ public class LeaveServlet extends HttpServlet{
 		String leaveDesc = req.getParameter("leave-desc");
 		String availComp = req.getParameter("avail-comp");
 		String compId = req.getParameter("comp-id");
-
-		System.out.println("Avail comp:  "+ availComp);
-		System.out.println("Comp Id:  "+ compId);
-		System.out.println("dayLeave:  "+ dayLeave);
 		
 		int numberOfDays = Integer.parseInt(req.getParameter("number-days"));
 		PrintWriter out = res.getWriter();		

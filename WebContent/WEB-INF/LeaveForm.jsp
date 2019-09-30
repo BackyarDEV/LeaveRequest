@@ -10,7 +10,12 @@
 		 	ArrayList<CompoffReqObject> obj =  DatabaseQueries.getCompoffDates(ecode);
 		%>	
 		
-		<div class="alert" style="display: none; width: 65%; margin-left: auto; margin-right: auto;" role="alert"></div>		
+		<div class="alert" style="display: none; width: 65%; margin-left: auto; margin-right: auto;" role="alert">
+			<span class="alert-msg"></span>
+			<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+			    <span aria-hidden="true">&times;</span>
+		    </button>
+		</div>		
 		<form class="form leave-form" method="post" action="leave">
 				<h3>Leave Request</h3><br>
 				<div class="form-group">
